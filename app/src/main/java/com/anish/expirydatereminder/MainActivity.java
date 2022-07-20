@@ -1,7 +1,5 @@
 package com.anish.expirydatereminder;
 
-import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
-
 import android.Manifest;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -19,12 +17,13 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,12 +32,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DialogHandler.ExampleDialogListener{
 
     private ArrayList<String> items;
     private ArrayAdapter<String> itemsAdapter;
     private ListView listView;
-    private Button button, refreshButton;
+    private Button refreshButton;
+    private FloatingActionButton addItemButton;
     private DatabaseHandler dbHandler;
     private List<ItemModel> modelList;
 
@@ -58,15 +58,18 @@ public class MainActivity extends AppCompatActivity {
         createNotificationChannel();
 
         listView = findViewById(R.id.listView);
-        button = findViewById(R.id.addItemButton);
+        //button = findViewById(R.id.addItemButton);
         refreshButton = findViewById(R.id.refreshButton);
 
         items = new ArrayList<>();
         itemsAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, items);
         listView.setAdapter(itemsAdapter);
 
-        button.setOnClickListener(view -> addItem());
+        //button.setOnClickListener(view ->{ openDialog(); });
         setUpListViewListener();
+
+        addItemButton = findViewById(R.id.addItemButton);
+        addItemButton.setOnClickListener(view -> openDialog());
 
         dbHandler = new DatabaseHandler(MainActivity.this);
         modelList = dbHandler.getAllItems();
@@ -80,12 +83,15 @@ public class MainActivity extends AppCompatActivity {
             setNotifications(1);
 
         refreshButton.setOnClickListener(view -> {
-            Intent myIntent = new Intent(MainActivity.this, MainActivity.class);
-            myIntent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
-            MainActivity.this.startActivity(myIntent);
+            Collections.sort(modelList, Comparator.comparingInt(ItemModel::getMonth));
+            Collections.sort(modelList, Comparator.comparingInt(ItemModel::getYear));
+            itemsAdapter.notifyDataSetChanged();
         });
 
+
+
     }
+
 
     private void populate(List<ItemModel> list) {
         for(ItemModel a:list){
@@ -126,10 +132,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void addItem() {
+    private int checkIfItemExists(String item, int month, int year) {
+        List<ItemModel> list_of_items = dbHandler.getAllItems();
+        for (ItemModel obj:list_of_items){
+            if(obj.getItem().equals(item)){
+                if(obj.getMonth() == month){
+                    if(obj.getYear() == year){
+                        return 3;
+                    }
+                }
+                if(year >= obj.getYear()) {
+                    return 2;
+                }
+            }
+        }
+        return 1;
+    }
+
+    /*private void addItem() {
         EditText input = findViewById(R.id.itemName);
         EditText m = findViewById(R.id.month);
         EditText y = findViewById(R.id.year);
+
 
         String itemName = input.getText().toString();
 
@@ -176,25 +200,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             Toast.makeText(getApplicationContext(),"Fields are empty!!!",Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private int checkIfItemExists(String item, int month, int year) {
-        List<ItemModel> list_of_items = dbHandler.getAllItems();
-        for (ItemModel obj:list_of_items){
-            if(obj.getItem().equals(item)){
-                if(obj.getMonth() == month){
-                    if(obj.getYear() == year){
-                        return 3;
-                    }
-                }
-                if(year >= obj.getYear()) {
-                    return 2;
-                }
-            }
-        }
-        return 1;
-    }
-
+    }*/
     private void addItem(ItemModel obj) {
         String itemName = obj.getItem();
         int month = obj.getMonth();
@@ -206,6 +212,33 @@ public class MainActivity extends AppCompatActivity {
         else{
             Toast.makeText(getApplicationContext(),"Cannot be empty string, enter text",Toast.LENGTH_SHORT).show();
         }
+    }
+    private void addItem(String itemName, int month, int year){
+        if(month > 12 || month<0){
+            Toast.makeText(getApplicationContext(),"Incorrect month input!!!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(year < 1000 || year > 9999){
+            Toast.makeText(getApplicationContext(),"Please enter year in YYYY format",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int checker = checkIfItemExists(itemName,month,year);
+
+        if(checker == 3){
+            Toast.makeText(getApplicationContext(),"This item already exists!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(checker == 2){
+            Toast.makeText(getApplicationContext(),"Same Item with different expiry date exists! ",Toast.LENGTH_SHORT).show();
+        }
+
+        String text = month + "/" + year + " : " + itemName;
+
+        itemsAdapter.add(text);
+        dbHandler.addNewItem(new ItemModel(itemName,month,year));
+        modelList.add(new ItemModel(itemName,month,year));
     }
 
     private void createNotificationChannel(){
@@ -238,5 +271,16 @@ public class MainActivity extends AppCompatActivity {
         if(a==1){
             alarmManager.cancel(pendingIntent);
         }
+    }
+
+    private void openDialog() {
+        DialogHandler dialogHandler = new DialogHandler();
+        dialogHandler.show(getSupportFragmentManager(),"Add item");
+    }
+
+    @Override
+    public void addItemAsNeeded(String item_name, int month, int year) {
+        addItem(item_name,month,year);
+        itemsAdapter.notifyDataSetChanged();
     }
 }

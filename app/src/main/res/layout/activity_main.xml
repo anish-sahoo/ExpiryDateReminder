@@ -43,145 +43,14 @@
         android:backgroundTint="@color/purple_500"
         android:backgroundTintMode="src_over" />
 
-    <EditText
-        android:id="@+id/itemName"
-        android:layout_width="wrap_content"
-        android:layout_height="47dp"
-
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="20dp"
-        android:layout_toStartOf="@id/refreshButton"
-
-        android:ems="10"
-        android:hint="name"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textColorHint="#757575"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/month"
-        android:layout_width="100dp"
-        android:layout_height="64dp"
-
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="64dp"
-
-        android:ems="10"
-        android:hint="month"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColorHint="#757575"
-        android:textSize="20sp" />
-
-    <EditText
-        android:id="@+id/year"
-        android:layout_width="100dp"
-        android:layout_height="64dp"
-
-        android:layout_alignParentTop="true"
-
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="20dp"
-        android:layout_toStartOf="@id/addItemButton"
-
-        android:ems="10"
-        android:hint="year"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColorHint="#757575"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/addItemButton"
-        android:layout_width="124dp"
-        android:layout_height="61dp"
-
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="13dp"
-
-        android:backgroundTint="@color/purple_500"
-        android:text="Add Item"
-        android:textSize="17sp"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-
-        android:layout_below="@id/divider2"
-        android:layout_above="@id/divider3"
-
-        android:layout_marginBottom="42dp"
-        android:layout_marginStart="25dp"
-
-        android:orientation="vertical">
-
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"/>
-
-    </LinearLayout>
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="131dp"
-
-        android:background="?android:attr/listDivider"
-        android:backgroundTint="@color/purple_500"
-        android:backgroundTintMode="src_over" />
-
-    <TextView
-        android:id="@+id/copyrightText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentBottom="true"
-
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-
-        android:text="Built by Anish S. (2022)"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="5dp"
 
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
 
         android:background="?android:attr/listDivider"
         android:backgroundTint="@color/purple_500"
@@ -193,26 +62,103 @@
         android:layout_height="match_parent"
 
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
 
         android:background="?android:attr/listDivider"
         android:backgroundTint="@color/purple_500"
         android:backgroundTintMode="src_over" />
 
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginTop="120dp"
+        android:background="@color/purple_500"
+        android:backgroundTintMode="src_over" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addItemButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="50dp"
+
+        android:backgroundTint="@color/purple_500"
+        android:foreground="@drawable/ic_baseline_add_24" />
+
+    <TextView
+        android:id="@+id/copyrightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentBottom="true"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp"
+
+        android:text="Developed by A. Sahoo (2022)"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:fontFamily="serif-monospace"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
     <Button
         android:id="@+id/refreshButton"
-        android:layout_width="124dp"
-        android:layout_height="61dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
 
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="277dp"
         android:backgroundTint="@color/purple_500"
 
         android:text="Refresh"
         android:textSize="17sp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/sortButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="9dp"
+        android:text="Sort By: Name"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="355dp"
+        android:layout_height="450dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="232dp"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="291dp"
+            android:layout_height="356dp" />
+
+    </LinearLayout>
+
 </RelativeLayout>
