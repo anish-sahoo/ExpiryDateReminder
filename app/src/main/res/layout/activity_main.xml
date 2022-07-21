@@ -16,6 +16,7 @@
         android:backgroundTint="@color/purple_500"
         android:backgroundTintMode="src_over" />
 
+
     <View
         android:id="@+id/divider4"
         android:layout_width="match_parent"
@@ -69,6 +70,7 @@
         android:backgroundTint="@color/purple_500"
         android:backgroundTintMode="src_over" />
 
+
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
@@ -78,10 +80,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
 
-        android:layout_marginTop="120dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="111dp"
+        android:layout_marginEnd="0dp"
         android:background="@color/purple_500"
         android:backgroundTintMode="src_over" />
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addItemButton"
@@ -122,8 +126,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
 
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="277dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
         android:backgroundTint="@color/purple_500"
 
         android:text="Refresh"
@@ -140,25 +144,47 @@
 
         android:layout_marginStart="13dp"
         android:layout_marginTop="9dp"
-        android:text="Sort By: Name"
+        android:text="Sort By:&#10; Name"
         android:textSize="17sp"
         android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="355dp"
-        android:layout_height="450dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="232dp"
-        android:orientation="vertical">
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="42dp"
+
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <ListView
             android:id="@+id/listView"
-            android:layout_width="291dp"
-            android:layout_height="356dp" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
+
+    <Spinner
+        android:id="@+id/category_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_centerInParent="true"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="71dp"
+        android:layout_marginEnd="33dp"
+        android:spinnerMode="dropdown" />
 
 </RelativeLayout>

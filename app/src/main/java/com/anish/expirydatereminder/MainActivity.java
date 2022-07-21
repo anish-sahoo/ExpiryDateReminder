@@ -14,10 +14,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -32,7 +35,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements DialogHandler.ExampleDialogListener{
+public class MainActivity extends AppCompatActivity implements DialogHandler.ExampleDialogListener, AdapterView.OnItemSelectedListener{
 
     private ArrayList<String> items;
     private ArrayAdapter<String> itemsAdapter;
@@ -41,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     private FloatingActionButton addItemButton;
     private DatabaseHandler dbHandler;
     private List<ItemModel> modelList;
+    private final String[] categories = new String[]{"All Items","Grocery","Important dates","Medicine","Other Items"};
+
+    private Spinner categorySpinner;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -58,17 +64,15 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         createNotificationChannel();
 
         listView = findViewById(R.id.listView);
-        //button = findViewById(R.id.addItemButton);
         refreshButton = findViewById(R.id.refreshButton);
+        addItemButton = findViewById(R.id.addItemButton);
 
         items = new ArrayList<>();
         itemsAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, items);
         listView.setAdapter(itemsAdapter);
 
-        //button.setOnClickListener(view ->{ openDialog(); });
         setUpListViewListener();
 
-        addItemButton = findViewById(R.id.addItemButton);
         addItemButton.setOnClickListener(view -> openDialog());
 
         dbHandler = new DatabaseHandler(MainActivity.this);
@@ -81,14 +85,21 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             setNotifications(0);
         else
             setNotifications(1);
-
         refreshButton.setOnClickListener(view -> {
+            modelList = dbHandler.getAllItems();
+            itemsAdapter.clear();
             Collections.sort(modelList, Comparator.comparingInt(ItemModel::getMonth));
             Collections.sort(modelList, Comparator.comparingInt(ItemModel::getYear));
+            populate(modelList);
             itemsAdapter.notifyDataSetChanged();
         });
 
 
+        categorySpinner = findViewById(R.id.category_spinner);
+        categorySpinner.setOnItemSelectedListener(this);
+        ArrayAdapter<String> ad = new ArrayAdapter<>(this, R.layout.spinner_item, categories);
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(ad);
 
     }
 
@@ -278,9 +289,20 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         dialogHandler.show(getSupportFragmentManager(),"Add item");
     }
 
+
     @Override
-    public void addItemAsNeeded(String item_name, int month, int year) {
+    public void addItemAsNeeded(String item_name, int date, int month, int year, String category_name) {
         addItem(item_name,month,year);
         itemsAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Toast.makeText(getApplicationContext(), "Hello!", Toast.LENGTH_SHORT).show();
+    }
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

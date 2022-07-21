@@ -2,14 +2,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="30dp">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/name_dialog_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingStart="3dp"
         android:text="Name:"
-        android:textSize="24dp">
+        android:textColor="@color/black"
+        android:textSize="16sp">
     </TextView>
     <EditText
         android:id="@+id/name_dialog_box_editText"
@@ -19,19 +21,46 @@
         android:hint="item name">
     </EditText>
 
+
     <TextView
-        android:id="@+id/month_dialog_box"
-        android:layout_below="@id/name_dialog_box_editText"
+        android:id="@+id/date_dialog_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/name_dialog_box_editText"
+        android:text="Date: (leave empty for last date of month)"
+        android:paddingStart="3dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="15dp"
+        android:textSize="16sp">
+    </TextView>
+
+    <EditText
+        android:id="@+id/date_dialog_box_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date_dialog_box"
+        android:inputType="number"
+        android:hint="date">
+    </EditText>
+
+
+    <TextView
+        android:id="@+id/month_dialog_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date_dialog_box_editText"
+        android:paddingStart="3dp"
         android:text="Month:"
-        android:textSize="24dp">
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:textSize="16sp">
     </TextView>
     <EditText
         android:id="@+id/month_dialog_box_editText"
         android:layout_below="@id/month_dialog_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:hint="month">
     </EditText>
 
@@ -40,21 +69,42 @@
         android:layout_below="@id/month_dialog_box_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingStart="3dp"
         android:text="Year:"
-        android:textSize="24dp">
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:textSize="16sp">
     </TextView>
     <EditText
         android:id="@+id/year_dialog_box_editText"
         android:layout_below="@id/year_dialog_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:hint="year">
     </EditText>
 
+
     <Spinner
+        android:id="@+id/spinner_category_selector_add_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/year_dialog_box_editText">
+        android:layout_below="@id/year_dialog_box_editText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp">
     </Spinner>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_category_selector_add_item"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:text="Dont forget to select item type from dropdown!"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textColor="#8C8C8C">
+
+    </TextView>
 
 </RelativeLayout>
