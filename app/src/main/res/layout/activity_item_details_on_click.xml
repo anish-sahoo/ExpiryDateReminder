@@ -11,17 +11,17 @@
     <TextView
         android:id="@+id/nameOfItem"
         android:layout_width="match_parent"
-        android:layout_height="96dp"
+        android:layout_height="wrap_content"
 
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
 
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="40dp"
 
-        android:text="Item name -"
+        android:text="Item:"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -43,6 +43,25 @@
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="120dp"
+
+        android:text="Category -"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
 
     <ImageView
         android:id="@+id/imageView"
@@ -117,22 +136,6 @@
         android:text="Add Picture"
         android:textSize="16sp"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/itemDetailsHeading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-
-        android:layout_marginTop="14dp"
-        android:text="Item Details"
-
-        android:textColor="@color/black"
-        android:textSize="38sp"
-        android:textStyle="bold"
-        android:typeface="serif" />
 
 
     <View

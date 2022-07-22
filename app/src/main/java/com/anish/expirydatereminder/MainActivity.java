@@ -12,7 +12,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,15 +23,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -51,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     private Spinner categorySpinner;
 
     @SuppressLint("SetTextI18n")
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,9 +74,10 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         addItemButton.setOnClickListener(view -> openDialog());
 
         dbHandler = new DatabaseHandler(MainActivity.this);
+
         modelList = dbHandler.getAllItems();
-        Collections.sort(modelList, Comparator.comparingInt(ItemModel::getMonth));
-        Collections.sort(modelList, Comparator.comparingInt(ItemModel::getYear));
+        modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
+        modelList.sort(Comparator.comparingInt(ItemModel::getYear));
         populate(modelList);
 
         if(modelList.size()>0)
@@ -93,8 +89,8 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         refreshButton.setOnClickListener(view -> {
             modelList = dbHandler.getAllItems();
             itemsAdapter.clear();
-            Collections.sort(modelList, Comparator.comparingInt(ItemModel::getMonth));
-            Collections.sort(modelList, Comparator.comparingInt(ItemModel::getYear));
+            modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
+            modelList.sort(Comparator.comparingInt(ItemModel::getYear));
             populate(modelList);
             itemsAdapter.notifyDataSetChanged();
         });
@@ -112,10 +108,10 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             String txt = sortButton.getText().toString();
             System.out.println("Button clicked");
             System.out.println(txt);
-            if(txt == "Sort By: Date"){
+            if(txt.equals("Sort By: Date")){
                 modelList = dbHandler.getAllItems();
                 itemsAdapter.clear();
-                Collections.sort(modelList,Comparator.comparing(ItemModel::getItem));
+                modelList.sort(Comparator.comparing(ItemModel::getItem));
                 populate(modelList);
                 itemsAdapter.notifyDataSetChanged();
                 sortButton.setText("Sort By: Name");
@@ -123,8 +119,8 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             else if(txt.contains("Sort By: Name")){
                 modelList = dbHandler.getAllItems();
                 itemsAdapter.clear();
-                Collections.sort(modelList, Comparator.comparingInt(ItemModel::getMonth));
-                Collections.sort(modelList, Comparator.comparingInt(ItemModel::getYear));
+                modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
+                modelList.sort(Comparator.comparingInt(ItemModel::getYear));
                 populate(modelList);
                 itemsAdapter.notifyDataSetChanged();
                 sortButton.setText("Sort By: Date");
@@ -169,11 +165,13 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             myIntent.putExtra("item name",modelList.get(i).getItem());
             myIntent.putExtra("month",modelList.get(i).getMonth());
             myIntent.putExtra("year",modelList.get(i).getYear());
+            myIntent.putExtra("date",modelList.get(i).getDate());
+            myIntent.putExtra("category",modelList.get(i).getCategory());
             MainActivity.this.startActivity(myIntent);
         });
     }
 
-    private int checkIfItemExists(String item, int month, int year) {
+    private int checkIfItemExists(String item, int month, int year, int date, String category) {
         List<ItemModel> list_of_items = dbHandler.getAllItems();
         for (ItemModel obj:list_of_items){
             if(obj.getItem().equals(item)){
@@ -246,7 +244,8 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         String itemName = obj.getItem();
         int month = obj.getMonth();
         int year  = obj.getYear();
-        String totalItem = month+"/"+year + " : " + itemName;
+        int date = obj.getDate();
+        String totalItem = month+"/"+ date+"/"+year + " : " + itemName;
         if(!itemName.isEmpty()){
             itemsAdapter.add(totalItem);
         }
@@ -254,45 +253,34 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             Toast.makeText(getApplicationContext(),"Cannot be empty string, enter text",Toast.LENGTH_SHORT).show();
         }
     }
-    private void addItem(String itemName,int date, int month, int year){
-        if(month > 12 || month<0){
-            Toast.makeText(getApplicationContext(),"Incorrect month input!!!",Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if(year < 1000 || year > 9999){
-            Toast.makeText(getApplicationContext(),"Please enter year in YYYY format",Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        int checker = checkIfItemExists(itemName,month,year);
+    private void addItem(String itemName,int date, int month, int year, String category){
+        int checker = checkIfItemExists(itemName,month,year,date,category);
 
         if(checker == 3){
             Toast.makeText(getApplicationContext(),"This item already exists!",Toast.LENGTH_SHORT).show();
             return;
         }
         else if(checker == 2){
-            Toast.makeText(getApplicationContext(),"Same Item with different expiry date exists! ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Same Item with different expiry date exists! Finish that first! ",Toast.LENGTH_SHORT).show();
+            return;
         }
 
         String text = month + "/" + date + "/" + year + " : " + itemName;
 
         itemsAdapter.add(text);
-        dbHandler.addNewItem(new ItemModel(itemName,month,year));
-        modelList.add(new ItemModel(itemName,month,year));
+        dbHandler.addNewItem(new ItemModel(itemName,month,year,date,category));
+        modelList.add(new ItemModel(itemName,month,year,date,category));
     }
 
     private void createNotificationChannel(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            CharSequence name = "EDR Channel";
-            String description = "Channel for Expiry Date Reminder notifications";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("edr_channel_1",name,importance);
-            channel.setDescription(description);
+        CharSequence name = "EDR Channel";
+        String description = "Channel for Expiry Date Reminder notifications";
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel channel = new NotificationChannel("edr_channel_1",name,importance);
+        channel.setDescription(description);
 
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
     }
     private void setNotifications(int a){
         Intent intent = new Intent(MainActivity.this,NotificationHandler.class);
@@ -321,17 +309,49 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
 
     @Override
     public void addItemAsNeeded(String item_name, int date, int month, int year, String category_name) {
-        addItem(item_name,date,month,year);
+        addItem(item_name,date,month,year,category_name);
         itemsAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(getApplicationContext(), "Hello!", Toast.LENGTH_SHORT).show();
+        if(i==0){
+            if(sortButton.getText().toString().equals("Sort By: Date")){
+                modelList = dbHandler.getAllItems();
+                itemsAdapter.clear();
+                modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
+                modelList.sort(Comparator.comparingInt(ItemModel::getYear));
+                populate(modelList);
+                itemsAdapter.notifyDataSetChanged();
+            }
+            else {
+                modelList = dbHandler.getAllItems();
+                itemsAdapter.clear();
+                modelList.sort(Comparator.comparing(ItemModel::getItem));
+                populate(modelList);
+                itemsAdapter.notifyDataSetChanged();
+            }
+        }
+        else {
+            if(sortButton.getText().toString().equals("Sort By: Date")){
+                modelList = dbHandler.getAllItems(categories[i]);
+                itemsAdapter.clear();
+                modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
+                modelList.sort(Comparator.comparingInt(ItemModel::getYear));
+                populate(modelList);
+                itemsAdapter.notifyDataSetChanged();
+            }
+            else {
+                modelList = dbHandler.getAllItems(categories[i]);
+                itemsAdapter.clear();
+                modelList.sort(Comparator.comparing(ItemModel::getItem));
+                populate(modelList);
+                itemsAdapter.notifyDataSetChanged();
+            }
+        }
     }
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 }
 

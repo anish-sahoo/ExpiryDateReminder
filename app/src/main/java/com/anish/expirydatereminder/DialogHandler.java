@@ -17,10 +17,10 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import java.time.YearMonth;
 
 public class DialogHandler extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
-    private EditText name, month, year;
+    private EditText name, month, year, date;
     private ExampleDialogListener listener;
     private Spinner spinner;
-    private String[] CATEGORIES = new String[]{"All Items","Grocery","Important dates","Medicine","Other Items"};
+    private String[] CATEGORIES = new String[]{"Grocery","Important dates","Medicine","Other Items"};
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -37,12 +37,22 @@ public class DialogHandler extends AppCompatDialogFragment implements AdapterVie
                         String itemName = name.getText().toString();
                         int expiryMonth = Integer.parseInt(month.getText().toString());
                         int expiryYear = Integer.parseInt(year.getText().toString());
+                        int d;
 
                         String item_category = spinner.getSelectedItem().toString();
                         Toast.makeText(getContext(), item_category+" was selected from spinner inside dialog box", Toast.LENGTH_SHORT).show();
 
-                        int d = YearMonth.of(expiryYear, expiryMonth).lengthOfMonth();
-
+                        if(date.getText().toString().isEmpty()) {
+                            d = YearMonth.of(expiryYear, expiryMonth).lengthOfMonth();
+                        }
+                        else {
+                            d = Integer.parseInt(date.getText().toString());
+                            if(d < 1 || d > YearMonth.of(expiryYear, expiryMonth).lengthOfMonth()){
+                                Toast.makeText(getContext(), "Incorrect date!", Toast.LENGTH_SHORT).show();
+                                date.setText("");
+                                return;
+                            }
+                        }
                         if(expiryMonth < 13 && expiryMonth > 0) {
                             if (expiryYear > 999 && expiryYear < 10000)
                                 listener.addItemAsNeeded(itemName, d, expiryMonth, expiryYear, item_category);
@@ -57,6 +67,7 @@ public class DialogHandler extends AppCompatDialogFragment implements AdapterVie
         name = view.findViewById(R.id.name_dialog_box_editText);
         month = view.findViewById(R.id.month_dialog_box_editText);
         year = view.findViewById(R.id.year_dialog_box_editText);
+        date = view.findViewById(R.id.date_dialog_box_editText);
 
         spinner = view.findViewById(R.id.spinner_category_selector_add_item);
         spinner.setOnItemSelectedListener(this);

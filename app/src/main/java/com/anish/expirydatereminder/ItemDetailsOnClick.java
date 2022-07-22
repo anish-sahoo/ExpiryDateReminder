@@ -10,8 +10,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -48,11 +46,6 @@ public class ItemDetailsOnClick extends AppCompatActivity {
         if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
         }
-
-        TextView textView = findViewById(R.id.itemDetailsHeading);
-        SpannableString content = new SpannableString("Item Details");
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
-        textView.setText(content);
 
         itemName = findViewById(R.id.nameOfItem);
         expiresOn = findViewById(R.id.expiresOn);

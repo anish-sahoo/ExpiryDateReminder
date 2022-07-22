@@ -39,8 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/date_dialog_box"
-        android:inputType="number"
-        android:hint="date">
+        android:hint="date"
+        android:inputType="number">
     </EditText>
 
 

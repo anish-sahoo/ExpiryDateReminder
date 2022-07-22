@@ -1,0 +1,46 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="28dp">
+
+    <TextView
+        android:id="@+id/category_text_field_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Category:"
+        android:textSize="26sp">
+    </TextView>
+
+    <EditText
+        android:id="@+id/add_category_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/category_text_field_settings"
+        android:layout_toStartOf="@id/add_category_button"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="10dp"
+        android:hint="category name"
+        android:textAlignment="center">
+    </EditText>
+
+    <Button
+        android:id="@+id/add_category_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/category_text_field_settings"
+        android:layout_alignParentEnd="true"
+        android:text="Add ">
+    </Button>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restore Default Settings"
+        android:layout_below="@id/add_category_button"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="60dp"
+        android:backgroundTint="#F44336"
+        android:textColor="#FFFFFF">
+    </Button>
+</RelativeLayout>
