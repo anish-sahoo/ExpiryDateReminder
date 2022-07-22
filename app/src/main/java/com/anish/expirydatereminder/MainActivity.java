@@ -1,6 +1,7 @@
 package com.anish.expirydatereminder;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
@@ -30,6 +31,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -40,14 +42,15 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     private ArrayList<String> items;
     private ArrayAdapter<String> itemsAdapter;
     private ListView listView;
-    private Button refreshButton;
-    private FloatingActionButton addItemButton;
+    private FloatingActionButton refreshButton, addItemButton, settingsButton;
+    private Button sortButton;
     private DatabaseHandler dbHandler;
     private List<ItemModel> modelList;
     private final String[] categories = new String[]{"All Items","Grocery","Important dates","Medicine","Other Items"};
 
     private Spinner categorySpinner;
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             setNotifications(0);
         else
             setNotifications(1);
+
+
         refreshButton.setOnClickListener(view -> {
             modelList = dbHandler.getAllItems();
             itemsAdapter.clear();
@@ -100,6 +105,31 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         ArrayAdapter<String> ad = new ArrayAdapter<>(this, R.layout.spinner_item, categories);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(ad);
+
+
+        sortButton = findViewById(R.id.sortButton);
+        sortButton.setOnClickListener(view -> {
+            String txt = sortButton.getText().toString();
+            System.out.println("Button clicked");
+            System.out.println(txt);
+            if(txt == "Sort By: Date"){
+                modelList = dbHandler.getAllItems();
+                itemsAdapter.clear();
+                Collections.sort(modelList,Comparator.comparing(ItemModel::getItem));
+                populate(modelList);
+                itemsAdapter.notifyDataSetChanged();
+                sortButton.setText("Sort By: Name");
+            }
+            else if(txt.contains("Sort By: Name")){
+                modelList = dbHandler.getAllItems();
+                itemsAdapter.clear();
+                Collections.sort(modelList, Comparator.comparingInt(ItemModel::getMonth));
+                Collections.sort(modelList, Comparator.comparingInt(ItemModel::getYear));
+                populate(modelList);
+                itemsAdapter.notifyDataSetChanged();
+                sortButton.setText("Sort By: Date");
+            }
+        });
 
     }
 
@@ -224,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             Toast.makeText(getApplicationContext(),"Cannot be empty string, enter text",Toast.LENGTH_SHORT).show();
         }
     }
-    private void addItem(String itemName, int month, int year){
+    private void addItem(String itemName,int date, int month, int year){
         if(month > 12 || month<0){
             Toast.makeText(getApplicationContext(),"Incorrect month input!!!",Toast.LENGTH_SHORT).show();
             return;
@@ -245,7 +275,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             Toast.makeText(getApplicationContext(),"Same Item with different expiry date exists! ",Toast.LENGTH_SHORT).show();
         }
 
-        String text = month + "/" + year + " : " + itemName;
+        String text = month + "/" + date + "/" + year + " : " + itemName;
 
         itemsAdapter.add(text);
         dbHandler.addNewItem(new ItemModel(itemName,month,year));
@@ -289,13 +319,11 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         dialogHandler.show(getSupportFragmentManager(),"Add item");
     }
 
-
     @Override
     public void addItemAsNeeded(String item_name, int date, int month, int year, String category_name) {
-        addItem(item_name,month,year);
+        addItem(item_name,date,month,year);
         itemsAdapter.notifyDataSetChanged();
     }
-
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -306,3 +334,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
 
     }
 }
+
+
+//https://stackoverflow.com/questions/19699776/write-multiline-text-on-button-in-android
+//https://stackoverflow.com/questions/13624442/getting-last-day-of-the-month-in-a-given-string-date/40689365#40689365

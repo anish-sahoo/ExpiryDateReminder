@@ -16,7 +16,6 @@
         android:backgroundTint="@color/purple_500"
         android:backgroundTintMode="src_over" />
 
-
     <View
         android:id="@+id/divider4"
         android:layout_width="match_parent"
@@ -81,8 +80,8 @@
         android:layout_alignParentTop="true"
 
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="111dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="0dp"
         android:background="@color/purple_500"
         android:backgroundTintMode="src_over" />
@@ -118,21 +117,37 @@
         android:textStyle="bold"
         android:textSize="20sp"/>
 
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/refreshButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
 
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="115dp"
+
         android:backgroundTint="@color/purple_500"
-
-        android:text="Refresh"
+        android:foreground="@drawable/ic_baseline_refresh_24"
         android:textSize="17sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:contentDescription="refresh" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foreground="@drawable/ic_baseline_settings_24"
+        android:backgroundTint="@color/purple_500"
+        android:backgroundTintMode="src_over"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="180dp"
+
+        android:contentDescription="settings"/>
 
     <Button
         android:id="@+id/sortButton"
@@ -144,8 +159,8 @@
 
         android:layout_marginStart="13dp"
         android:layout_marginTop="9dp"
-        android:text="Sort By:&#10; Name"
-        android:textSize="17sp"
+        android:text="Sort By: Name"
+        android:textSize="13sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -158,7 +173,7 @@
         android:layout_alignParentBottom="true"
 
         android:layout_marginStart="5dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="64dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="42dp"
 
@@ -174,17 +189,16 @@
 
     <Spinner
         android:id="@+id/category_spinner"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignParentStart="true"
+
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-
-        android:layout_centerInParent="true"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="71dp"
-        android:layout_marginEnd="33dp"
+        android:layout_toEndOf="@id/sortButton"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="10dp"
         android:spinnerMode="dropdown" />
 
 </RelativeLayout>

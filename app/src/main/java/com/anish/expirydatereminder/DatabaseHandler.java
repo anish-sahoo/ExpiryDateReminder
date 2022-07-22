@@ -18,6 +18,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String NAME_COL = "itemName";
     private static final String MONTH_COL = "month";
     private static final String YEAR_COL = "year";
+    private static final String CATEGORY_COL = "category";
+    private static final String DATE_COL = "date";
 
     public DatabaseHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -74,6 +76,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public ArrayList<ItemModel> getAllItems() {
+        // on below line we are creating a database for reading our database.
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // on below line we are creating a cursor with query to read data from database.
+        Cursor crs = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+
+        // on below line we are creating a new array list.
+        ArrayList<ItemModel> items = new ArrayList<>();
+
+        // moving our cursor to first position.
+        if (crs.moveToFirst()) {
+            do {
+                // on below line we are adding the data from cursor to our array list.
+                items.add(new ItemModel(crs.getString(1), crs.getInt(2), crs.getInt(3)));
+                Log.d("Accessing","ROW ID = "+crs.getString(0));
+            } while (crs.moveToNext());
+            // moving our cursor to next.
+        }
+
+        // at last closing our cursor and returning our array list.
+        crs.close();
+        return items;
+    }
+
+    public ArrayList<ItemModel> getAllItems(String category) {
         // on below line we are creating a database for reading our database.
         SQLiteDatabase db = this.getReadableDatabase();
 

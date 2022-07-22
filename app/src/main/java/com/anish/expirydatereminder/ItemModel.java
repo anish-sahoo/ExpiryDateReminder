@@ -1,8 +1,8 @@
 package com.anish.expirydatereminder;
 
 public class ItemModel {
-    private String item;
-    private int month, year, id;
+    private String item, category;
+    private int month, year, id, date;
 
     ItemModel(String i, int m, int y){
         this.item = i;
@@ -14,6 +14,24 @@ public class ItemModel {
         this.item = null;
         this.month = 0;
         this.year = 0;
+        this.category = null;
+        this.date = 0;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
     }
 
     public int getId() {
