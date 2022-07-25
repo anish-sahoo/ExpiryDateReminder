@@ -77,7 +77,11 @@ public class SettingsDatabaseHandler extends SQLiteOpenHelper {
 
     public int deleteCategory(String category_name) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "category=? and type=?", new String[]{category_name,"1"});
+        int i = db.delete(TABLE_NAME, "category=? and type=?", new String[]{category_name,"1"});
+        if(i!=0) {
+            db.delete("itemsTable", "category=?", new String[]{category_name});
+        }
+        return i;
     }
 
     public void restoreDefault() {

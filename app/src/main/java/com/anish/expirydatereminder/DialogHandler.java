@@ -15,12 +15,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import java.time.YearMonth;
+import java.util.List;
 
 public class DialogHandler extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
     private EditText name, month, year, date;
     private ExampleDialogListener listener;
     private Spinner spinner;
-    private String[] CATEGORIES = new String[]{"Grocery","Important dates","Medicine","Other Items"};
+    private List<String> CATEGORIES;
+    SettingsDatabaseHandler settingsDatabaseHandler;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -69,6 +71,9 @@ public class DialogHandler extends AppCompatDialogFragment implements AdapterVie
         year = view.findViewById(R.id.year_dialog_box_editText);
         date = view.findViewById(R.id.date_dialog_box_editText);
 
+        settingsDatabaseHandler = new SettingsDatabaseHandler(getContext());
+        CATEGORIES = settingsDatabaseHandler.getCategories();
+
         spinner = view.findViewById(R.id.spinner_category_selector_add_item);
         spinner.setOnItemSelectedListener(this);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,CATEGORIES);
@@ -96,7 +101,7 @@ public class DialogHandler extends AppCompatDialogFragment implements AdapterVie
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(getContext(), CATEGORIES[i], Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), CATEGORIES.get(i), Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
