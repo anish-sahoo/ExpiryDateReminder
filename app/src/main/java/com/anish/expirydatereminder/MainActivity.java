@@ -33,7 +33,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements DialogHandler.ExampleDialogListener, AdapterView.OnItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements DialogHandler.ExampleDialogListener, SettingsDialogHandler.ExampleDialogListener2, AdapterView.OnItemSelectedListener{
 
     private ArrayList<String> items;
     private ArrayAdapter<String> itemsAdapter;
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     private DatabaseHandler dbHandler;
     private List<ItemModel> modelList;
     private final String[] categories = new String[]{"All Items","Grocery","Important dates","Medicine","Other Items"};
+    SettingsDatabaseHandler settingsDatabaseHandler;
 
     private Spinner categorySpinner;
 
@@ -102,6 +103,9 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(ad);
 
+        settingsButton = findViewById(R.id.settings_button);
+        settingsButton.setOnClickListener(view -> openSettingsDialog());
+        settingsDatabaseHandler = new SettingsDatabaseHandler(MainActivity.this);
 
         sortButton = findViewById(R.id.sortButton);
         sortButton.setOnClickListener(view -> {
@@ -306,6 +310,10 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         DialogHandler dialogHandler = new DialogHandler();
         dialogHandler.show(getSupportFragmentManager(),"Add item");
     }
+    private void openSettingsDialog(){
+        SettingsDialogHandler settingsDialogHandler = new SettingsDialogHandler();
+        settingsDialogHandler.show(getSupportFragmentManager(),"Settings");
+    }
 
     @Override
     public void addItemAsNeeded(String item_name, int date, int month, int year, String category_name) {
@@ -352,6 +360,36 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     }
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+
+
+
+
+
+
+
+
+
+
+
+    @Override
+    public void addCategory(String categoryName) {
+
+    }
+
+    @Override
+    public int deleteCategory(String category_name) {
+        return 0;
+    }
+
+    @Override
+    public void restoreDefault() {
+
+    }
+
+    @Override
+    public List<String> getCategories() {
+        return null;
     }
 }
 
