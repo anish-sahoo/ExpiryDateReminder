@@ -2,15 +2,20 @@ package com.anish.expirydatereminder;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsDatabaseHandler extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "itemsDatabase";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 8;
     private static final String TABLE_NAME = "categoriesTable";
     private static final String ID_COL = "id";
     private static final String CATEGORY_COL = "category";
@@ -18,27 +23,56 @@ public class SettingsDatabaseHandler extends SQLiteOpenHelper {
 
     public SettingsDatabaseHandler(Context context){
         super(context, DB_NAME, null, DB_VERSION);
+        try{
+            onCreate(getWritableDatabase());
+        }
+        catch (SQLException e) {
+            String query = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
+                    + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + CATEGORY_COL + " TEXT,"
+                    + TYPE_COL + " INTEGER)";
+            getWritableDatabase().execSQL(query);
+
+            addCategory("All Items",0);
+            addCategory("Grocery",0);
+            addCategory("Important Dates",0);
+            addCategory("Medicine",0);
+            addCategory("Snacks",0);
+            addCategory("Frozen goods",0);
+        }
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String query = "CREATE TABLE " + TABLE_NAME + " ("
+        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + CATEGORY_COL + " TEXT,"
                 + TYPE_COL + " INTEGER)";
         sqLiteDatabase.execSQL(query);
+
+        addCategory("All Items",0);
+        addCategory("Grocery",0);
+        addCategory("Important Dates",0);
+        addCategory("Medicine",0);
+        addCategory("Snacks",0);
+        addCategory("Frozen goods",0);
     }
 
-    public void addCategory(String categoryName) {
+    public boolean addCategory(String categoryName, int type) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
         values.put(CATEGORY_COL, categoryName);
-        values.put(TYPE_COL,1);
+        values.put(TYPE_COL,type);
 
-        db.insert(TABLE_NAME, null, values);
+        if(!checkIfCategoryExists(categoryName)){
+            db.insert(TABLE_NAME, null, values);
+            db.close();
+            return true;
+        }
         db.close();
+        return false;
     }
 
     public int deleteCategory(String category_name) {
@@ -49,10 +83,20 @@ public class SettingsDatabaseHandler extends SQLiteOpenHelper {
     public void restoreDefault() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, "type=?", new String[]{"1"});
+        System.err.println("Defaults Restored!");
     }
 
     public List<String> getCategories() {
-        return null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor crs = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        ArrayList<String> categories = new ArrayList<>();
+        if (crs.moveToFirst()) {
+            do {
+                categories.add(crs.getString(1));
+            } while (crs.moveToNext());
+        }
+        crs.close();
+        return categories;
     }
 
     public void clearDatabase() {
@@ -65,5 +109,19 @@ public class SettingsDatabaseHandler extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(sqLiteDatabase);
+    }
+
+    public boolean checkIfCategoryExists(String category_name){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor crs = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        ArrayList<String> categories = new ArrayList<>();
+        if (crs.moveToFirst()) {
+            do {
+                categories.add(crs.getString(1));
+            } while (crs.moveToNext());
+        }
+        crs.close();
+
+        return categories.contains(category_name);
     }
 }

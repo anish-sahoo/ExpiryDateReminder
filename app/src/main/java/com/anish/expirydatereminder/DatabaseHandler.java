@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "itemsDatabase";
-    private static final int DB_VERSION = 6;
+    private static final int DB_VERSION = 8;
     private static final String TABLE_NAME = "itemsTable";
     private static final String ID_COL = "id";
     private static final String NAME_COL = "itemName";
@@ -28,7 +28,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         // on below line we are creating an sqlite query and we are setting our column names along with their data types.
-        String query = "CREATE TABLE " + TABLE_NAME + " ("
+        String query = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + NAME_COL + " TEXT,"
                 + MONTH_COL + " INTEGER,"

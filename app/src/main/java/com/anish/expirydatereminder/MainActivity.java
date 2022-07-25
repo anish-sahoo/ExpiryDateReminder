@@ -33,7 +33,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements DialogHandler.ExampleDialogListener, SettingsDialogHandler.ExampleDialogListener2, AdapterView.OnItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements DialogHandler.ExampleDialogListener, AdapterView.OnItemSelectedListener{
 
     private ArrayList<String> items;
     private ArrayAdapter<String> itemsAdapter;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     private Button sortButton;
     private DatabaseHandler dbHandler;
     private List<ItemModel> modelList;
-    private final String[] categories = new String[]{"All Items","Grocery","Important dates","Medicine","Other Items"};
+    private List<String> categories;
     SettingsDatabaseHandler settingsDatabaseHandler;
 
     private Spinner categorySpinner;
@@ -97,6 +97,10 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         });
 
 
+
+        settingsDatabaseHandler = new SettingsDatabaseHandler(MainActivity.this);
+        categories = new ArrayList<>();
+        categories = settingsDatabaseHandler.getCategories();
         categorySpinner = findViewById(R.id.category_spinner);
         categorySpinner.setOnItemSelectedListener(this);
         ArrayAdapter<String> ad = new ArrayAdapter<>(this, R.layout.spinner_item, categories);
@@ -104,8 +108,11 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         categorySpinner.setAdapter(ad);
 
         settingsButton = findViewById(R.id.settings_button);
-        settingsButton.setOnClickListener(view -> openSettingsDialog());
-        settingsDatabaseHandler = new SettingsDatabaseHandler(MainActivity.this);
+        settingsButton.setOnClickListener(view -> {
+            openSettingsDialog();
+            ad.notifyDataSetChanged();
+        });
+
 
         sortButton = findViewById(R.id.sortButton);
         sortButton.setOnClickListener(view -> {
@@ -177,11 +184,13 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
 
     private int checkIfItemExists(String item, int month, int year, int date, String category) {
         List<ItemModel> list_of_items = dbHandler.getAllItems();
-        for (ItemModel obj:list_of_items){
-            if(obj.getItem().equals(item)){
-                if(obj.getMonth() == month){
-                    if(obj.getYear() == year){
-                        return 3;
+        for (ItemModel obj:list_of_items) {
+            if(obj.getItem().equals(item)) {
+                if(obj.getMonth() == month) {
+                    if(obj.getYear() == year) {
+                        if(obj.getCategory() == category) {
+                            return 3;
+                        }
                     }
                 }
                 if(year >= obj.getYear()) {
@@ -192,58 +201,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         return 1;
     }
 
-    /*private void addItem() {
-        EditText input = findViewById(R.id.itemName);
-        EditText m = findViewById(R.id.month);
-        EditText y = findViewById(R.id.year);
 
-
-        String itemName = input.getText().toString();
-
-        if(!itemName.isEmpty() && !m.getText().toString().isEmpty() && !y.getText().toString().isEmpty()){
-            int month = Integer.parseInt(m.getText().toString());
-            int year  = Integer.parseInt(y.getText().toString());
-
-            if(month > 12 || month<0){
-                Toast.makeText(getApplicationContext(),"Incorrect month input!!!",Toast.LENGTH_SHORT).show();
-                m.setText("");
-                return;
-            }
-
-            if(year < 1000 || year > 9999){
-                Toast.makeText(getApplicationContext(),"Please enter year in YYYY format",Toast.LENGTH_SHORT).show();
-                y.setText("");
-                return;
-            }
-
-            int checker = checkIfItemExists(itemName,month,year);
-
-            if(checker == 3){
-                Toast.makeText(getApplicationContext(),"This item already exists!",Toast.LENGTH_SHORT).show();
-                input.setText("");
-                y.setText("");
-                m.setText("");
-                return;
-            }
-            else if(checker == 2){
-                Toast.makeText(getApplicationContext(),"Same Item with different expiry date exists! ",Toast.LENGTH_SHORT).show();
-            }
-
-
-            String text = month + "/" + year + " : " + itemName;
-
-            itemsAdapter.add(text);
-            dbHandler.addNewItem(new ItemModel(itemName,month,year));
-            modelList.add(new ItemModel(itemName,month,year));
-
-            input.setText("");
-            m.setText("");
-            y.setText("");
-        }
-        else{
-            Toast.makeText(getApplicationContext(),"Fields are empty!!!",Toast.LENGTH_SHORT).show();
-        }
-    }*/
     private void addItem(ItemModel obj) {
         String itemName = obj.getItem();
         int month = obj.getMonth();
@@ -342,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         }
         else {
             if(sortButton.getText().toString().equals("Sort By: Date")){
-                modelList = dbHandler.getAllItems(categories[i]);
+                modelList = dbHandler.getAllItems(categories.get(i));
                 itemsAdapter.clear();
                 modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
                 modelList.sort(Comparator.comparingInt(ItemModel::getYear));
@@ -350,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
                 itemsAdapter.notifyDataSetChanged();
             }
             else {
-                modelList = dbHandler.getAllItems(categories[i]);
+                modelList = dbHandler.getAllItems(categories.get(i));
                 itemsAdapter.clear();
                 modelList.sort(Comparator.comparing(ItemModel::getItem));
                 populate(modelList);
@@ -361,38 +319,4 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
-
-
-
-
-
-
-
-
-
-
-
-    @Override
-    public void addCategory(String categoryName) {
-
-    }
-
-    @Override
-    public int deleteCategory(String category_name) {
-        return 0;
-    }
-
-    @Override
-    public void restoreDefault() {
-
-    }
-
-    @Override
-    public List<String> getCategories() {
-        return null;
-    }
 }
-
-
-//https://stackoverflow.com/questions/19699776/write-multiline-text-on-button-in-android
-//https://stackoverflow.com/questions/13624442/getting-last-day-of-the-month-in-a-given-string-date/40689365#40689365
