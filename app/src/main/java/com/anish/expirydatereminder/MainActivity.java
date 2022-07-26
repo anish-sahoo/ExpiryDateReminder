@@ -33,10 +33,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements DialogHandler.ExampleDialogListener, AdapterView.OnItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements DialogHandler.ExampleDialogListener, SettingsDialogHandler.SettingsDialog, AdapterView.OnItemSelectedListener{
 
     private ArrayList<String> items;
-    private ArrayAdapter<String> itemsAdapter;
+    private ArrayAdapter<String> itemsAdapter, ad;
     private ListView listView;
     private FloatingActionButton refreshButton, addItemButton, settingsButton;
     private Button sortButton;
@@ -88,8 +88,10 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
 
 
         refreshButton.setOnClickListener(view -> {
-            modelList = dbHandler.getAllItems();
+            modelList.clear();
             itemsAdapter.clear();
+            itemsAdapter.notifyDataSetChanged();
+            modelList = dbHandler.getAllItems();
             modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
             modelList.sort(Comparator.comparingInt(ItemModel::getYear));
             populate(modelList);
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         categories = settingsDatabaseHandler.getCategories();
         categorySpinner = findViewById(R.id.category_spinner);
         categorySpinner.setOnItemSelectedListener(this);
-        ArrayAdapter<String> ad = new ArrayAdapter<>(this, R.layout.spinner_item, categories);
+        ad = new ArrayAdapter<>(this, R.layout.spinner_item, categories);
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(ad);
 
@@ -201,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         return 1;
     }
 
-
     private void addItem(ItemModel obj) {
         String itemName = obj.getItem();
         int month = obj.getMonth();
@@ -278,7 +279,6 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         addItem(item_name,date,month,year,category_name);
         itemsAdapter.notifyDataSetChanged();
     }
-
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         if(i==0){
@@ -318,5 +318,25 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     }
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+
+    @Override
+    public void refresh() {
+        ad.clear();
+        categories.clear();
+        ad.notifyDataSetChanged();
+        categories = settingsDatabaseHandler.getCategories();
+        ad.addAll(categories);
+        ad.notifyDataSetChanged();
+
+        modelList.clear();
+        itemsAdapter.clear();
+        itemsAdapter.notifyDataSetChanged();
+        modelList = dbHandler.getAllItems();
+        modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
+        modelList.sort(Comparator.comparingInt(ItemModel::getYear));
+        populate(modelList);
+        itemsAdapter.notifyDataSetChanged();
+        sortButton.setText("Sort By: Date");
     }
 }

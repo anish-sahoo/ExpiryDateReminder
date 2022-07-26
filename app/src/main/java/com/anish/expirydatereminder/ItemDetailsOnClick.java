@@ -26,11 +26,11 @@ import java.lang.ref.WeakReference;
 import java.util.Objects;
 
 public class ItemDetailsOnClick extends AppCompatActivity {
-    TextView itemName, expiresOn;
+    TextView itemName, expiresOn, categoryName;
     Button backBtn, addPicButton, deletePicButton;
     ImageView itemImage;
-    String item_name;
-    int month,year;
+    String item_name, category_name;
+    int month,year,date;
 
     ActivityResultLauncher<Intent> activityResultLauncher;
 
@@ -52,14 +52,18 @@ public class ItemDetailsOnClick extends AppCompatActivity {
         backBtn = findViewById(R.id.backButton);
         addPicButton = findViewById(R.id.addPicture);
         deletePicButton = findViewById(R.id.deletePicture);
+        categoryName = findViewById(R.id.category_image_view_in_item_details);
 
         Intent intent = getIntent();
         item_name = intent.getStringExtra("item name");
         month = intent.getIntExtra("month",0);
         year = intent.getIntExtra("year",0);
+        category_name = intent.getStringExtra("category");
+        date = intent.getIntExtra("date",0);
 
         itemName.setText("Item Name - " + item_name);
-        expiresOn.setText("Expires On - "+month+"/"+year);
+        expiresOn.setText("Expires On - "+ date+"/"+month+"/"+year + " DD/MM/YYYY");
+        categoryName.setText("Category - "+category_name);
 
         itemImage = findViewById(R.id.imageView);
         itemImage.setRotation(90);
@@ -68,8 +72,7 @@ public class ItemDetailsOnClick extends AppCompatActivity {
 
 
         backBtn.setOnClickListener(view -> {
-            Intent myIntent = new Intent(ItemDetailsOnClick.this, MainActivity.class);
-            ItemDetailsOnClick.this.startActivity(myIntent);
+            finish();
         });
 
         addPicButton.setOnClickListener(view -> {
@@ -127,5 +130,10 @@ public class ItemDetailsOnClick extends AppCompatActivity {
         ContentResolver contentResolver = getContentResolver();
         contentResolver.delete(uri,null,null);
         itemImage.setImageBitmap(null);
+    }
+
+    @Override
+    public void onBackPressed(){
+        finish();
     }
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SettingsDatabaseHandler extends SQLiteOpenHelper {
@@ -86,8 +87,21 @@ public class SettingsDatabaseHandler extends SQLiteOpenHelper {
 
     public void restoreDefault() {
         SQLiteDatabase db = this.getWritableDatabase();
+        Cursor crs = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        if (crs.moveToFirst()) {
+            do {
+                if(crs.getInt(2) == 1) {
+                    Log.d("Entered restore default loop in the method -------   ", crs.getString(1)+" is deleting now!");
+                    db.delete("itemsTable", "category=?", new String[]{crs.getString(1)});
+                }
+            } while (crs.moveToNext());
+        }
+        crs.close();
+
         db.delete(TABLE_NAME, "type=?", new String[]{"1"});
-        System.err.println("Defaults Restored!");
+
+        Log.d("LOOK AT ME ------- ", "restoreDefault METHOD CALLED ");
+        Log.d("ITEMS REMAINING IN DB ------ ", Arrays.toString(getCategories().toArray()));
     }
 
     public List<String> getCategories() {
