@@ -3,6 +3,7 @@ package com.anish.expirydatereminder;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,9 +38,8 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
 
         builder.setView(v)
                 .setTitle("Settings")
-                .setPositiveButton("ok",((dialogInterface, i) -> {
-                    obj.refresh();
-                }));
+                .setOnCancelListener(dialogInterface -> obj.refresh())
+                .setPositiveButton("ok",((dialogInterface, i) -> obj.refresh()));
 
         category_input = v.findViewById(R.id.add_category_name);
         restoreButton = v.findViewById(R.id.restore_button);
