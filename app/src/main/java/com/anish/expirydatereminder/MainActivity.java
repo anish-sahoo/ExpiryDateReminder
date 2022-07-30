@@ -38,12 +38,13 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     private ArrayList<String> items;
     private ArrayAdapter<String> itemsAdapter, ad;
     private ListView listView;
-    private FloatingActionButton refreshButton, addItemButton, settingsButton;
+    private FloatingActionButton refreshButton, addItemButton, settingsButton, helpButton;
     private Button sortButton;
     private DatabaseHandler dbHandler;
     private List<ItemModel> modelList;
     private List<String> categories;
     SettingsDatabaseHandler settingsDatabaseHandler;
+    DateFormatDatabase dbh;
 
     private Spinner categorySpinner;
 
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         addItemButton.setOnClickListener(view -> openDialog());
 
         dbHandler = new DatabaseHandler(MainActivity.this);
+        dbh = new DateFormatDatabase(MainActivity.this);
 
         modelList = dbHandler.getAllItems();
         modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
@@ -85,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             setNotifications(0);
         else
             setNotifications(1);
-
 
         refreshButton.setOnClickListener(view -> {
             modelList.clear();
@@ -140,12 +141,17 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             }
         });
 
+        helpButton = findViewById(R.id.help_button);
+        helpButton.setOnClickListener(view -> {
+            HelpDialogHandler hd = new HelpDialogHandler();
+            hd.show(getSupportFragmentManager(),"Help");
+        });
     }
 
 
     private void populate(List<ItemModel> list) {
         for(ItemModel a:list){
-            addItem(a);
+            addItem(a, dbh.getCurrentFormat());
         }
     }
 
@@ -190,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             if(obj.getItem().equals(item)) {
                 if(obj.getMonth() == month) {
                     if(obj.getYear() == year) {
-                        if(obj.getCategory() == category) {
+                        if(Objects.equals(obj.getCategory(), category)) {
                             return 3;
                         }
                     }
@@ -203,12 +209,16 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         return 1;
     }
 
-    private void addItem(ItemModel obj) {
+    private void addItem(ItemModel obj, int dateFormat) {
         String itemName = obj.getItem();
         int month = obj.getMonth();
         int year  = obj.getYear();
         int date = obj.getDate();
-        String totalItem = month+"/"+ date+"/"+year + " : " + itemName;
+        String totalItem = "";
+        if(dateFormat == 1) {
+            totalItem = month + "/" + date + "/" + year + " : " + itemName;
+        }
+        else totalItem = date + "/" + month + "/" + year + " : " + itemName;
         if(!itemName.isEmpty()){
             itemsAdapter.add(totalItem);
         }
@@ -321,7 +331,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     }
 
     @Override
-    public void refresh() {
+    public void refresh(int a) {
         ad.clear();
         categories.clear();
         ad.notifyDataSetChanged();

@@ -3,7 +3,7 @@ package com.anish.expirydatereminder;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsDialogHandler extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
-    Button restoreButton,add_button;
+    Button restoreButton,add_button, dateformat1, dateformat2;
     ArrayAdapter<String> settings_spinner_adapter;
     List<String> categories_list;
     EditText category_input;
@@ -35,11 +35,12 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
         View v = inflater.inflate(R.layout.settings_layout,null);
         sdh = new SettingsDatabaseHandler(getContext());
 
+        DateFormatDatabase dfd = new DateFormatDatabase(getContext());
 
         builder.setView(v)
                 .setTitle("Settings")
-                .setOnCancelListener(dialogInterface -> obj.refresh())
-                .setPositiveButton("ok",((dialogInterface, i) -> obj.refresh()));
+                .setOnCancelListener(dialogInterface -> obj.refresh(dfd.getCurrentFormat()))
+                .setPositiveButton("ok",((dialogInterface, i) -> obj.refresh(dfd.getCurrentFormat())));
 
         category_input = v.findViewById(R.id.add_category_name);
         restoreButton = v.findViewById(R.id.restore_button);
@@ -98,7 +99,7 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
                         categories_list = sdh.getCategories();
                         settings_spinner_adapter.addAll(categories_list);
                         settings_spinner_adapter.notifyDataSetChanged();
-                        obj.refresh();
+                        obj.refresh(dfd.getCurrentFormat());
                     })
                     .setNegativeButton("No", (dialog, which) -> dialog.cancel());
 
@@ -114,6 +115,31 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
             settings_spinner_adapter.addAll(categories_list);
             settings_spinner_adapter.notifyDataSetChanged();
             obj.refresh();*/
+        });
+
+        dateformat1 = v.findViewById(R.id.dd_mm_yyyy_button);
+        dateformat2 = v.findViewById(R.id.dd_mm_yyyy_button_2);
+
+        if(dfd.getCurrentFormat() == 1){
+            dateformat1.setBackgroundColor(Color.parseColor("#4CAF50"));
+            dateformat2.setBackgroundColor(Color.parseColor("#807C7C"));
+        }
+        else {
+            dateformat2.setBackgroundColor(Color.parseColor("#4CAF50"));
+            dateformat1.setBackgroundColor(Color.parseColor("#807C7C"));
+        }
+
+        dateformat1.setOnClickListener(view -> {
+            dateformat1.setBackgroundColor(Color.parseColor("#4CAF50"));
+            dateformat2.setBackgroundColor(Color.parseColor("#807C7C"));
+            dfd.update(1);
+            Toast.makeText(getContext(), "Date format changed to MM-DD-YYYY", Toast.LENGTH_SHORT).show();
+        });
+        dateformat2.setOnClickListener(view -> {
+            dateformat2.setBackgroundColor(Color.parseColor("#4CAF50"));
+            dateformat1.setBackgroundColor(Color.parseColor("#807C7C"));
+            dfd.update(2);
+            Toast.makeText(getContext(), "Date format changed to DD-MM-YYYY", Toast.LENGTH_SHORT).show();
         });
 
         return builder.create();
@@ -140,6 +166,6 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
     }
 
     public interface SettingsDialog{
-        void refresh();
+        void refresh(int a);
     }
 }

@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp">
+
+
+    <LinearLayout
+        android:id="@+id/layout_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/ic_baseline_add_24"
+            android:backgroundTint="@color/purple_500"
+            app:borderWidth="0dp"
+            android:clickable="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click on this button to add a new item"
+            android:textSize="22sp"
+            android:textColor="@color/black"
+            android:paddingStart="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/layout_1"
+        android:orientation="horizontal"
+        android:id="@+id/layout_2"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/ic_baseline_settings_24"
+            android:backgroundTint="@color/purple_500"
+            app:borderWidth="0dp"
+            android:clickable="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Click on this button to access settings, where you can add new categories, delete new categories and select date format"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:paddingStart="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/layout_2"
+        android:padding="10dp"
+        android:layout_marginTop="10dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/ic_baseline_refresh_24"
+            android:backgroundTint="@color/purple_500"
+            app:borderWidth="0dp"
+            android:clickable="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Touch this button to Refresh"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:paddingStart="10dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

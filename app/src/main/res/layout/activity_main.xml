@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <View
         android:id="@+id/divider6"
@@ -37,7 +39,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="31dp"
 
         android:background="?android:attr/listDivider"
         android:backgroundTint="@color/purple_500"
@@ -96,9 +98,11 @@
 
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="50dp"
-
+        app:borderWidth="0dp"
         android:backgroundTint="@color/purple_500"
-        android:foreground="@drawable/ic_baseline_add_24" />
+        tools:ignore="RelativeOverlap"
+        android:foreground="@drawable/ic_baseline_add_24"
+        android:contentDescription="Add Item" />
 
     <TextView
         android:id="@+id/copyrightText"
@@ -127,11 +131,12 @@
 
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="115dp"
-
+        app:borderWidth="0dp"
         android:backgroundTint="@color/purple_500"
         android:foreground="@drawable/ic_baseline_refresh_24"
         android:textSize="17sp"
         android:textStyle="bold"
+        tools:ignore="RelativeOverlap"
         android:contentDescription="refresh" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -142,12 +147,31 @@
         android:backgroundTint="@color/purple_500"
         android:backgroundTintMode="src_over"
         android:layout_alignParentEnd="true"
+        android:layout_above="@id/refreshButton"
         android:layout_alignParentBottom="true"
-
+        app:borderWidth="0dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="180dp"
-
+        tools:ignore="RelativeOverlap"
         android:contentDescription="settings"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/help_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:backgroundTint="@color/purple_500"
+        android:backgroundTintMode="src_over"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+
+        android:foreground="@drawable/ic_baseline_help_outline_24"
+        app:borderWidth="0dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="245dp"
+        android:contentDescription="help button"
+        tools:ignore="RelativeOverlap">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
     <Button
         android:id="@+id/sortButton"
@@ -175,7 +199,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="42dp"
+        android:layout_marginBottom="38dp"
 
         android:orientation="vertical"
         android:padding="10dp">

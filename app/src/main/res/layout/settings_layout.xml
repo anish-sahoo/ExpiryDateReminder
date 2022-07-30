@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:text="Add Category:"
         android:textColor="@color/black"
-        android:textSize="26sp">
+        android:textSize="20sp"
+        android:textStyle="bold">
     </TextView>
 
     <EditText
@@ -46,12 +47,41 @@
         android:text="Restore Default Settings"
         android:textColor="#FFFFFF"/>
 
+    <TextView
+        android:id="@+id/date_format"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/restore_button"
+        android:text="Current Date Format:    MM/DD/YYYY"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="22dp"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/dd_mm_yyyy_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date_format"
+        android:text="MM-DD-YYYY"
+        android:backgroundTint="#4CAF50"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/dd_mm_yyyy_button_2"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date_format"
+        android:text="DD-MM-YYYY"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="#807C7C"/>
+
     <ListView
         android:id="@+id/categories_list_view"
         android:layout_width="wrap_content"
         android:layout_below="@id/current_categories"
         android:layout_marginTop="10dp"
-        android:layout_height="250dp"
+        android:layout_height="150dp"
         android:layout_centerVertical="true" />
 
     <TextView
@@ -59,11 +89,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:layout_marginTop="18dp"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_below="@id/add_category_button"
-        android:text="Current categories:">
-    </TextView>
+        android:text="Current categories:"/>
 
 </RelativeLayout>
