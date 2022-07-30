@@ -3,6 +3,7 @@ package com.anish.expirydatereminder;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -23,6 +24,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public DatabaseHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+        try{
+            onCreate(getWritableDatabase());
+        }
+        catch (SQLException e) {
+            String query = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
+                    + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + NAME_COL + " TEXT,"
+                    + MONTH_COL + " INTEGER,"
+                    + YEAR_COL + " INTEGER,"
+                    + DATE_COL + " INTEGER,"
+                    + CATEGORY_COL + " TEXT)";
+
+            // at last we are calling a exec sql method to execute above sql query
+            getWritableDatabase().execSQL(query);
+        }
     }
 
     @Override
