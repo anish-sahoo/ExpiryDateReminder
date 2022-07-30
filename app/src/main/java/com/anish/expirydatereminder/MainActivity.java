@@ -92,7 +92,11 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             modelList.clear();
             itemsAdapter.clear();
             itemsAdapter.notifyDataSetChanged();
-            modelList = dbHandler.getAllItems();
+            String a = categorySpinner.getSelectedItem().toString();
+            if(a.equals("All Items")) {
+                modelList = dbHandler.getAllItems();
+            }
+            else modelList = dbHandler.getAllItems(a);
             modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
             modelList.sort(Comparator.comparingInt(ItemModel::getYear));
             populate(modelList);
@@ -123,7 +127,11 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             System.out.println("Button clicked");
             System.out.println(txt);
             if(txt.equals("Sort By: Date")){
-                modelList = dbHandler.getAllItems();
+                String a = categorySpinner.getSelectedItem().toString();
+                if(a.equals("All Items")) {
+                    modelList = dbHandler.getAllItems();
+                }
+                else modelList = dbHandler.getAllItems(a);
                 itemsAdapter.clear();
                 modelList.sort(Comparator.comparing(ItemModel::getItem));
                 populate(modelList);
@@ -131,7 +139,11 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
                 sortButton.setText("Sort By: Name");
             }
             else if(txt.contains("Sort By: Name")){
-                modelList = dbHandler.getAllItems();
+                String a = categorySpinner.getSelectedItem().toString();
+                if(a.equals("All Items")) {
+                    modelList = dbHandler.getAllItems();
+                }
+                else modelList = dbHandler.getAllItems(a);
                 itemsAdapter.clear();
                 modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
                 modelList.sort(Comparator.comparingInt(ItemModel::getYear));

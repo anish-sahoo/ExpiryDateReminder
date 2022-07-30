@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
@@ -24,6 +25,10 @@ public class DateFormatDatabase extends SQLiteOpenHelper {
             String query = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
                     + FORMAT_COL + " INTEGER)";
             getWritableDatabase().execSQL(query);
+
+            ContentValues cv = new ContentValues();
+            cv.put(FORMAT_COL,1);
+            getWritableDatabase().insert(TABLE_NAME,null,cv);
             }
         }
 
@@ -32,6 +37,14 @@ public class DateFormatDatabase extends SQLiteOpenHelper {
         String query = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
                 + FORMAT_COL + " INTEGER)";
         sqLiteDatabase.execSQL(query);
+        try {
+            getCurrentFormat();
+        }
+        catch (Exception e){
+            ContentValues cv = new ContentValues();
+            cv.put(FORMAT_COL,1);
+            sqLiteDatabase.insert(TABLE_NAME,null,cv);
+        }
     }
 
     public void update(int a){
