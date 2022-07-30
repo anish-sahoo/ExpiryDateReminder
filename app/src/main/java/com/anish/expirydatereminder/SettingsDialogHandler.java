@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
@@ -128,17 +129,20 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
             dateformat2.setBackgroundColor(Color.parseColor("#4CAF50"));
             dateformat1.setBackgroundColor(Color.parseColor("#807C7C"));
         }
+        TextView tv = v.findViewById(R.id.date_format);
 
         dateformat1.setOnClickListener(view -> {
             dateformat1.setBackgroundColor(Color.parseColor("#4CAF50"));
             dateformat2.setBackgroundColor(Color.parseColor("#807C7C"));
             dfd.update(1);
+            tv.setText("Current Date Format:    MM/DD/YYYY");
             Toast.makeText(getContext(), "Date format changed to MM-DD-YYYY", Toast.LENGTH_SHORT).show();
         });
         dateformat2.setOnClickListener(view -> {
             dateformat2.setBackgroundColor(Color.parseColor("#4CAF50"));
             dateformat1.setBackgroundColor(Color.parseColor("#807C7C"));
             dfd.update(2);
+            tv.setText("Current Date Format:    DD/MM/YYYY");
             Toast.makeText(getContext(), "Date format changed to DD-MM-YYYY", Toast.LENGTH_SHORT).show();
         });
 
