@@ -1,11 +1,13 @@
 package com.anish.expirydatereminder;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -111,6 +113,21 @@ public class SettingsDatabaseHandler extends SQLiteOpenHelper {
         if (crs.moveToFirst()) {
             do {
                 categories.add(crs.getString(1));
+            } while (crs.moveToNext());
+        }
+        crs.close();
+        return categories;
+    }
+
+    public List<String> getDeletableCategories(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor crs = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        ArrayList<String> categories = new ArrayList<>();
+        if (crs.moveToFirst()) {
+            do {
+                if(crs.getInt(2) == 1) {
+                    categories.add(crs.getString(1));
+                }
             } while (crs.moveToNext());
         }
         crs.close();

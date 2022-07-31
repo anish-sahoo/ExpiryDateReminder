@@ -103,7 +103,7 @@ public class ItemDetailsOnClick extends AppCompatActivity {
         Uri uri = null;
         try {
             imagesFolder.mkdirs();
-            String fileNameText = "anish_" + item_name + "." + month + "." + year + ".jpg";
+            String fileNameText = "anish_" + item_name + "." + date + "." + month + "." + year + "." + category_name + ".jpg";
             File file = new File(imagesFolder,fileNameText);
             FileOutputStream stream = new FileOutputStream(file);
             image.compress(Bitmap.CompressFormat.JPEG,100,stream);
@@ -119,13 +119,13 @@ public class ItemDetailsOnClick extends AppCompatActivity {
     }
 
     private void checkIfImageExistsAlready() {
-        String fileNameText = "anish_" + item_name + "." + month + "." + year + ".jpg";
+        String fileNameText = "anish_" + item_name + "." + date + "." + month + "." + year + "." + category_name + ".jpg";
         Uri uri = Uri.parse("content://com.anish.expirydatereminder.provider/cache/images/"+fileNameText);
         itemImage.setImageURI(uri);
     }
 
     private void deleteImage(){
-        String fileNameText = "anish_" + item_name + "." + month + "." + year + ".jpg";
+        String fileNameText = "anish_" + item_name + "." + date + "." + month + "." + year + "." + category_name + ".jpg";
         Uri uri = Uri.parse("content://com.anish.expirydatereminder.provider/cache/images/"+fileNameText);
         ContentResolver contentResolver = getContentResolver();
         contentResolver.delete(uri,null,null);

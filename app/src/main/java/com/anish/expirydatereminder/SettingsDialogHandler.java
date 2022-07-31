@@ -2,8 +2,11 @@ package com.anish.expirydatereminder;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,6 +96,9 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
             AlertDialog.Builder altdial = new AlertDialog.Builder(getContext());
             altdial.setMessage("Do you want restore Defaults? ALL ITEMS FROM CATEGORIES YOU ADDED WILL BE REMOVED").setCancelable(false)
                     .setPositiveButton("Yes", (dialog, which) -> {
+                        for(String str: sdh.getDeletableCategories()){
+                            obj.deleteImages(str);
+                        }
                         sdh.restoreDefault();
                         settings_spinner_adapter.clear();
                         categories_list.clear();
@@ -171,5 +177,6 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
 
     public interface SettingsDialog{
         void refresh(int a);
+        void deleteImages(String category);
     }
 }
