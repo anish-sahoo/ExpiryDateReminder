@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Click on this button to add a new item"
+            android:text="Tap to add a new item"
             android:textSize="22sp"
             android:textColor="#000000"
             android:paddingStart="10dp"/>
@@ -58,7 +58,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Click on this button to access settings, where you can add new categories, delete new categories and select date format"
+            android:text="Tap to access settings, where you can add new categories, delete new categories and select date format"
             android:textColor="#000000"
             android:textSize="22sp"
             android:paddingStart="10dp" />
@@ -87,7 +87,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Touch this button to Refresh"
+            android:text="Tap to Refresh"
             android:textColor="#000000"
             android:textSize="22sp"
             android:paddingStart="10dp" />

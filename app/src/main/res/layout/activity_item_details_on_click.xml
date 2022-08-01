@@ -36,7 +36,7 @@
         android:layout_centerHorizontal="true"
 
         android:layout_marginStart="40dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="40dp"
 
         android:text="Expires On -"
@@ -55,7 +55,7 @@
 
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="210dp"
 
         android:text="Category -"
         android:textColor="@color/black"
@@ -68,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_below="@id/expiresOn"
+        android:layout_below="@id/category_image_view_in_item_details"
         android:layout_alignParentBottom="true"
 
         android:layout_centerHorizontal="true"
@@ -99,7 +99,7 @@
         android:layout_marginBottom="12dp"
         android:backgroundTint="@color/purple_500"
 
-        android:text="Go Back"
+        android:text="Done"
         android:textSize="17sp"
         android:textStyle="bold"/>
 

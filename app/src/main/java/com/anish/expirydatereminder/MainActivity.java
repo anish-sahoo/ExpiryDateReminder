@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         dbh = new DateFormatDatabase(MainActivity.this);
 
         modelList = dbHandler.getAllItems();
+        modelList.sort(Comparator.comparingInt(ItemModel::getDate));
         modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
         modelList.sort(Comparator.comparingInt(ItemModel::getYear));
         populate(modelList);
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             String txt = sortButton.getText().toString();
             System.out.println("Button clicked");
             System.out.println(txt);
-            if(txt.equals("Sort By: Date")){
+            if(txt.equals("Sort By: Name")){
                 String a = categorySpinner.getSelectedItem().toString();
                 if(a.equals("All Items")) {
                     modelList = dbHandler.getAllItems();
@@ -136,20 +137,21 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
                 modelList.sort(Comparator.comparing(ItemModel::getItem));
                 populate(modelList);
                 itemsAdapter.notifyDataSetChanged();
-                sortButton.setText("Sort By: Name");
+                sortButton.setText("Sort By: Date");
             }
-            else if(txt.contains("Sort By: Name")){
+            else if(txt.contains("Sort By: Date")){
                 String a = categorySpinner.getSelectedItem().toString();
                 if(a.equals("All Items")) {
                     modelList = dbHandler.getAllItems();
                 }
                 else modelList = dbHandler.getAllItems(a);
                 itemsAdapter.clear();
+                modelList.sort(Comparator.comparingInt(ItemModel::getDate));
                 modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
                 modelList.sort(Comparator.comparingInt(ItemModel::getYear));
                 populate(modelList);
                 itemsAdapter.notifyDataSetChanged();
-                sortButton.setText("Sort By: Date");
+                sortButton.setText("Sort By: Name");
             }
         });
 
@@ -307,6 +309,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             if(sortButton.getText().toString().equals("Sort By: Date")){
                 modelList = dbHandler.getAllItems();
                 itemsAdapter.clear();
+                modelList.sort(Comparator.comparingInt(ItemModel::getDate));
                 modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
                 modelList.sort(Comparator.comparingInt(ItemModel::getYear));
                 populate(modelList);
@@ -324,6 +327,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             if(sortButton.getText().toString().equals("Sort By: Date")){
                 modelList = dbHandler.getAllItems(categories.get(i));
                 itemsAdapter.clear();
+                modelList.sort(Comparator.comparingInt(ItemModel::getDate));
                 modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
                 modelList.sort(Comparator.comparingInt(ItemModel::getYear));
                 populate(modelList);
@@ -355,6 +359,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         itemsAdapter.clear();
         itemsAdapter.notifyDataSetChanged();
         modelList = dbHandler.getAllItems();
+        modelList.sort(Comparator.comparingInt(ItemModel::getDate));
         modelList.sort(Comparator.comparingInt(ItemModel::getMonth));
         modelList.sort(Comparator.comparingInt(ItemModel::getYear));
         populate(modelList);

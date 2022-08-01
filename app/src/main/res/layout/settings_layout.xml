@@ -44,7 +44,7 @@
         android:layout_centerInParent="true"
         android:layout_below="@id/categories_list_view"
         android:backgroundTint="#F44336"
-        android:text="Restore Default Settings"
+        android:text="Restore Defaults"
         android:textColor="#FFFFFF"/>
 
     <TextView

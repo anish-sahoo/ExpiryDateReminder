@@ -42,28 +42,27 @@ public class DialogHandler extends AppCompatDialogFragment implements AdapterVie
                         int d;
 
                         String item_category = spinner.getSelectedItem().toString();
-                        Toast.makeText(getContext(), item_category+" was selected from spinner inside dialog box", Toast.LENGTH_SHORT).show();
 
-                        if(date.getText().toString().isEmpty()) {
-                            d = YearMonth.of(expiryYear, expiryMonth).lengthOfMonth();
-                        }
-                        else {
-                            d = Integer.parseInt(date.getText().toString());
-                            if(d < 1 || d > YearMonth.of(expiryYear, expiryMonth).lengthOfMonth()){
-                                Toast.makeText(getContext(), "Incorrect date!", Toast.LENGTH_SHORT).show();
-                                date.setText("");
-                                return;
-                            }
-                        }
                         if(expiryMonth < 13 && expiryMonth > 0) {
+                            if (date.getText().toString().isEmpty()) {
+                                d = YearMonth.of(expiryYear, expiryMonth).lengthOfMonth();
+                            } else {
+                                d = Integer.parseInt(date.getText().toString());
+                                if (d < 1 || d > YearMonth.of(expiryYear, expiryMonth).lengthOfMonth()) {
+                                    Toast.makeText(getContext(), "Incorrect date!", Toast.LENGTH_SHORT).show();
+                                    date.setText("");
+                                    return;
+                                }
+                            }
                             if (expiryYear > 999 && expiryYear < 10000)
                                 listener.addItemAsNeeded(itemName, d, expiryMonth, expiryYear, item_category);
-                            else
-                                Toast.makeText(getContext(), "Incorrect year input, it must be in YYYY format!", Toast.LENGTH_SHORT).show();
+                            else {
+                                Toast.makeText(getContext(), "Invalid Year, it should be in YYYY format", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else Toast.makeText(getContext(),"Incorrect month input, please try again!",Toast.LENGTH_SHORT).show();
+                        else Toast.makeText(getContext(), "Invalid month, it should be between 1 and 12", Toast.LENGTH_SHORT).show();
                     }
-                    else Toast.makeText(getContext(), "Empty fields not allowed!", Toast.LENGTH_SHORT).show();
+                    else Toast.makeText(getContext(), "Name cannot be empty", Toast.LENGTH_SHORT).show();
                 });
 
         name = view.findViewById(R.id.name_dialog_box_editText);

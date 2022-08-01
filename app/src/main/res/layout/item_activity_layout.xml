@@ -20,8 +20,7 @@
         android:layout_below="@id/name_dialog_box"
         android:hint="item name">
     </EditText>
-
-
+    
     <TextView
         android:id="@+id/date_dialog_box"
         android:layout_width="match_parent"

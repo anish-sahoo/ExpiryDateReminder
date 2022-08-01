@@ -61,8 +61,15 @@ public class ItemDetailsOnClick extends AppCompatActivity {
         category_name = intent.getStringExtra("category");
         date = intent.getIntExtra("date",0);
 
-        itemName.setText("Item Name - " + item_name);
-        expiresOn.setText("Expires On - "+ date+"/"+month+"/"+year + " DD/MM/YYYY");
+        itemName.setText("Item - " + item_name);
+
+        DateFormatDatabase dateFormatDatabase = new DateFormatDatabase(getApplicationContext());
+        if(dateFormatDatabase.getCurrentFormat() == 1) {
+            expiresOn.setText("Expires On - " + month + "/" + date + "/" +  year);
+        }
+        else {
+            expiresOn.setText("Expires On - " + date + "/" + month + "/" + year);
+        }
         categoryName.setText("Category - "+category_name);
 
         itemImage = findViewById(R.id.imageView);
