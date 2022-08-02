@@ -4,106 +4,71 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/name_dialog_box"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="3dp"
-        android:text="Name:"
-        android:textColor="@color/black"
-        android:textSize="16sp">
-    </TextView>
     <EditText
         android:id="@+id/name_dialog_box_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/name_dialog_box"
-        android:hint="item name">
+        android:hint="Item Name"
+        android:layout_alignParentTop="true">
     </EditText>
-    
+
     <TextView
-        android:id="@+id/date_dialog_box"
+        android:id="@+id/expiryDate_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/name_dialog_box_editText"
-        android:text="Date: (leave empty for last date of month)"
-        android:paddingStart="3dp"
+        android:text="Expiry Date"
         android:textColor="@color/black"
-        android:layout_marginTop="15dp"
-        android:textSize="16sp">
-    </TextView>
+        android:textSize="18sp"
+        android:paddingStart="3dp"
+        android:layout_marginTop="20dp"/>
 
     <EditText
         android:id="@+id/date_dialog_box_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/date_dialog_box"
-        android:hint="date"
+        android:layout_below="@id/expiryDate_text"
+        android:hint="Day (Default: Last day of month)"
         android:inputType="number">
     </EditText>
 
-
-    <TextView
-        android:id="@+id/month_dialog_box"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/date_dialog_box_editText"
-        android:paddingStart="3dp"
-        android:text="Month:"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/black"
-        android:textSize="16sp">
-    </TextView>
     <EditText
         android:id="@+id/month_dialog_box_editText"
-        android:layout_below="@id/month_dialog_box"
+        android:layout_below="@id/date_dialog_box_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="month">
+        android:hint="Month">
     </EditText>
 
-    <TextView
-        android:id="@+id/year_dialog_box"
+    <EditText
+        android:id="@+id/year_dialog_box_editText"
         android:layout_below="@id/month_dialog_box_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="3dp"
-        android:text="Year:"
-        android:layout_marginTop="15dp"
-        android:textColor="@color/black"
-        android:textSize="16sp">
-    </TextView>
-    <EditText
-        android:id="@+id/year_dialog_box_editText"
-        android:layout_below="@id/year_dialog_box"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:inputType="number"
-        android:hint="year">
+        android:hint="Year">
     </EditText>
 
 
+    <TextView
+        android:id="@+id/category_instructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category:"
+        android:textSize="18sp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:layout_below="@+id/year_dialog_box_editText"/>
+
     <Spinner
         android:id="@+id/spinner_category_selector_add_item"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/year_dialog_box_editText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp">
-    </Spinner>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/spinner_category_selector_add_item"
-        android:layout_centerHorizontal="true"
+        android:layout_toEndOf="@id/category_instructions"
         android:layout_marginTop="15dp"
-        android:text="Dont forget to select item type from dropdown!"
-        android:textSize="16sp"
-        android:textAlignment="center"
-        android:textColor="#8C8C8C">
-
-    </TextView>
+        android:layout_alignParentEnd="true">
+    </Spinner>
 
 </RelativeLayout>

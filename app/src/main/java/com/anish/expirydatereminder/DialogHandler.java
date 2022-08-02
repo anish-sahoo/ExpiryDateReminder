@@ -75,7 +75,7 @@ public class DialogHandler extends AppCompatDialogFragment implements AdapterVie
 
         spinner = view.findViewById(R.id.spinner_category_selector_add_item);
         spinner.setOnItemSelectedListener(this);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item,CATEGORIES);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.spinner_layout_2,CATEGORIES);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
 
