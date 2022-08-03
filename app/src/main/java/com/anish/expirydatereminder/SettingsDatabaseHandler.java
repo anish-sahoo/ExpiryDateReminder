@@ -38,10 +38,11 @@ public class SettingsDatabaseHandler extends SQLiteOpenHelper {
 
             addCategory("All Items",0);
             addCategory("Grocery",0);
-            addCategory("Important Dates",0);
-            addCategory("Medicine",0);
-            addCategory("Snacks",0);
             addCategory("Frozen goods",0);
+            addCategory("Snacks",0);
+            addCategory("Medicine",0);
+            addCategory("Important Dates",0);
+
         }
     }
 
@@ -55,10 +56,10 @@ public class SettingsDatabaseHandler extends SQLiteOpenHelper {
 
         addCategory("All Items",0);
         addCategory("Grocery",0);
-        addCategory("Important Dates",0);
-        addCategory("Medicine",0);
-        addCategory("Snacks",0);
         addCategory("Frozen goods",0);
+        addCategory("Snacks",0);
+        addCategory("Medicine",0);
+        addCategory("Important Dates",0);
     }
 
     public boolean addCategory(String categoryName, int type) {

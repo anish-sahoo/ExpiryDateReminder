@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsDialogHandler extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
-    Button restoreButton,add_button, dateformat1, dateformat2;
+    Button restoreButton,add_button, dateformat1, dateformat2, removeEverythingButton;
     ArrayAdapter<String> settings_spinner_adapter;
     List<String> categories_list;
     EditText category_input;
@@ -49,6 +49,7 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
         category_input = v.findViewById(R.id.add_category_name);
         restoreButton = v.findViewById(R.id.restore_button);
         add_button = v.findViewById(R.id.add_category_button);
+        removeEverythingButton = v.findViewById(R.id.remove_everything_button);
 
         lv = v.findViewById(R.id.categories_list_view);
         categories_list = new ArrayList<>();
@@ -94,7 +95,7 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
 
         restoreButton.setOnClickListener(view -> {
             AlertDialog.Builder altdial = new AlertDialog.Builder(getContext());
-            altdial.setMessage("Do you want restore Defaults? ALL ITEMS FROM CATEGORIES YOU ADDED WILL BE REMOVED").setCancelable(false)
+            altdial.setMessage("ALL ITEMS UNDER THE USER-ADDED CATEGORIES WILL BE REMOVED").setCancelable(false)
                     .setPositiveButton("Yes", (dialog, which) -> {
                         for(String str: sdh.getDeletableCategories()){
                             obj.deleteImages(str);
@@ -111,7 +112,7 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
                     .setNegativeButton("No", (dialog, which) -> dialog.cancel());
 
             AlertDialog alert = altdial.create();
-            alert.setTitle("Delete this item?");
+            alert.setTitle("Delete all user-added categories?");
             alert.show();
 
             /*sdh.restoreDefault();
@@ -124,6 +125,8 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
             obj.refresh();*/
         });
 
+        removeEverythingButton.setOnClickListener(view -> removeEverythingWipeOutAllItems());
+
         dateformat1 = v.findViewById(R.id.dd_mm_yyyy_button);
         dateformat2 = v.findViewById(R.id.dd_mm_yyyy_button_2);
 
@@ -135,24 +138,31 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
             dateformat2.setBackgroundColor(Color.parseColor("#4CAF50"));
             dateformat1.setBackgroundColor(Color.parseColor("#807C7C"));
         }
-        TextView tv = v.findViewById(R.id.date_format);
 
         dateformat1.setOnClickListener(view -> {
             dateformat1.setBackgroundColor(Color.parseColor("#4CAF50"));
             dateformat2.setBackgroundColor(Color.parseColor("#807C7C"));
             dfd.update(1);
-            tv.setText("Current Date Format:    MM/DD/YYYY");
             Toast.makeText(getContext(), "Date format changed to MM-DD-YYYY", Toast.LENGTH_SHORT).show();
         });
         dateformat2.setOnClickListener(view -> {
             dateformat2.setBackgroundColor(Color.parseColor("#4CAF50"));
             dateformat1.setBackgroundColor(Color.parseColor("#807C7C"));
             dfd.update(2);
-            tv.setText("Current Date Format:    DD/MM/YYYY");
             Toast.makeText(getContext(), "Date format changed to DD-MM-YYYY", Toast.LENGTH_SHORT).show();
         });
 
         return builder.create();
+    }
+
+    private void removeEverythingWipeOutAllItems() {
+        obj.deleteImages();
+
+        DatabaseHandler dbHandler = new DatabaseHandler(getContext());
+        dbHandler.clearDatabase();
+
+        DateFormatDatabase dfd = new DateFormatDatabase(getContext());
+        obj.refresh(dfd.getCurrentFormat());
     }
 
     @Override
@@ -178,5 +188,6 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
     public interface SettingsDialog{
         void refresh(int a);
         void deleteImages(String category);
+        void deleteImages();
     }
 }

@@ -22,8 +22,7 @@
         android:layout_toStartOf="@id/add_category_button"
         android:layout_alignParentStart="true"
         android:layout_marginEnd="10dp"
-        android:hint="category name"
-        android:textAlignment="center">
+        android:hint="category name">
     </EditText>
 
     <Button
@@ -32,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/category_text_field_settings"
         android:layout_alignParentEnd="true"
-        android:backgroundTint="@color/purple_500"
+        android:backgroundTint="#4CAF50"
         android:text="Add ">
     </Button>
 
@@ -41,45 +40,56 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_centerInParent="true"
         android:layout_below="@id/categories_list_view"
         android:backgroundTint="#F44336"
-        android:text="Restore Defaults"
+        android:text="Reset Category List"
+        android:layout_centerInParent="true"
         android:textColor="#FFFFFF"/>
-
-    <TextView
-        android:id="@+id/date_format"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/restore_button"
-        android:text="Current Date Format:    MM/DD/YYYY"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="22dp"
-        android:textColor="@color/black" />
 
     <Button
         android:id="@+id/dd_mm_yyyy_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/date_format"
+        android:layout_below="@id/restore_button"
         android:text="MM-DD-YYYY"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#4CAF50"/>
 
     <Button
         android:layout_width="wrap_content"
         android:id="@+id/dd_mm_yyyy_button_2"
         android:layout_height="wrap_content"
-        android:layout_below="@id/date_format"
+        android:layout_below="@id/restore_button"
         android:text="DD-MM-YYYY"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="12dp"
         android:backgroundTint="#807C7C"/>
+
+    <Button
+        android:id="@+id/remove_everything_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dd_mm_yyyy_button"
+        android:text="DELETE ALL ITEMS UNDER ALL CATEGORIES"
+        android:backgroundTint="#F44336"
+        android:layout_marginTop="12dp"
+        android:layout_centerInParent="true"
+        />
+
+    <TextView
+        android:id="@+id/category_scroll_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/current_categories"
+        android:text="(Scroll to view available categories)"
+        android:paddingStart="3dp"
+        android:textColor="#807C7C"
+        />
 
     <ListView
         android:id="@+id/categories_list_view"
         android:layout_width="wrap_content"
-        android:layout_below="@id/current_categories"
+        android:layout_below="@id/category_scroll_details"
         android:layout_marginTop="10dp"
         android:layout_height="150dp"
         android:layout_centerVertical="true" />

@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tap to add a new item"
+            android:text="Add a new item"
             android:textSize="22sp"
             android:textColor="#000000"
             android:paddingStart="10dp"/>
@@ -58,7 +58,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tap to access settings, where you can add new categories, delete new categories and select date format"
+            android:text="Add new categories, delete user-added categories and select date format"
             android:textColor="#000000"
             android:textSize="22sp"
             android:paddingStart="10dp" />
@@ -68,6 +68,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/layout_3"
         android:orientation="horizontal"
         android:layout_below="@id/layout_2"
         android:padding="10dp"
@@ -87,10 +88,26 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tap to Refresh"
+            android:text="Refresh category and item lists"
             android:textColor="#000000"
             android:textSize="22sp"
             android:paddingStart="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/layout_3"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/gray_help">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To delete an item or a category (including all items under it), long press and hold." />
 
     </LinearLayout>
 

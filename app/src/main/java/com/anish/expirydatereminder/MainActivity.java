@@ -377,4 +377,15 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             contentResolver.delete(uri,null,null);
         }
     }
+    @Override
+    public void deleteImages() {
+        List<ItemModel> items_of_category = dbHandler.getAllItems();
+        for (ItemModel a:items_of_category){
+            String fileNameText = "anish_" + a.getItem() + "." + a.getDate() + "." + a.getMonth() + "." + a.getYear() + "." + a.getCategory() + ".jpg";
+            Uri uri = Uri.parse("content://com.anish.expirydatereminder.provider/cache/images/"+fileNameText);
+            ContentResolver contentResolver = getContentResolver();
+            contentResolver.delete(uri,null,null);
+        }
+    }
+
 }
