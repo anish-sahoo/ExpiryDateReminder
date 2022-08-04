@@ -150,13 +150,13 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
             dateformat1.setBackgroundColor(Color.parseColor("#4CAF50"));
             dateformat2.setBackgroundColor(Color.parseColor("#807C7C"));
             dfd.update(1);
-            Toast.makeText(getContext(), "Date format changed to MM-DD-YYYY", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Date format changed to MM/DD/YYYY", Toast.LENGTH_SHORT).show();
         });
         dateformat2.setOnClickListener(view -> {
             dateformat2.setBackgroundColor(Color.parseColor("#4CAF50"));
             dateformat1.setBackgroundColor(Color.parseColor("#807C7C"));
             dfd.update(2);
-            Toast.makeText(getContext(), "Date format changed to DD-MM-YYYY", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Date format changed to DD/MM/YYYY", Toast.LENGTH_SHORT).show();
         });
 
         return builder.create();

@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     private void setUpListViewListener() {
         listView.setOnItemLongClickListener((adapterView, view, i, l) -> {
             AlertDialog.Builder altdial = new AlertDialog.Builder(MainActivity.this);
-            altdial.setMessage("Do you want to delete "+items.get(i)+" ???").setCancelable(false)
+            altdial.setMessage("Delete this item?").setCancelable(false)
                     .setPositiveButton("Yes", (dialog, which) -> {
                         Context context = getApplicationContext();
                         Toast.makeText(context,"Item Removed",Toast.LENGTH_SHORT).show();
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
                     .setNegativeButton("No", (dialog, which) -> dialog.cancel());
 
             AlertDialog alert = altdial.create();
-            alert.setTitle("Delete this item?");
+            alert.setTitle(items.get(i));
             alert.show();
             return true;
         });
