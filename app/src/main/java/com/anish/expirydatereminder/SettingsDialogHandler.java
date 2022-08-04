@@ -95,7 +95,7 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
 
         restoreButton.setOnClickListener(view -> {
             AlertDialog.Builder altdial = new AlertDialog.Builder(getContext());
-            altdial.setMessage("ALL ITEMS UNDER THE USER-ADDED CATEGORIES WILL BE REMOVED").setCancelable(false)
+            altdial.setMessage("ALL ITEMS UNDER THE USER-DEFINED CATEGORIES WILL BE REMOVED").setCancelable(false)
                     .setPositiveButton("Yes", (dialog, which) -> {
                         for(String str: sdh.getDeletableCategories()){
                             obj.deleteImages(str);
@@ -112,7 +112,7 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
                     .setNegativeButton("No", (dialog, which) -> dialog.cancel());
 
             AlertDialog alert = altdial.create();
-            alert.setTitle("Delete all user-added categories?");
+            alert.setTitle("Delete all user-defined categories?");
             alert.show();
 
             /*sdh.restoreDefault();
@@ -156,13 +156,22 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
     }
 
     private void removeEverythingWipeOutAllItems() {
-        obj.deleteImages();
+        AlertDialog.Builder altdial = new AlertDialog.Builder(getContext());
+        altdial.setMessage("ALL ITEMS WILL BE REMOVED! ARE YOU SURE?").setCancelable(false)
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    obj.deleteImages();
 
-        DatabaseHandler dbHandler = new DatabaseHandler(getContext());
-        dbHandler.clearDatabase();
+                    DatabaseHandler dbHandler = new DatabaseHandler(getContext());
+                    dbHandler.clearDatabase();
 
-        DateFormatDatabase dfd = new DateFormatDatabase(getContext());
-        obj.refresh(dfd.getCurrentFormat());
+                    DateFormatDatabase dfd = new DateFormatDatabase(getContext());
+                    obj.refresh(dfd.getCurrentFormat());
+                })
+                .setNegativeButton("No", (dialog, which) -> dialog.cancel());
+
+        AlertDialog alert = altdial.create();
+        alert.setTitle("Delete all items?");
+        alert.show();
     }
 
     @Override
