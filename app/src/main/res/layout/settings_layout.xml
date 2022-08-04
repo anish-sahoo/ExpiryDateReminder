@@ -8,7 +8,7 @@
         android:id="@+id/category_text_field_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Category:"
+        android:text="Add category:"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold">
@@ -42,8 +42,9 @@
         android:layout_marginTop="10dp"
         android:layout_below="@id/categories_list_view"
         android:backgroundTint="#F44336"
-        android:text="Reset Category List"
+        android:text="Delete all user-defined categories"
         android:layout_centerInParent="true"
+        android:textSize="12sp"
         android:textColor="#FFFFFF"/>
 
     <Button
@@ -51,7 +52,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/restore_button"
-        android:text="MM-DD-YYYY"
+        android:text="MM/DD/YYYY"
+        android:textSize="12sp"
         android:layout_marginTop="12dp"
         android:backgroundTint="#4CAF50"/>
 
@@ -60,7 +62,8 @@
         android:id="@+id/dd_mm_yyyy_button_2"
         android:layout_height="wrap_content"
         android:layout_below="@id/restore_button"
-        android:text="DD-MM-YYYY"
+        android:text="DD/MM/YYYY"
+        android:textSize="12sp"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="12dp"
         android:backgroundTint="#807C7C"/>
@@ -72,6 +75,7 @@
         android:layout_below="@id/dd_mm_yyyy_button"
         android:text="DELETE ALL ITEMS UNDER ALL CATEGORIES"
         android:backgroundTint="#F44336"
+        android:textSize="12sp"
         android:layout_marginTop="12dp"
         android:layout_centerInParent="true"
         />

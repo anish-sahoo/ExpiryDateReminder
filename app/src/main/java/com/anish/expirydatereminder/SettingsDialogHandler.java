@@ -2,11 +2,8 @@ package com.anish.expirydatereminder;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ClipData;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
@@ -59,14 +55,25 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
 
         add_button.setOnClickListener(view1 -> {
             System.err.println("Button clicked");
-            sdh.addCategory(category_input.getText().toString(),1);
-            category_input.setText("");
-            settings_spinner_adapter.clear();
-            categories_list.clear();
-            settings_spinner_adapter.notifyDataSetChanged();
-            categories_list = sdh.getCategories();
-            settings_spinner_adapter.addAll(categories_list);
-            settings_spinner_adapter.notifyDataSetChanged();
+            if(!category_input.getText().toString().trim().equals("")) {
+                if (sdh.getCategories().contains(category_input.getText().toString())) {
+                    Toast.makeText(getContext(), "Category already exists!", Toast.LENGTH_SHORT).show();
+                    category_input.setText("");
+                    return;
+                }
+                sdh.addCategory(category_input.getText().toString(), 1);
+                category_input.setText("");
+                settings_spinner_adapter.clear();
+                categories_list.clear();
+                settings_spinner_adapter.notifyDataSetChanged();
+                categories_list = sdh.getCategories();
+                settings_spinner_adapter.addAll(categories_list);
+                settings_spinner_adapter.notifyDataSetChanged();
+            }
+            else {
+                Toast.makeText(getContext(), "Category name cannot be empty!", Toast.LENGTH_SHORT).show();
+                category_input.setText("");
+            }
         });
 
         lv.setOnItemLongClickListener((adapterView, view, i, l) -> {
@@ -95,7 +102,7 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
 
         restoreButton.setOnClickListener(view -> {
             AlertDialog.Builder altdial = new AlertDialog.Builder(getContext());
-            altdial.setMessage("ALL ITEMS UNDER THE USER-DEFINED CATEGORIES WILL BE REMOVED").setCancelable(false)
+            altdial.setMessage("ALL ITEMS UNDER THE USER-DEFINED CATEGORIES WILL BE REMOVED.\nAre you sure?").setCancelable(false)
                     .setPositiveButton("Yes", (dialog, which) -> {
                         for(String str: sdh.getDeletableCategories()){
                             obj.deleteImages(str);

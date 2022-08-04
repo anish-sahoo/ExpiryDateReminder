@@ -1,15 +1,12 @@
 package com.anish.expirydatereminder;
 
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +35,7 @@ public class SettingsDatabaseHandler extends SQLiteOpenHelper {
 
             addCategory("All Items",0);
             addCategory("Grocery",0);
-            addCategory("Frozen goods",0);
+            addCategory("Frozen Items",0);
             addCategory("Snacks",0);
             addCategory("Medicine",0);
             addCategory("Important Dates",0);
@@ -56,7 +53,7 @@ public class SettingsDatabaseHandler extends SQLiteOpenHelper {
 
         addCategory("All Items",0);
         addCategory("Grocery",0);
-        addCategory("Frozen goods",0);
+        addCategory("Frozen Items",0);
         addCategory("Snacks",0);
         addCategory("Medicine",0);
         addCategory("Important Dates",0);
