@@ -114,7 +114,9 @@ public class DialogHandler extends AppCompatDialogFragment implements AdapterVie
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(getContext(), CATEGORIES.get(i), Toast.LENGTH_SHORT).show();
+        if(i!=0) {
+            Toast.makeText(getContext(), CATEGORIES.get(i), Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {

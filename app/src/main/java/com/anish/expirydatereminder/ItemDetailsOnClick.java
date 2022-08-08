@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -99,6 +100,7 @@ public class ItemDetailsOnClick extends AppCompatActivity {
             }
             catch (AssertionError e){
                 Log.d("AssertionError as activity was cancelled midway", "no image saved!");
+                Toast.makeText(this, "Action was disrupted, no image saved. Try again!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -113,6 +115,7 @@ public class ItemDetailsOnClick extends AppCompatActivity {
             imageUri = saveImage(bm, ItemDetailsOnClick.this);
             itemImage.setImageURI(imageUri);
             System.out.println("///////////////////\nImage uri = \n" + imageUri + "\n\n/////////////////");
+            Toast.makeText(this, "Image saved successfully!", Toast.LENGTH_SHORT).show();
         });
 
         deletePicButton.setOnClickListener(view -> deleteImage());
