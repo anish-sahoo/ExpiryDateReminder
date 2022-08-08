@@ -36,16 +36,17 @@ public class DialogHandler extends AppCompatDialogFragment implements AdapterVie
                 .setTitle("Add Item")
                 .setNegativeButton("cancel", (dialogInterface, i) -> {})
                 .setPositiveButton("ok", (dialogInterface, i) -> {
-                    if(!name.getText().toString().isEmpty()) {
+                    if(!name.getText().toString().trim().isEmpty()) {
                         if (!month.getText().toString().isEmpty()) {
-                            String itemName = name.getText().toString();
+                            String itemName = name.getText().toString().trim();
                             int expiryMonth = Integer.parseInt(month.getText().toString());
                             int expiryYear = 0;
                             if (!year.getText().toString().isEmpty()) {
                                 expiryYear = Integer.parseInt(year.getText().toString());
                             }
-                            int d;
+                            else expiryYear = Year.now().getValue();
 
+                            int d=0;
                             String item_category = spinner.getSelectedItem().toString();
 
                             if (expiryMonth < 13 && expiryMonth > 0) {
@@ -64,6 +65,7 @@ public class DialogHandler extends AppCompatDialogFragment implements AdapterVie
                                     listener.addItemAsNeeded(itemName, d, expiryMonth, Year.now().getValue(), item_category);
                                 }
                                 else {
+                                    System.out.println("d=\t\t"+d);
                                     if (expiryYear > 999 && expiryYear < 10000)
                                         listener.addItemAsNeeded(itemName, d, expiryMonth, expiryYear, item_category);
                                     else {
@@ -114,9 +116,7 @@ public class DialogHandler extends AppCompatDialogFragment implements AdapterVie
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if(i!=0) {
-            Toast.makeText(getContext(), CATEGORIES.get(i), Toast.LENGTH_SHORT).show();
-        }
+        Toast.makeText(getContext(), CATEGORIES.get(i), Toast.LENGTH_SHORT).show();
     }
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
