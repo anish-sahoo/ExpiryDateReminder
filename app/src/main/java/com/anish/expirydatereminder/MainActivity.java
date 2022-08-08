@@ -228,11 +228,20 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         int month = obj.getMonth();
         int year  = obj.getYear();
         int date = obj.getDate();
+
+        String m = month+"", d = date+"";
+        if(month<10){
+            m = "0" + month;
+        }
+        if(date<10){
+            d = "0" + date;
+        }
+
         String totalItem = "";
         if(dateFormat == 1) {
-            totalItem = month + "/" + date + "/" + year + " : " + itemName;
+            totalItem = m + "/" + d + "/" + year + " : " + itemName;
         }
-        else totalItem = date + "/" + month + "/" + year + " : " + itemName;
+        else totalItem = d + "/" + m + "/" + year + " : " + itemName;
         if(!itemName.isEmpty()){
             itemsAdapter.add(totalItem);
         }
@@ -252,7 +261,21 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             return;
         }
 
-        String text = month + "/" + date + "/" + year + " : " + itemName;
+        String m = month+"", d = date+"";
+        if(month<10){
+            m = "0" + month;
+        }
+        if(date<10){
+            d = "0" + date;
+        }
+
+        String text;
+
+        DateFormatDatabase dfd = new DateFormatDatabase(getApplicationContext());
+        if(dfd.getCurrentFormat() == 1){
+            text = m + "/" + d + "/" + year + " : " + itemName;
+        }
+        else text = d + "/" + m + "/" + year + " : " + itemName;
 
         itemsAdapter.add(text);
         dbHandler.addNewItem(new ItemModel(itemName,month,year,date,category));

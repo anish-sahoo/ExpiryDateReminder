@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -63,12 +64,20 @@ public class ItemDetailsOnClick extends AppCompatActivity {
 
         itemName.setText("Item - " + item_name);
 
+        String m = month+"", d = date+"";
+        if(month<10){
+            m = "0" + month;
+        }
+        if(date<10){
+            d = "0" + date;
+        }
+
         DateFormatDatabase dateFormatDatabase = new DateFormatDatabase(getApplicationContext());
         if(dateFormatDatabase.getCurrentFormat() == 1) {
-            expiresOn.setText("Expires On - " + month + "/" + date + "/" +  year);
+            expiresOn.setText("Expires On - " + m + "/" + d + "/" +  year);
         }
         else {
-            expiresOn.setText("Expires On - " + date + "/" + month + "/" + year);
+            expiresOn.setText("Expires On - " + d + "/" + m + "/" + year);
         }
         categoryName.setText("Category - "+category_name);
 
@@ -78,25 +87,30 @@ public class ItemDetailsOnClick extends AppCompatActivity {
         checkIfImageExistsAlready();
 
 
-        backBtn.setOnClickListener(view -> {
-            finish();
-        });
+        backBtn.setOnClickListener(view -> finish());
 
         addPicButton.setOnClickListener(view -> {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             activityResultLauncher.launch(takePictureIntent);
         });
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            assert result.getData() != null;
+            try {
+                assert result.getData() != null;
+            }
+            catch (AssertionError e){
+                Log.d("AssertionError as activity was cancelled midway", "no image saved!");
+                return;
+            }
+
             Bundle extras = result.getData().getExtras();
             Uri imageUri;
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             WeakReference<Bitmap> result1 = new WeakReference<>(Bitmap.createScaledBitmap(imageBitmap,
-                    imageBitmap.getHeight(),imageBitmap.getWidth(),false).copy(Bitmap.Config.RGB_565,true));
+                    imageBitmap.getHeight(), imageBitmap.getWidth(), false).copy(Bitmap.Config.RGB_565, true));
 
             Bitmap bm = result1.get();
-            imageUri = saveImage(bm,ItemDetailsOnClick.this);
+            imageUri = saveImage(bm, ItemDetailsOnClick.this);
             itemImage.setImageURI(imageUri);
             System.out.println("///////////////////\nImage uri = \n" + imageUri + "\n\n/////////////////");
         });
