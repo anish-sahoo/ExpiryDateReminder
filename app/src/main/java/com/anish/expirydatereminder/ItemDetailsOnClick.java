@@ -63,7 +63,7 @@ public class ItemDetailsOnClick extends AppCompatActivity {
         category_name = intent.getStringExtra("category");
         date = intent.getIntExtra("date",0);
 
-        itemName.setText("Item - " + item_name);
+        itemName.setText("Item: " + item_name);
 
         String m = month+"", d = date+"";
         if(month<10){
@@ -75,12 +75,12 @@ public class ItemDetailsOnClick extends AppCompatActivity {
 
         DateFormatDatabase dateFormatDatabase = new DateFormatDatabase(getApplicationContext());
         if(dateFormatDatabase.getCurrentFormat() == 1) {
-            expiresOn.setText("Expires On - " + m + "/" + d + "/" +  year);
+            expiresOn.setText("Expires On: " + m + "/" + d + "/" +  year);
         }
         else {
-            expiresOn.setText("Expires On - " + d + "/" + m + "/" + year);
+            expiresOn.setText("Expires On: " + d + "/" + m + "/" + year);
         }
-        categoryName.setText("Category - "+category_name);
+        categoryName.setText("Category: "+category_name);
 
         itemImage = findViewById(R.id.imageView);
         itemImage.setRotation(90);

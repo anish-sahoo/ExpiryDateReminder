@@ -17,9 +17,9 @@
         android:layout_alignParentEnd="true"
 
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="30dp"
 
         android:text="Item:"
         android:textColor="@color/black"
@@ -35,11 +35,11 @@
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
 
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="120dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="30dp"
 
-        android:text="Expires On -"
+        android:text="Expires On:"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -53,11 +53,11 @@
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
 
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_marginTop="210dp"
 
-        android:text="Category -"
+        android:text="Category:"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -116,8 +116,8 @@
 
         android:layout_marginBottom="12dp"
         android:backgroundTint="@color/purple_500"
-        android:text="Delete Picture"
-        android:textSize="15sp"
+        android:text="Delete Image"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <Button
@@ -133,8 +133,8 @@
 
         android:backgroundTint="@color/purple_500"
         android:layout_marginBottom="12dp"
-        android:text="Add Picture"
-        android:textSize="15sp"
+        android:text="Add Image"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
 
