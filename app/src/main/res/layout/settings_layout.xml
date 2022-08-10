@@ -22,7 +22,7 @@
         android:layout_toStartOf="@id/add_category_button"
         android:layout_alignParentStart="true"
         android:layout_marginEnd="10dp"
-        android:hint="category name">
+        android:hint="Category Name">
     </EditText>
 
     <Button
@@ -37,7 +37,7 @@
 
     <Button
         android:id="@+id/restore_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_below="@id/categories_list_view"
@@ -68,7 +68,7 @@
 
     <Button
         android:id="@+id/remove_everything_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/dd_mm_yyyy_button"
         android:text="DELETE ALL ITEMS UNDER ALL CATEGORIES"
@@ -112,9 +112,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Notifications "
-        app:switchMinWidth="56dp"
-        android:textSize="24sp"
+        android:text="Expiry notifications "
+        app:useMaterialThemeColors="true"
+        app:switchMinWidth="50dp"
+        android:textSize="18sp"
         android:checked="true"
         android:layout_centerInParent="true"
         android:layout_below="@id/remove_everything_button" />
