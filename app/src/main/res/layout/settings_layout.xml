@@ -2,7 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="28dp">
+    android:padding="20dp">
 
     <TextView
         android:id="@+id/category_text_field_settings"
@@ -54,7 +54,6 @@
         android:layout_below="@id/restore_button"
         android:text="MM/DD/YYYY"
         android:textSize="12sp"
-        android:layout_marginTop="12dp"
         android:backgroundTint="#4CAF50"/>
 
     <Button
@@ -65,7 +64,6 @@
         android:text="DD/MM/YYYY"
         android:textSize="12sp"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="12dp"
         android:backgroundTint="#807C7C"/>
 
     <Button
@@ -76,7 +74,6 @@
         android:text="DELETE ALL ITEMS UNDER ALL CATEGORIES"
         android:backgroundTint="#F44336"
         android:textSize="12sp"
-        android:layout_marginTop="12dp"
         android:layout_centerInParent="true"
         />
 
@@ -109,5 +106,34 @@
         android:textColor="@color/black"
         android:layout_below="@id/add_category_button"
         android:text="Current categories:"/>
+
+    <Button
+        android:id="@+id/enableNotificationsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enable\n Notifications"
+        android:layout_below="@id/remove_everything_button"
+        android:textSize="12sp"
+        android:layout_alignParentEnd="true"/>
+    <Button
+        android:id="@+id/disableNotificationsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="Disable\n Notifications"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/enableNotificationsButton"/>
+
+    <TextView
+        android:id="@+id/NotificationStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:text="Current status: Notifications Enabled"
+        android:layout_toStartOf="@id/enableNotificationsButton"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:layout_below="@id/remove_everything_button"/>
 
 </RelativeLayout>

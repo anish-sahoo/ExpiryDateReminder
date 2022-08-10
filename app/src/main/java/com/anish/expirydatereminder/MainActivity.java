@@ -84,10 +84,13 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         modelList.sort(Comparator.comparingInt(ItemModel::getYear));
         populate(modelList);
 
-        if(modelList.size()>0)
-            setNotifications(0);
-        else
-            setNotifications(1);
+        NotificationDatabase ndb = new NotificationDatabase(getApplicationContext());
+        if(ndb.getCurrentSetting()==1) {
+            if (modelList.size() > 0)
+                setNotifications(1);
+            else
+                setNotifications(2);
+        }
 
         refreshButton.setOnClickListener(view -> {
             modelList.clear();
@@ -305,14 +308,19 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         alarmStartTime.set(Calendar.HOUR_OF_DAY, 8);
         alarmStartTime.set(Calendar.MINUTE, 30);
         alarmStartTime.set(Calendar.SECOND, 0);
+
         if (now.after(alarmStartTime)) {
             Log.d("Hey","Added a day");
             alarmStartTime.add(Calendar.DATE, 1);
         }
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmStartTime.getTimeInMillis(), AlarmManager.INTERVAL_HALF_DAY, pendingIntent);
-        Log.d("Alarm","Alarms set for everyday 8:30 am and pm.");
-        if(a==1){
+        if(a==1) {
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmStartTime.getTimeInMillis(), AlarmManager.INTERVAL_HALF_DAY, pendingIntent);
+            Log.d("Alarm","Alarms set for everyday 8:30 am and pm.");
+        }
+        else if(a==2){
             alarmManager.cancel(pendingIntent);
+            alarmStartTime.clear();
+            Log.d("Alarm","Alarm Disabled");
         }
     }
 
@@ -413,6 +421,11 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             ContentResolver contentResolver = getContentResolver();
             contentResolver.delete(uri,null,null);
         }
+    }
+
+    @Override
+    public void updateNotificationSettings(int a) {
+        setNotifications(a);
     }
 
 }

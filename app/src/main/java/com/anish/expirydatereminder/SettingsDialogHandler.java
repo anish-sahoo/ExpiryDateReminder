@@ -1,5 +1,6 @@
 package com.anish.expirydatereminder;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsDialogHandler extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
-    Button restoreButton,add_button, dateformat1, dateformat2, removeEverythingButton;
+    Button restoreButton,add_button, dateformat1, dateformat2, removeEverythingButton, enableNotificationsButton, disableNotificationsButton;
     ArrayAdapter<String> settings_spinner_adapter;
     List<String> categories_list;
     EditText category_input;
@@ -28,6 +30,7 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
     SettingsDatabaseHandler sdh;
     SettingsDialog obj;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -150,6 +153,28 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
             Toast.makeText(getContext(), "Date format changed to DD/MM/YYYY", Toast.LENGTH_SHORT).show();
         });
 
+        enableNotificationsButton = v.findViewById(R.id.enableNotificationsButton);
+        disableNotificationsButton = v.findViewById(R.id.disableNotificationsButton);
+        TextView tv = v.findViewById(R.id.NotificationStatus);
+
+        NotificationDatabase ndb = new NotificationDatabase(getContext());
+
+        if(ndb.getCurrentSetting() == 1)
+            tv.setText("Current status: Notifications Enabled");
+        else tv.setText("Current status: Notifications Disabled");
+
+        enableNotificationsButton.setOnClickListener(view -> {
+            obj.updateNotificationSettings(1);
+            ndb.updateSetting(1);
+            tv.setText("Current status: Notifications Enabled");
+            Toast.makeText(getContext(), "Notifications enabled", Toast.LENGTH_SHORT).show();
+        });
+        disableNotificationsButton.setOnClickListener(view -> {
+            obj.updateNotificationSettings(2);
+            ndb.updateSetting(2);
+            tv.setText("Current status: Notifications Disabled");
+            Toast.makeText(getContext(), "Notifications disabled!", Toast.LENGTH_SHORT).show();
+        });
         return builder.create();
     }
 
@@ -196,5 +221,6 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
         void refresh(int a);
         void deleteImages(String category);
         void deleteImages();
+        void updateNotificationSettings(int a);
     }
 }
