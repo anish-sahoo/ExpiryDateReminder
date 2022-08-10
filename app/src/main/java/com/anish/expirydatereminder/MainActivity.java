@@ -210,14 +210,14 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             if(obj.getItem().equals(item)) {
                 if(obj.getMonth() == month) {
                     if(obj.getYear() == year) {
-                        if(Objects.equals(obj.getCategory(), category)) {
+                        System.out.println(obj.getCategory());
+                        if(obj.getCategory().equals(category)) {
                             return 3;
                         }
+                        else return 4;
                     }
                 }
-                if(year >= obj.getYear()) {
-                    return 2;
-                }
+                return 2;
             }
         }
         return 1;
@@ -257,7 +257,11 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             return;
         }
         else if(checker == 2){
-            Toast.makeText(getApplicationContext(),"Same Item with different expiry date exists! Finish that first! ",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"Item with same name exists! ",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        else if(checker == 4){
+            Toast.makeText(getApplicationContext(), "Item with same name exists in a different category!", Toast.LENGTH_SHORT).show();
             return;
         }
 

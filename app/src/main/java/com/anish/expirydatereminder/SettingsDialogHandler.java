@@ -56,12 +56,12 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
         add_button.setOnClickListener(view1 -> {
             System.err.println("Button clicked");
             if(!category_input.getText().toString().trim().equals("")) {
-                if (sdh.getCategories().contains(category_input.getText().toString())) {
+                if (sdh.getCategories().contains(category_input.getText().toString().trim())) {
                     Toast.makeText(getContext(), "Category already exists!", Toast.LENGTH_SHORT).show();
                     category_input.setText("");
                     return;
                 }
-                sdh.addCategory(category_input.getText().toString(), 1);
+                sdh.addCategory(category_input.getText().toString().trim(), 1);
                 category_input.setText("");
                 settings_spinner_adapter.clear();
                 categories_list.clear();
@@ -78,7 +78,7 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
 
         lv.setOnItemLongClickListener((adapterView, view, i, l) -> {
             AlertDialog.Builder altdial = new AlertDialog.Builder(getContext());
-            altdial.setMessage("Do you want to delete this category? ALL ITEMS OF THIS CATEGORY WILL BE REMOVED FROM THE DATABASE").setCancelable(false)
+            altdial.setMessage("ALL ITEMS UNDER THIS CATEGORY WILL BE REMOVED!\nAre you sure?").setCancelable(false)
                 .setPositiveButton("Yes", (dialog, which) -> {
                     if(sdh.deleteCategory(categories_list.get(i)) == 1)
                         Toast.makeText(getContext(),"Item deleted",Toast.LENGTH_SHORT).show();
@@ -94,7 +94,7 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
                 .setNegativeButton("No", (dialog, which) -> dialog.cancel());
 
             AlertDialog alert = altdial.create();
-            alert.setTitle("Delete this item?");
+            alert.setTitle("Delete this category?");
             alert.show();
 
             return true;
@@ -102,7 +102,7 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
 
         restoreButton.setOnClickListener(view -> {
             AlertDialog.Builder altdial = new AlertDialog.Builder(getContext());
-            altdial.setMessage("ALL ITEMS UNDER THE USER-DEFINED CATEGORIES WILL BE REMOVED.\nAre you sure?").setCancelable(false)
+            altdial.setMessage("ALL ITEMS UNDER ALL USER-DEFINED CATEGORIES WILL BE REMOVED!\nAre you sure?").setCancelable(false)
                     .setPositiveButton("Yes", (dialog, which) -> {
                         for(String str: sdh.getDeletableCategories()){
                             obj.deleteImages(str);
@@ -121,15 +121,6 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
             AlertDialog alert = altdial.create();
             alert.setTitle("Delete all user-defined categories?");
             alert.show();
-
-            /*sdh.restoreDefault();
-            settings_spinner_adapter.clear();
-            categories_list.clear();
-            settings_spinner_adapter.notifyDataSetChanged();
-            categories_list = sdh.getCategories();
-            settings_spinner_adapter.addAll(categories_list);
-            settings_spinner_adapter.notifyDataSetChanged();
-            obj.refresh();*/
         });
 
         removeEverythingButton.setOnClickListener(view -> removeEverythingWipeOutAllItems());
@@ -164,7 +155,7 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
 
     private void removeEverythingWipeOutAllItems() {
         AlertDialog.Builder altdial = new AlertDialog.Builder(getContext());
-        altdial.setMessage("ALL ITEMS WILL BE REMOVED! ARE YOU SURE?").setCancelable(false)
+        altdial.setMessage("ALL ITEMS WILL BE REMOVED!\nAre you sure?").setCancelable(false)
                 .setPositiveButton("Yes", (dialog, which) -> {
                     obj.deleteImages();
 
