@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,17 +19,20 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SettingsDialogHandler extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
-    Button restoreButton,add_button, dateformat1, dateformat2, removeEverythingButton, enableNotificationsButton, disableNotificationsButton;
+    Button restoreButton,add_button, dateformat1, dateformat2, removeEverythingButton;
     ArrayAdapter<String> settings_spinner_adapter;
     List<String> categories_list;
     EditText category_input;
     ListView lv;
     SettingsDatabaseHandler sdh;
     SettingsDialog obj;
+    SwitchMaterial notifications;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -153,28 +157,24 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
             Toast.makeText(getContext(), "Date format changed to DD/MM/YYYY", Toast.LENGTH_SHORT).show();
         });
 
-        enableNotificationsButton = v.findViewById(R.id.enableNotificationsButton);
-        disableNotificationsButton = v.findViewById(R.id.disableNotificationsButton);
-        TextView tv = v.findViewById(R.id.NotificationStatus);
-
         NotificationDatabase ndb = new NotificationDatabase(getContext());
 
-        if(ndb.getCurrentSetting() == 1)
-            tv.setText("Current status: Notifications Enabled");
-        else tv.setText("Current status: Notifications Disabled");
+        notifications = v.findViewById(R.id.notifications_switch);
+        notifications.setChecked(ndb.getCurrentSetting()==1);
 
-        enableNotificationsButton.setOnClickListener(view -> {
-            obj.updateNotificationSettings(1);
-            ndb.updateSetting(1);
-            tv.setText("Current status: Notifications Enabled");
-            Toast.makeText(getContext(), "Notifications enabled", Toast.LENGTH_SHORT).show();
+        notifications.setOnCheckedChangeListener((compoundButton, b) -> {
+            if(b){
+                obj.updateNotificationSettings(1);
+                ndb.updateSetting(1);
+                Toast.makeText(getContext(), "Notifications enabled!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                obj.updateNotificationSettings(2);
+                ndb.updateSetting(2);
+                Toast.makeText(getContext(), "Notifications disabled!", Toast.LENGTH_SHORT).show();
+            }
         });
-        disableNotificationsButton.setOnClickListener(view -> {
-            obj.updateNotificationSettings(2);
-            ndb.updateSetting(2);
-            tv.setText("Current status: Notifications Disabled");
-            Toast.makeText(getContext(), "Notifications disabled!", Toast.LENGTH_SHORT).show();
-        });
+
         return builder.create();
     }
 

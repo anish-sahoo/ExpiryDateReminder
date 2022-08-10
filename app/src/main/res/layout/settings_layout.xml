@@ -1,7 +1,7 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp">
 
     <TextView
@@ -107,33 +107,16 @@
         android:layout_below="@id/add_category_button"
         android:text="Current categories:"/>
 
-    <Button
-        android:id="@+id/enableNotificationsButton"
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/notifications_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enable\n Notifications"
-        android:layout_below="@id/remove_everything_button"
-        android:textSize="12sp"
-        android:layout_alignParentEnd="true"/>
-    <Button
-        android:id="@+id/disableNotificationsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:text="Disable\n Notifications"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/enableNotificationsButton"/>
-
-    <TextView
-        android:id="@+id/NotificationStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:text="Current status: Notifications Enabled"
-        android:layout_toStartOf="@id/enableNotificationsButton"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
-        android:textSize="16sp"
-        android:layout_below="@id/remove_everything_button"/>
+        android:text="Notifications "
+        app:switchMinWidth="56dp"
+        android:textSize="24sp"
+        android:checked="true"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/remove_everything_button" />
 
 </RelativeLayout>
