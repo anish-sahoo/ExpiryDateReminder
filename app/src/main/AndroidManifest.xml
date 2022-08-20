@@ -40,7 +40,6 @@
 
         <activity android:name=".MainActivity" />
 
-        <receiver android:name=".NotificationHandler"/>
-
+        <receiver android:name=".WakeUpReceiver"/>
     </application>
 </manifest>

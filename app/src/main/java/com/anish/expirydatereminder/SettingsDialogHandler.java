@@ -164,12 +164,10 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
 
         notifications.setOnCheckedChangeListener((compoundButton, b) -> {
             if(b){
-                obj.updateNotificationSettings(1);
                 ndb.updateSetting(1);
                 Toast.makeText(getContext(), "Notifications enabled!", Toast.LENGTH_SHORT).show();
             }
             else {
-                obj.updateNotificationSettings(2);
                 ndb.updateSetting(2);
                 Toast.makeText(getContext(), "Notifications disabled!", Toast.LENGTH_SHORT).show();
             }
@@ -221,6 +219,5 @@ public class SettingsDialogHandler extends AppCompatDialogFragment implements Ad
         void refresh(int a);
         void deleteImages(String category);
         void deleteImages();
-        void updateNotificationSettings(int a);
     }
 }

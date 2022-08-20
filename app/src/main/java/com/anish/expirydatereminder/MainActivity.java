@@ -84,14 +84,6 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         modelList.sort(Comparator.comparingInt(ItemModel::getYear));
         populate(modelList);
 
-        NotificationDatabase ndb = new NotificationDatabase(getApplicationContext());
-        if(ndb.getCurrentSetting()==1) {
-            if (modelList.size() > 0)
-                setNotifications(1);
-            else
-                setNotifications(2);
-        }
-
         refreshButton.setOnClickListener(view -> {
             modelList.clear();
             itemsAdapter.clear();
@@ -106,8 +98,6 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             populate(modelList);
             itemsAdapter.notifyDataSetChanged();
         });
-
-
 
         settingsDatabaseHandler = new SettingsDatabaseHandler(MainActivity.this);
         categories = new ArrayList<>();
@@ -163,8 +153,20 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             HelpDialogHandler hd = new HelpDialogHandler();
             hd.show(getSupportFragmentManager(),"Help");
         });
-    }
 
+
+        AlarmManager alarmMgr = (AlarmManager)getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(MainActivity.this, WakeUpReceiver.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 10);
+        calendar.set(Calendar.MINUTE,15);
+        calendar.set(Calendar.SECOND,0);
+        Log.d("Alarm Set","interval 15 min");
+        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),AlarmManager.INTERVAL_FIFTEEN_MINUTES, alarmIntent);
+    }
 
     private void populate(List<ItemModel> list) {
         for(ItemModel a:list){
@@ -240,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             d = "0" + date;
         }
 
-        String totalItem = "";
+        String totalItem;
         if(dateFormat == 1) {
             totalItem = m + "/" + d + "/" + year + " : " + itemName;
         }
@@ -298,30 +300,6 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
 
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel);
-    }
-    private void setNotifications(int a){
-        Intent intent = new Intent(MainActivity.this,NotificationHandler.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0, intent,PendingIntent.FLAG_IMMUTABLE);
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        Calendar alarmStartTime = Calendar.getInstance();
-        Calendar now = Calendar.getInstance();
-        alarmStartTime.set(Calendar.HOUR_OF_DAY, 8);
-        alarmStartTime.set(Calendar.MINUTE, 30);
-        alarmStartTime.set(Calendar.SECOND, 0);
-
-        if (now.after(alarmStartTime)) {
-            Log.d("Hey","Added a day");
-            alarmStartTime.add(Calendar.DATE, 1);
-        }
-        if(a==1) {
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmStartTime.getTimeInMillis(), AlarmManager.INTERVAL_HALF_DAY, pendingIntent);
-            Log.d("Alarm","Alarms set for everyday 8:30 am and pm.");
-        }
-        else if(a==2){
-            alarmManager.cancel(pendingIntent);
-            alarmStartTime.clear();
-            Log.d("Alarm","Alarm Disabled");
-        }
     }
 
     private void openDialog() {
@@ -381,6 +359,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void refresh(int a) {
         ad.clear();
@@ -422,10 +401,4 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             contentResolver.delete(uri,null,null);
         }
     }
-
-    @Override
-    public void updateNotificationSettings(int a) {
-        setNotifications(a);
-    }
-
 }
