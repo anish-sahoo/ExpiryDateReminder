@@ -99,23 +99,29 @@ public class ItemDetailsOnClick extends AppCompatActivity {
                 assert result.getData() != null;
             }
             catch (AssertionError e){
-                Log.d("AssertionError as activity was cancelled midway", "no image saved!");
+                Log.d("AssertionError", "no image saved!");
                 Toast.makeText(this, "Action was disrupted, no image saved. Try again!", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             Bundle extras = result.getData().getExtras();
-            Uri imageUri;
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            if(extras != null) {
+                Uri imageUri;
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
 
-            WeakReference<Bitmap> result1 = new WeakReference<>(Bitmap.createScaledBitmap(imageBitmap,
-                    imageBitmap.getHeight(), imageBitmap.getWidth(), false).copy(Bitmap.Config.RGB_565, true));
+                WeakReference<Bitmap> result1 = new WeakReference<>(Bitmap.createScaledBitmap(imageBitmap,
+                        imageBitmap.getHeight(), imageBitmap.getWidth(), false).copy(Bitmap.Config.RGB_565, true));
 
-            Bitmap bm = result1.get();
-            imageUri = saveImage(bm, ItemDetailsOnClick.this);
-            itemImage.setImageURI(imageUri);
-            System.out.println("///////////////////\nImage uri = \n" + imageUri + "\n\n/////////////////");
-            Toast.makeText(this, "Image saved successfully!", Toast.LENGTH_SHORT).show();
+                Bitmap bm = result1.get();
+                imageUri = saveImage(bm, ItemDetailsOnClick.this);
+                itemImage.setImageURI(imageUri);
+                System.out.println("///////////////////\nImage uri = \n" + imageUri + "\n\n/////////////////");
+                Toast.makeText(this, "Image saved successfully!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Log.d("Image Save?", "Not saved, as user cancelled the image capture event");
+                Toast.makeText(this, "No image saved.", Toast.LENGTH_SHORT).show();
+            }
         });
 
         deletePicButton.setOnClickListener(view -> deleteImage());
