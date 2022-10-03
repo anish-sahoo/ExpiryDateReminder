@@ -1,4 +1,4 @@
-# ExpiryDateReminder
+# Expiry Date Reminder
 App that tracks items purchased according to expiry date, and reminds the user. Plus, many other useful grocery/inventory management features.
 
 <p align="left">
