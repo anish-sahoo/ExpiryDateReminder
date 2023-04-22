@@ -32,6 +32,6 @@ This app lets you:
 
 - This application uses a local SQLite database with multiple tables to store everything
 - Images are stored in the app's cached directory, ensuring that no one except the app can access the images
-- The targeted API Level is 32 (Android 12), and the minimum API Level is 26 (Android 8.0)
+- The targeted API Level is 33 (Android 13), and the minimum API Level is 26 (Android 8.0)
 - Java is the only language used in this application
 - I have not used any external Third-party libraries except androidx & Material
