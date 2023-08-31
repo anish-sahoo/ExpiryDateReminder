@@ -123,7 +123,3 @@ public class DialogHandler extends AppCompatDialogFragment implements AdapterVie
 
     }
 }
-
-//spinner in main activity not working
-//sort by not working
-//when a category is removed the product is not going away
