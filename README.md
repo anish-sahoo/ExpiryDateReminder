@@ -15,7 +15,7 @@ App that tracks items purchased according to expiry date, and reminds the user. 
 Expiry Date Reminder is an app created to help you keep track of expiry dates. 
 Get reminded by notifications once something is expiring within 14 days.
 
-This application has been created by Anish Sahoo, and has not been released under any license yet.
+This application has been created by Anish Sahoo, and has been released under the MIT license.
 
 ## Features
 
