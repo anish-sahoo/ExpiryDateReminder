@@ -30,7 +30,7 @@
 
 
         <activity
-            android:name=".ItemDetailsOnClick"
+            android:name=".ItemDetailsOnClickActivity"
             android:exported="true" />
         <activity
             android:name=".SplashActivity"
@@ -44,6 +44,6 @@
 
         <activity android:name=".MainActivity" />
 
-        <receiver android:name=".WakeUpReceiver"/>
+        <receiver android:name=".messaging.WakeUpReceiver"/>
     </application>
 </manifest>

@@ -25,6 +25,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.anish.expirydatereminder.db.ItemsDatabase;
+import com.anish.expirydatereminder.db.DateFormatDatabase;
+import com.anish.expirydatereminder.db.SettingsDatabase;
+import com.anish.expirydatereminder.dialog.AddItemDialogHandler;
+import com.anish.expirydatereminder.dialog.HelpDialogHandler;
+import com.anish.expirydatereminder.dialog.InsertDialogOptions;
+import com.anish.expirydatereminder.dialog.SettingsDialogOptions;
+import com.anish.expirydatereminder.dialog.SettingsDialogHandler;
+import com.anish.expirydatereminder.messaging.WakeUpReceiver;
+import com.anish.expirydatereminder.model.ItemModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -33,17 +43,17 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements DialogHandler.ExampleDialogListener, SettingsDialogHandler.SettingsDialog, AdapterView.OnItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements InsertDialogOptions, SettingsDialogOptions, AdapterView.OnItemSelectedListener{
 
     private ArrayList<String> items;
     private ArrayAdapter<String> itemsAdapter, ad;
     private ListView listView;
     private FloatingActionButton refreshButton, addItemButton, settingsButton, helpButton;
     private Button sortButton;
-    private DatabaseHandler dbHandler;
+    private ItemsDatabase dbHandler;
     private List<ItemModel> modelList;
     private List<String> categories;
-    SettingsDatabaseHandler settingsDatabaseHandler;
+    SettingsDatabase settingsDatabase;
     DateFormatDatabase dbh;
 
     private Spinner categorySpinner;
@@ -75,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
 
         addItemButton.setOnClickListener(view -> openDialog());
 
-        dbHandler = new DatabaseHandler(MainActivity.this);
+        dbHandler = new ItemsDatabase(MainActivity.this);
         dbh = new DateFormatDatabase(MainActivity.this);
 
         modelList = dbHandler.getAllItems();
@@ -99,9 +109,9 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             itemsAdapter.notifyDataSetChanged();
         });
 
-        settingsDatabaseHandler = new SettingsDatabaseHandler(MainActivity.this);
+        settingsDatabase = new SettingsDatabase(MainActivity.this);
         categories = new ArrayList<>();
-        categories = settingsDatabaseHandler.getCategories();
+        categories = settingsDatabase.getCategories();
         categorySpinner = findViewById(R.id.category_spinner);
         categorySpinner.setOnItemSelectedListener(this);
         ad = new ArrayAdapter<>(this, R.layout.spinner_item, categories);
@@ -199,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
             return true;
         });
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
-            Intent myIntent = new Intent(MainActivity.this, ItemDetailsOnClick.class);
+            Intent myIntent = new Intent(MainActivity.this, ItemDetailsOnClickActivity.class);
             myIntent.putExtra("item name",modelList.get(i).getItem());
             myIntent.putExtra("month",modelList.get(i).getMonth());
             myIntent.putExtra("year",modelList.get(i).getYear());
@@ -303,8 +313,8 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
     }
 
     private void openDialog() {
-        DialogHandler dialogHandler = new DialogHandler();
-        dialogHandler.show(getSupportFragmentManager(),"Add item");
+        AddItemDialogHandler addItemDialogHandler = new AddItemDialogHandler();
+        addItemDialogHandler.show(getSupportFragmentManager(),"Add item");
     }
     private void openSettingsDialog(){
         SettingsDialogHandler settingsDialogHandler = new SettingsDialogHandler();
@@ -365,7 +375,7 @@ public class MainActivity extends AppCompatActivity implements DialogHandler.Exa
         ad.clear();
         categories.clear();
         ad.notifyDataSetChanged();
-        categories = settingsDatabaseHandler.getCategories();
+        categories = settingsDatabase.getCategories();
         ad.addAll(categories);
         ad.notifyDataSetChanged();
 

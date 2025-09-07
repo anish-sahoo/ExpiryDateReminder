@@ -1,17 +1,17 @@
-package com.anish.expirydatereminder;
+package com.anish.expirydatereminder.model;
 
 public class ItemModel {
     private String item, category;
     private int month, year, id, date;
 
-    ItemModel(String i, int m, int y, int d, String cat){
+    public ItemModel(String i, int m, int y, int d, String cat){
         this.item = i;
         this.month = m;
         this.year = y;
         this.date = d;
         this.category = cat;
     }
-    ItemModel(String i, int m, int y){
+    public ItemModel(String i, int m, int y){
         this.item = i;
         this.month = m;
         this.year = y;

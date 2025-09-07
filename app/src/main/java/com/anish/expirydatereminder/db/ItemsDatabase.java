@@ -1,4 +1,4 @@
-package com.anish.expirydatereminder;
+package com.anish.expirydatereminder.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,9 +8,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.anish.expirydatereminder.model.ItemModel;
+
 import java.util.ArrayList;
 
-public class DatabaseHandler extends SQLiteOpenHelper {
+public class ItemsDatabase extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "itemsDatabase";
     private static final int DB_VERSION = 8;
@@ -22,12 +24,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String CATEGORY_COL = "category";
     private static final String DATE_COL = "date";
 
-    public DatabaseHandler(Context context) {
+    public ItemsDatabase(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        try{
+        try {
             onCreate(getWritableDatabase());
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             String query = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
                     + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + NAME_COL + " TEXT,"
