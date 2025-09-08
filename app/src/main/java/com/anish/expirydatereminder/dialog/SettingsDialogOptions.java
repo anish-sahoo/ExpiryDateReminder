@@ -3,7 +3,7 @@ package com.anish.expirydatereminder.dialog;
 public interface SettingsDialogOptions {
     void refresh(int a);
 
-    void deleteImages(String category);
+    void deleteAllImages(String category);
 
-    void deleteImages();
+    void deleteAllImages();
 }

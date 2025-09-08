@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.anish.expirydatereminder.R;
 
-public class HelpDialogHandler extends AppCompatDialogFragment {
+public class HelpDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View v = inflater.inflate(R.layout.help_layout, null);

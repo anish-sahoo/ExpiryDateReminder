@@ -24,8 +24,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import com.anish.expirydatereminder.constants.AppConstants;
 import com.anish.expirydatereminder.db.DateFormatDatabase;
+import com.anish.expirydatereminder.utils.DateUtils;
 import com.anish.expirydatereminder.utils.FileUtils;
+import com.anish.expirydatereminder.utils.ViewUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -46,6 +49,7 @@ public class ItemDetailsOnClickActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details_on_click);
+        ViewUtils.applyInsets(findViewById(R.id.item_details_activity), getWindow());
 
         Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
@@ -70,19 +74,8 @@ public class ItemDetailsOnClickActivity extends AppCompatActivity {
 
         itemName.setText("Item: " + item_name);
 
-        String m = month + "", d = date + "";
-        if (month < 10) {
-            m = "0" + month;
-        }
-        if (date < 10) {
-            d = "0" + date;
-        }
-
-        DateFormatDatabase dateFormatDatabase = new DateFormatDatabase(getApplicationContext());
-        if (dateFormatDatabase.getCurrentFormat() == 1) {
-            expiresOn.setText("Expires On: " + m + "/" + d + "/" + year);
-        } else {
-            expiresOn.setText("Expires On: " + d + "/" + m + "/" + year);
+        try (DateFormatDatabase dateFormatDatabase = new DateFormatDatabase(getApplicationContext())) {
+            expiresOn.setText("Expires On: " + DateUtils.getDateStr(month, date, year, dateFormatDatabase.getCurrentFormat()));
         }
         categoryName.setText("Category: " + category_name);
 
@@ -106,16 +99,16 @@ public class ItemDetailsOnClickActivity extends AppCompatActivity {
 
             Bundle extras = result.getData().getExtras();
             if (extras != null) {
-                Uri imageUri;
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
+                assert imageBitmap != null;
 
                 WeakReference<Bitmap> result1 = new WeakReference<>(Bitmap.createScaledBitmap(imageBitmap,
                         imageBitmap.getWidth(), imageBitmap.getHeight(), false).copy(Bitmap.Config.RGB_565, true));
 
                 Bitmap bm = result1.get();
-                imageUri = saveImage(bm, ItemDetailsOnClickActivity.this);
+                Uri imageUri = saveImage(bm, ItemDetailsOnClickActivity.this);
                 itemImage.setImageURI(imageUri);
-                System.out.println("///////////////////\nImage uri = \n" + imageUri + "\n\n/////////////////");
+                // System.out.println("///////////////////\nImage uri = \n" + imageUri + "\n\n/////////////////");
                 Toast.makeText(this, "Image saved successfully!", Toast.LENGTH_SHORT).show();
             } else {
                 Log.d("Image Save?", "Not saved, as user cancelled the image capture event");
@@ -144,11 +137,10 @@ public class ItemDetailsOnClickActivity extends AppCompatActivity {
             image.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             stream.flush();
             stream.close();
-
-            uri = FileProvider.getUriForFile(context.getApplicationContext(), "com.anish.expirydatereminder" + ".provider", file);
+            uri = FileProvider.getUriForFile(context.getApplicationContext(), AppConstants.APP_NAME + ".provider", file);
 
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("ItemDetailsOnClickActivity:saveImage", Objects.requireNonNull(e.getMessage()));
         }
         return uri;
     }

@@ -21,7 +21,7 @@ import java.time.Year;
 import java.time.YearMonth;
 import java.util.List;
 
-public class AddItemDialogHandler extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
+public class AddItemDialog extends AppCompatDialogFragment implements AdapterView.OnItemSelectedListener {
     private EditText name, month, year, date;
     private InsertDialogOptions listener;
     private Spinner spinner;

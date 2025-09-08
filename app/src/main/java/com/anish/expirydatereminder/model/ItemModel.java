@@ -1,26 +1,22 @@
 package com.anish.expirydatereminder.model;
 
 public class ItemModel {
-    private String item, category;
-    private int month, year, id, date;
+    private final String itemName;
+    private final String category;
+    private final int month;
+    private final int year;
+    private final int date;
 
     public ItemModel(String i, int m, int y, int d, String cat){
-        this.item = i;
+        this.itemName = i;
         this.month = m;
         this.year = y;
         this.date = d;
         this.category = cat;
     }
-    public ItemModel(String i, int m, int y){
-        this.item = i;
-        this.month = m;
-        this.year = y;
-        this.date = 1;
-        this.category = "Grocery";
-    }
 
-    public ItemModel() {
-        this.item = null;
+    private ItemModel() {
+        this.itemName = null;
         this.month = 0;
         this.year = 0;
         this.category = null;
@@ -31,47 +27,20 @@ public class ItemModel {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public int getDate() {
         return date;
     }
 
-    public void setDate(int date) {
-        this.date = date;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getItem() {
-        return item;
-    }
-
-    public void setItem(String item) {
-        this.item = item;
+    public String getItemName() {
+        return itemName;
     }
 
     public int getMonth() {
         return month;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
 }

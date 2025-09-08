@@ -99,8 +99,8 @@ public class SettingsDatabase extends SQLiteOpenHelper {
 
         db.delete(TABLE_NAME, "type=?", new String[]{"1"});
 
-        Log.d("LOOK AT ME ------- ", "restoreDefault METHOD CALLED ");
-        Log.d("ITEMS REMAINING IN DB ------ ", Arrays.toString(getCategories().toArray()));
+        // Log.d("LOOK AT ME ------- ", "restoreDefault METHOD CALLED ");
+        // Log.d("ITEMS REMAINING IN DB ------ ", Arrays.toString(getCategories().toArray()));
     }
 
     public List<String> getCategories() {
