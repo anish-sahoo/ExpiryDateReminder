@@ -5,8 +5,8 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    tools:context=".ItemDetailsOnClick">
+    android:id="@+id/item_details_activity"
+    tools:context=".ItemDetailsOnClickActivity">
 
     <TextView
         android:id="@+id/nameOfItem"
