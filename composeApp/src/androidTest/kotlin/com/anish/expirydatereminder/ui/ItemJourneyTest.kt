@@ -202,6 +202,7 @@ class ItemJourneyTest {
         const val SOUP = "EdrJourneySoup"
         const val TABLETS = "EdrJourneyTablets"
         const val RENAMED = "EdrJourneyRenamed"
+
         // Generous because a cold CI emulator is far slower than a warm local one, and a
         // timeout here reports as a behaviour failure rather than as the machine being busy.
         const val TIMEOUT_MS = 15_000L
