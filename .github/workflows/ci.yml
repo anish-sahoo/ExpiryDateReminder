@@ -54,21 +54,6 @@ jobs:
       - name: ${{ matrix.name }}
         run: ./gradlew ${{ matrix.task }} --no-daemon --stacktrace
 
-      # Reports are far more useful than the log when something fails, and they are the
-      # only artefact of a red run worth keeping.
-      - name: Upload reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: reports-${{ matrix.name }}
-          path: |
-            **/build/reports/ktlint/**
-            **/build/reports/detekt/**
-            **/build/reports/lint-results-*.html
-            **/build/reports/tests/**
-          retention-days: 7
-          if-no-files-found: ignore
-
   e2e:
     name: End-to-end tests
     runs-on: ubuntu-latest
@@ -104,15 +89,6 @@ jobs:
           arch: x86_64
           disable-animations: true
           script: ./gradlew :composeApp:connectedDebugAndroidTest --no-daemon
-
-      - name: Upload reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: e2e-reports
-          path: composeApp/build/reports/androidTests/**
-          retention-days: 7
-          if-no-files-found: ignore
 
   bundle:
     name: Release bundle
