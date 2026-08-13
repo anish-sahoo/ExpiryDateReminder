@@ -9,6 +9,8 @@ import com.anish.expirydatereminder.images.ImageStore
 import com.anish.expirydatereminder.testing.FakeItemRepository
 import com.anish.expirydatereminder.testing.FakeSettingsRepository
 import com.anish.expirydatereminder.testing.MainDispatcherRule
+import com.anish.expirydatereminder.testing.TEST_TODAY
+import com.anish.expirydatereminder.testing.fixedToday
 import com.anish.expirydatereminder.testing.testItem
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -31,7 +33,7 @@ class ItemDetailViewModelTest {
     private val imageStore = ImageStore(ApplicationProvider.getApplicationContext())
 
     private fun viewModel(items: FakeItemRepository, settings: FakeSettingsRepository = FakeSettingsRepository()) =
-        ItemDetailViewModel(items = items, settings = settings, imageStore = imageStore)
+        ItemDetailViewModel(items = items, settings = settings, imageStore = imageStore, today = fixedToday())
 
     @Test
     fun `loads the item and the settings it renders with`() = runTest {
@@ -67,7 +69,7 @@ class ItemDetailViewModelTest {
 
     @Test
     fun `an absent item reports OK rather than an urgent color`() = runTest {
-        assertEquals(ExpiryStatus.OK, ItemDetailUiState().status)
+        assertEquals(ExpiryStatus.OK, ItemDetailUiState(today = TEST_TODAY).status)
     }
 
     @Test

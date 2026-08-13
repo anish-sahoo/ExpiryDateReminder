@@ -11,6 +11,7 @@ import com.anish.expirydatereminder.testing.FakeCategoryRepository
 import com.anish.expirydatereminder.testing.FakeItemRepository
 import com.anish.expirydatereminder.testing.FakeSettingsRepository
 import com.anish.expirydatereminder.testing.MainDispatcherRule
+import com.anish.expirydatereminder.testing.fixedToday
 import com.anish.expirydatereminder.testing.testItem
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
@@ -54,6 +55,7 @@ class ItemListViewModelTest {
         categories = FakeCategoryRepository(),
         settings = FakeSettingsRepository(),
         imageStore = imageStore,
+        today = fixedToday(),
     )
 
     /** The flow opens on a placeholder before the repositories have emitted anything. */

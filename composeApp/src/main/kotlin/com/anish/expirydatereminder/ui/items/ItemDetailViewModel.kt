@@ -3,6 +3,7 @@ package com.anish.expirydatereminder.ui.items
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.anish.expirydatereminder.domain.Today
 import com.anish.expirydatereminder.domain.model.AppSettings
 import com.anish.expirydatereminder.domain.model.ExpiryStatus
 import com.anish.expirydatereminder.domain.model.Item
@@ -11,20 +12,17 @@ import com.anish.expirydatereminder.domain.repository.SettingsRepository
 import com.anish.expirydatereminder.images.ImageStore
 import com.anish.expirydatereminder.logging.Log
 import java.io.ByteArrayOutputStream
-import kotlin.time.Clock
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.todayIn
 
 data class ItemDetailUiState(
     val item: Item? = null,
     val settings: AppSettings = AppSettings(),
-    val today: LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault()),
+    val today: LocalDate,
     val deleted: Boolean = false,
 ) {
     val status: ExpiryStatus
@@ -35,9 +33,10 @@ class ItemDetailViewModel(
     private val items: ItemRepository,
     private val settings: SettingsRepository,
     private val imageStore: ImageStore,
+    private val today: Today,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(ItemDetailUiState())
+    private val _state = MutableStateFlow(ItemDetailUiState(today = today()))
     val state: StateFlow<ItemDetailUiState> = _state.asStateFlow()
 
     fun load(itemId: Long) {

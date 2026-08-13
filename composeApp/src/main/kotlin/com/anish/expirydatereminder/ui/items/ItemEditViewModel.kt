@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anish.expirydatereminder.camera.ScanCoordinator
+import com.anish.expirydatereminder.domain.Today
 import com.anish.expirydatereminder.domain.model.BuiltinCategory
 import com.anish.expirydatereminder.domain.model.Category
 import com.anish.expirydatereminder.domain.model.DateFormat
@@ -18,14 +19,11 @@ import com.anish.expirydatereminder.domain.usecase.DraftField
 import com.anish.expirydatereminder.domain.usecase.DuplicateCheck
 import com.anish.expirydatereminder.domain.usecase.validateDraft
 import com.anish.expirydatereminder.images.ImageStore
-import kotlin.time.Clock
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.todayIn
 
 data class ItemEditUiState(
     val itemId: Long? = null,
@@ -54,6 +52,7 @@ class ItemEditViewModel(
     private val settings: SettingsRepository,
     private val scanCoordinator: ScanCoordinator,
     private val imageStore: ImageStore,
+    private val today: Today,
 ) : ViewModel() {
 
     private val checkForDuplicate = CheckForDuplicate(items)
@@ -175,7 +174,7 @@ class ItemEditViewModel(
 
     fun save(force: Boolean = false) {
         val current = _state.value
-        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
+        val today = today()
         val validation = validateDraft(
             name = current.name,
             day = current.day,

@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import com.anish.expirydatereminder.domain.model.AppSettings
 import com.anish.expirydatereminder.domain.model.DateFormat
 import com.anish.expirydatereminder.testing.FakeSettingsRepository
+import com.anish.expirydatereminder.testing.fixedToday
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -36,6 +37,7 @@ class ScanCoordinatorTest {
         // Not available off a flagship, which is the path most users take.
         extractor = GeminiNanoExtractor(),
         settings = FakeSettingsRepository(AppSettings(dateFormat = dateFormat)),
+        today = fixedToday(),
         io = Dispatchers.Unconfined,
     )
 
@@ -45,6 +47,7 @@ class ScanCoordinatorTest {
         },
         extractor = GeminiNanoExtractor(),
         settings = FakeSettingsRepository(),
+        today = fixedToday(),
         io = Dispatchers.Unconfined,
     )
 

@@ -15,6 +15,7 @@ import com.anish.expirydatereminder.testing.FakeCategoryRepository
 import com.anish.expirydatereminder.testing.FakeItemRepository
 import com.anish.expirydatereminder.testing.FakeSettingsRepository
 import com.anish.expirydatereminder.testing.MainDispatcherRule
+import com.anish.expirydatereminder.testing.fixedToday
 import com.anish.expirydatereminder.testing.testItem
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
@@ -55,9 +56,11 @@ class ItemEditViewModelTest {
             },
             extractor = GeminiNanoExtractor(),
             settings = FakeSettingsRepository(),
+            today = fixedToday(),
             io = Dispatchers.Unconfined,
         ),
         imageStore = imageStore,
+        today = fixedToday(),
     )
 
     private fun ItemEditViewModel.fillValid(name: String = "Milk") {

@@ -7,6 +7,7 @@ import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.anish.expirydatereminder.MainActivity
@@ -103,7 +104,9 @@ class AddItemFlowTest {
         rule.onNodeWithContentDescription(string(R.string.edit_day)).performTextInput(soon.day.toString())
         rule.onNodeWithContentDescription(string(R.string.edit_year)).performTextInput(soon.year.toString())
 
-        rule.onNodeWithText(string(R.string.action_save)).performClick()
+        // Scrolled to first: the form is taller than the sheet on a short screen, and
+        // clicking an off screen node silently does nothing, which looks like a failed save.
+        rule.onNodeWithText(string(R.string.action_save)).performScrollTo().performClick()
 
         // The save runs on the view model's scope and the list updates from a database flow,
         // neither of which `waitForIdle` knows about — it only waits for composition. Waiting

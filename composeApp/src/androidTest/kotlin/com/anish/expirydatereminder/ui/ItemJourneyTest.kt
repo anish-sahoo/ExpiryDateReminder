@@ -10,6 +10,7 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
@@ -102,7 +103,9 @@ class ItemJourneyTest {
         // Cleared, the field shows its label again, which is a stable handle.
         rule.onNodeWithText(string(R.string.edit_name)).performTextInput(RENAMED)
 
-        rule.onNodeWithText(string(R.string.action_save)).performClick()
+        // Scrolled to first: the form is taller than the sheet on a short screen, and
+        // clicking an off screen node silently does nothing, which looks like a failed save.
+        rule.onNodeWithText(string(R.string.action_save)).performScrollTo().performClick()
         waitUntilGone(string(R.string.action_save))
 
         // The detail screen's back arrow is labeled, not captioned, so it is found the way

@@ -2,6 +2,7 @@ package com.anish.expirydatereminder.ui.items
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.anish.expirydatereminder.domain.Today
 import com.anish.expirydatereminder.domain.model.AppSettings
 import com.anish.expirydatereminder.domain.model.Category
 import com.anish.expirydatereminder.domain.model.Item
@@ -12,7 +13,6 @@ import com.anish.expirydatereminder.domain.repository.SettingsRepository
 import com.anish.expirydatereminder.domain.usecase.ItemSort
 import com.anish.expirydatereminder.domain.usecase.matching
 import com.anish.expirydatereminder.images.ImageStore
-import kotlin.time.Clock
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -22,8 +22,6 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.todayIn
 
 data class ItemListUiState(
     val loading: Boolean = true,
@@ -33,7 +31,7 @@ data class ItemListUiState(
     val query: String = "",
     val sort: ItemSort = ItemSort.BY_EXPIRY,
     val settings: AppSettings = AppSettings(),
-    val today: LocalDate = Clock.System.todayIn(TimeZone.currentSystemDefault()),
+    val today: LocalDate,
 ) {
     val isEmptyOverall: Boolean get() = !loading && items.isEmpty() && query.isBlank() && selectedCategoryId == null
     val hasNoMatches: Boolean get() = !loading && items.isEmpty() && (query.isNotBlank() || selectedCategoryId != null)
@@ -50,6 +48,7 @@ class ItemListViewModel(
     categories: CategoryRepository,
     settings: SettingsRepository,
     private val imageStore: ImageStore,
+    private val today: Today,
 ) : ViewModel() {
 
     private val filter = MutableStateFlow<Long?>(null)
@@ -74,8 +73,9 @@ class ItemListViewModel(
             query = currentQuery,
             sort = currentSort,
             settings = appSettings,
+            today = today(),
         )
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), ItemListUiState())
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(STOP_TIMEOUT_MS), ItemListUiState(today = today()))
 
     fun selectCategory(categoryId: Long?) {
         filter.value = categoryId

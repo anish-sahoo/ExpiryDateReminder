@@ -17,6 +17,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.anish.expirydatereminder.MainActivity
 import com.anish.expirydatereminder.R
+import com.anish.expirydatereminder.domain.Today
 import com.anish.expirydatereminder.domain.model.ExpiryDate
 import com.anish.expirydatereminder.domain.model.Item
 import com.anish.expirydatereminder.domain.model.minusDays
@@ -26,10 +27,7 @@ import com.anish.expirydatereminder.domain.repository.SettingsRepository
 import com.anish.expirydatereminder.logging.Log
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
-import kotlin.time.Clock
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.todayIn
 
 /**
  * Daily check for items approaching expiry.
@@ -47,6 +45,7 @@ class ExpiryReminderWorker(
     params: WorkerParameters,
     private val items: ItemRepository,
     private val settings: SettingsRepository,
+    private val today: Today,
 ) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
@@ -58,7 +57,7 @@ class ExpiryReminderWorker(
         if (!config.notificationsEnabled) return Result.success()
         if (!hasNotificationPermission()) return Result.success()
 
-        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
+        val today = today()
         // The lower bound matters: the pre-2.0 receiver counted every item where
         // `today >= expiry - 14 days` with no floor, so things that expired years ago
         // kept inflating the number forever.

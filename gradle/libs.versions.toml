@@ -35,6 +35,7 @@ androidxTestRunner = "1.6.2"
 androidxTestRules = "1.6.1"
 androidxTestCore = "1.6.1"
 robolectric = "4.16"
+mockk = "1.14.9"
 
 ktlint = "13.1.0"
 ktlintCli = "1.7.1"
@@ -99,6 +100,7 @@ androidx-test-core = { module = "androidx.test:core", version.ref = "androidxTes
 compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlintCli" }
 
 [plugins]

@@ -38,6 +38,7 @@ import androidx.glance.text.TextStyle
 import androidx.glance.unit.ColorProvider
 import com.anish.expirydatereminder.MainActivity
 import com.anish.expirydatereminder.R
+import com.anish.expirydatereminder.domain.Today
 import com.anish.expirydatereminder.domain.model.DateFormat
 import com.anish.expirydatereminder.domain.model.ExpiryDate
 import com.anish.expirydatereminder.domain.model.ExpiryStatus
@@ -47,10 +48,7 @@ import com.anish.expirydatereminder.domain.model.plusDays
 import com.anish.expirydatereminder.domain.repository.ItemRepository
 import com.anish.expirydatereminder.domain.repository.SettingsRepository
 import com.anish.expirydatereminder.ui.common.format
-import kotlin.time.Clock
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.todayIn
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -79,11 +77,12 @@ class ExpiryWidget :
 
     private val items: ItemRepository by inject()
     private val settings: SettingsRepository by inject()
+    private val today: Today by inject()
 
     override val sizeMode = SizeMode.Exact
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
-        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
+        val today = today()
         val config = settings.current()
         val leadDays = config.reminderLeadDays
         val due = items.expiringBetween(

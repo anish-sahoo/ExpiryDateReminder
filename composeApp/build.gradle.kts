@@ -151,6 +151,12 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
     testImplementation(libs.androidx.test.core)
+    testImplementation(libs.mockk)
+    // Compose UI tests on the JVM, under Robolectric. Same API as the instrumented suite,
+    // no emulator.
+    testImplementation(platform(libs.compose.bom))
+    testImplementation(libs.compose.ui.test.junit4)
+    testImplementation(libs.compose.ui.test.manifest)
     // Lets the migration and settings tests stand up a real, in-memory schema instead of
     // guessing at what SQLite would have done.
     testImplementation(libs.sqldelight.android.driver)

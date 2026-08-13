@@ -5,6 +5,8 @@ import com.anish.expirydatereminder.camera.MlKitOcrEngine
 import com.anish.expirydatereminder.camera.OcrEngine
 import com.anish.expirydatereminder.camera.ScanAvailability
 import com.anish.expirydatereminder.camera.ScanCoordinator
+import com.anish.expirydatereminder.domain.SystemToday
+import com.anish.expirydatereminder.domain.Today
 import com.anish.expirydatereminder.notifications.ExpiryReminderWorker
 import com.anish.expirydatereminder.ui.items.ItemDetailViewModel
 import com.anish.expirydatereminder.ui.items.ItemEditViewModel
@@ -18,11 +20,15 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val appModule = module {
+    // Injected rather than read from the clock at the point of use, so tests can hold the
+    // date still. See [Today].
+    single<Today> { SystemToday() }
+
     single { ScanAvailability(get()) }
     single { WidgetRefresher(androidContext(), get(), get()) }
     single { MlKitOcrEngine() } bind OcrEngine::class
     single { GeminiNanoExtractor() }
-    single { ScanCoordinator(ocr = get(), extractor = get(), settings = get(), io = get(IoDispatcher)) }
+    single { ScanCoordinator(ocr = get(), extractor = get(), settings = get(), today = get(), io = get(IoDispatcher)) }
 
     workerOf(::ExpiryReminderWorker)
 

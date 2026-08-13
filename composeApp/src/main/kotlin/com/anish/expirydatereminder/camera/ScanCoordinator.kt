@@ -1,14 +1,12 @@
 package com.anish.expirydatereminder.camera
 
 import android.graphics.Bitmap
+import com.anish.expirydatereminder.domain.Today
 import com.anish.expirydatereminder.domain.model.ExpiryDate
 import com.anish.expirydatereminder.domain.repository.SettingsRepository
 import com.anish.expirydatereminder.parser.DateParser
-import kotlin.time.Clock
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.todayIn
 
 /**
  * What a scan produced. Never written anywhere directly: it prefills the add/edit form,
@@ -37,6 +35,7 @@ class ScanCoordinator(
     private val ocr: OcrEngine,
     private val extractor: GeminiNanoExtractor,
     private val settings: SettingsRepository,
+    private val today: Today,
     private val io: CoroutineDispatcher,
 ) {
 
@@ -44,7 +43,7 @@ class ScanCoordinator(
         val text = runCatching { ocr.recognize(bitmap) }.getOrElse { "" }
         if (text.isBlank()) return@withContext EMPTY
 
-        val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
+        val today = today()
         val parser = DateParser(
             currentYear = today.year,
             preferredFormat = settings.current().dateFormat,
