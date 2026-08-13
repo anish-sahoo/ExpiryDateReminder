@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Backup for Android 11 and below.
+
+  This is an allow-list: once anything is included, everything not named here is already
+  excluded, so the legacy `itemsDatabase` and its `.bak` need no rule of their own. Naming
+  them in an <exclude> was not just redundant, it was invalid — an exclude has to sit inside
+  an included path, and lint fails the release build over it.
+
+  Leaving the legacy database out is deliberate. It is only useful for the one-time import,
+  and restoring it onto a device that has already migrated would offer to import data the
+  user has since edited.
+-->
+<full-backup-content>
+    <include domain="database" path="edr_v2.db" />
+    <!-- Photos now survive a device transfer; under cacheDir they never did. -->
+    <include domain="file" path="images/" />
+</full-backup-content>

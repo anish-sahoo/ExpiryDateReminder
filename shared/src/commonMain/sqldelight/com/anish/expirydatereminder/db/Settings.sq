@@ -1,0 +1,62 @@
+-- The legacy schema kept two single-row tables (dateFormatTable, notificationTable)
+-- and mutated them by delete-then-insert. One singleton row is clearer.
+--
+-- dateFormat retains the legacy integer encoding (1 = MM/DD/YYYY, 2 = DD/MM/YYYY)
+-- so migrated values need no remapping. notificationsEnabled does NOT: the legacy
+-- encoding was 1 = enabled / 2 = disabled, which is remapped to a real boolean
+-- during import. Getting that inversion wrong would silently flip every existing
+-- user's preference, so LegacyImporter asserts on it.
+-- Column defaults mirror AppSettings() in Kotlin, and SettingsDefaultsTest fails if the two
+-- ever drift. In practice neither is reached: DriverFactory seeds the row with the device's
+-- locale default at creation. They are the fallback for a row that somehow does not exist.
+CREATE TABLE app_settings (
+    id                    INTEGER NOT NULL PRIMARY KEY DEFAULT 0 CHECK (id = 0),
+    dateFormat            INTEGER NOT NULL DEFAULT 2,
+    notificationsEnabled  INTEGER AS kotlin.Boolean NOT NULL DEFAULT 1,
+    reminderLeadDays      INTEGER NOT NULL DEFAULT 14,
+    reminderHour          INTEGER NOT NULL DEFAULT 7
+);
+
+-- Written inside the same transaction as the imported rows. Presence of this row
+-- is therefore logically equivalent to "the import transaction committed", which
+-- is the only safe migration guard: SQLDelight creates the database file on open,
+-- so file existence proves nothing about whether any data landed.
+CREATE TABLE migration_meta (
+    id           INTEGER NOT NULL PRIMARY KEY DEFAULT 0 CHECK (id = 0),
+    migratedAt   INTEGER NOT NULL,
+    itemCount    INTEGER NOT NULL,
+    categoryCount INTEGER NOT NULL,
+    orphanCount  INTEGER NOT NULL,
+    imageCount   INTEGER NOT NULL
+);
+
+selectSettings:
+SELECT * FROM app_settings WHERE id = 0;
+
+ensureSettings:
+INSERT OR IGNORE INTO app_settings(id) VALUES (0);
+
+-- Seeds the singleton row with a starting date format. OR IGNORE, so it only ever applies to
+-- a database that has no settings row yet: an existing install, or one whose row the legacy
+-- import is about to overwrite, is left exactly as it was.
+ensureSettingsWithDateFormat:
+INSERT OR IGNORE INTO app_settings(id, dateFormat) VALUES (0, ?);
+
+updateDateFormat:
+UPDATE app_settings SET dateFormat = ? WHERE id = 0;
+
+updateNotificationsEnabled:
+UPDATE app_settings SET notificationsEnabled = ? WHERE id = 0;
+
+updateReminderLeadDays:
+UPDATE app_settings SET reminderLeadDays = ? WHERE id = 0;
+
+updateReminderHour:
+UPDATE app_settings SET reminderHour = ? WHERE id = 0;
+
+selectMigrationMeta:
+SELECT * FROM migration_meta WHERE id = 0;
+
+insertMigrationMeta:
+INSERT OR REPLACE INTO migration_meta(id, migratedAt, itemCount, categoryCount, orphanCount, imageCount)
+VALUES (0, ?, ?, ?, ?, ?);

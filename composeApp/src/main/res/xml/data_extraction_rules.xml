@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Backup and device transfer for Android 12 and above.
+
+  Both sections are allow-lists: naming anything in an <include> excludes everything else by
+  default, so the legacy `itemsDatabase` needs no rule. An <exclude> outside an included path
+  is invalid and fails lint on the release build.
+
+  The legacy database is left out on purpose — it exists only for the one-time import, and
+  restoring it onto a device that has already migrated would offer to re-import data the user
+  has since changed.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <include domain="database" path="edr_v2.db" />
+        <include domain="file" path="images/" />
+    </cloud-backup>
+    <device-transfer>
+        <include domain="database" path="edr_v2.db" />
+        <include domain="file" path="images/" />
+    </device-transfer>
+</data-extraction-rules>

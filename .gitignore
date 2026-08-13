@@ -1,16 +1,31 @@
 *.iml
 .gradle
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+/.idea
 .DS_Store
 /build
+**/build
 /captures
 .externalNativeBuild
 .cxx
-local.properties
 *.aab
+*.apk
+
+# The Kotlin plugin's per-build session directory. Appears at the root the first
+# time the project is opened or built, and is pure scratch.
+.kotlin/
+
+# Heap dumps from the Studio profiler. Large, and easy to commit by accident.
+*.hprof
+
+# Signing material must never be committed
+keystore.properties
+*.jks
+*.keystore
+
+# Android Studio's "Inspect Code" HTML export, which lands in the project root.
+# Root-scoped on purpose: these are generic names and should not silently swallow
+# a real file somewhere in the tree.
+/index.html
+/script.js
+/styles.css

@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!--
+      The app's calendar-and-clock mark, as a notification small icon.
+
+      Notification small icons are drawn as a silhouette: the system throws away color and
+      keeps only the alpha, then tints the result itself. That is why this is one flat white
+      path with no tint attribute of its own — and why the pre-2.0 app's full-color PNG came
+      out as a gray blob. It is also why the holes matter: the header line, the gap between
+      the calendar and the clock, and the hands are the only things giving the silhouette any
+      internal structure once it is flattened.
+
+      Same path data as ic_launcher_foreground, re-fitted from that file's 108 viewport to
+      this 24 one. The artwork spans (29,28)-(84.5,84.5) there, so scaling by 22/56.5 and
+      shifting the result puts it in a 22dp box centered in the 24dp canvas — the inset a
+      notification icon is expected to keep.
+    -->
+    <group
+        android:scaleX="0.3894"
+        android:scaleY="0.3894"
+        android:translateX="-10.1"
+        android:translateY="-9.9">
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:fillType="evenOdd"
+            android:pathData="M37,28 a2.5,2.5 0 0,1 2.5,2.5 v5 h-5 v-5 a2.5,2.5 0 0,1 2.5,-2.5 z
+                              M55,28 a2.5,2.5 0 0,1 2.5,2.5 v5 h-5 v-5 a2.5,2.5 0 0,1 2.5,-2.5 z
+                              M35,32 h24 a6,6 0 0,1 6,6 v27 a6,6 0 0,1 -6,6 h-24 a6,6 0 0,1 -6,-6 v-27 a6,6 0 0,1 6,-6 z
+                              M29,43 h36 v4 h-36 z
+                              M57.5,71 a13.5,13.5 0 1,0 27,0 a13.5,13.5 0 1,0 -27,0 z
+                              M69.2,60.5 h3.6 v8.7 h8.5 v3.6 h-12.1 z" />
+    </group>
+</vector>

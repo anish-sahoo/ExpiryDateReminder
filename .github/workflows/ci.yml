@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # One job per gate, so each shows up as its own check: CI / Format, CI / Lint and
+  # so on, and a red run names the gate in the checks list without opening a log.
+  #
+  # A matrix rather than five copies of the same job, since the only thing that
+  # differs is the Gradle task. These are the tasks `./gradlew ciCheck` depends on;
+  # adding one there means adding a row here or the local and CI gates drift apart.
+  #
+  # The cost is that each job compiles independently. The Gradle cache absorbs most
+  # of it, and being able to see every failure at once is worth the minutes.
+  check:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Format
+            task: ktlintCheck
+          - name: Static analysis
+            task: detekt
+          - name: Lint
+            task: ':composeApp:lintDebug'
+          - name: Unit tests
+            task: ':shared:testAndroid :composeApp:testDebugUnitTest'
+          - name: Debug build
+            task: ':composeApp:assembleDebug'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: ${{ matrix.name }}
+        run: ./gradlew ${{ matrix.task }} --no-daemon --stacktrace
+
+  bundle:
+    name: Release bundle
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: check
+    # Proves the release variant still assembles, which is what actually ships to Play. It
+    # is unsigned here, the upload keystore never enters CI.
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Bundle release
+        run: ./gradlew :composeApp:bundleRelease --no-daemon
+
+      - name: Upload bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: aab
+          path: composeApp/build/outputs/bundle/release/*.aab
+          retention-days: 14

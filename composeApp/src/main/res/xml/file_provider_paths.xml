@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Item photos moved from cacheDir (evictable) to filesDir in 2.0. -->
+    <files-path name="images" path="images/" />
+    <!-- Scratch space handed to the system camera; cleaned up after the capture. -->
+    <cache-path name="captures" path="captures/" />
+</paths>

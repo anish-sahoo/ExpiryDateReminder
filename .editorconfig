@@ -1,0 +1,57 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.{kt,kts}]
+max_line_length = 120
+
+# The default `ktlint_official` style rewrites argument lists and expression bodies far more
+# aggressively than the code here is written, and several of its rules cannot be auto-fixed,
+# so a format pass leaves the build red. `intellij_idea` matches what Android Studio produces
+# on Reformat Code, which is what anyone touching this repo will actually run.
+ktlint_code_style = intellij_idea
+
+# Composables are PascalCase by convention; the naming rule assumes camelCase functions.
+ktlint_standard_function-naming = disabled
+
+# Rules the intellij_idea style leaves off, all of them auto-fixable. Without these the
+# formatter accepts imports in whatever order they were pasted in, which is most of what
+# makes a file look untidy at a glance.
+ij_kotlin_imports_layout = *
+ktlint_standard_import-ordering = enabled
+ktlint_standard_no-unused-imports = enabled
+ktlint_standard_no-wildcard-imports = enabled
+ktlint_standard_no-consecutive-blank-lines = enabled
+ktlint_standard_no-trailing-spaces = enabled
+ktlint_standard_no-blank-line-before-rbrace = enabled
+ktlint_standard_indent = enabled
+ktlint_standard_chain-wrapping = enabled
+ktlint_standard_colon-spacing = enabled
+ktlint_standard_comma-spacing = enabled
+ktlint_standard_curly-spacing = enabled
+ktlint_standard_keyword-spacing = enabled
+ktlint_standard_op-spacing = enabled
+ktlint_standard_paren-spacing = enabled
+
+# Trailing commas keep one-argument-per-line diffs to a single changed line.
+ij_kotlin_allow_trailing_comma = true
+ij_kotlin_allow_trailing_comma_on_call_site = true
+ktlint_standard_trailing-comma-on-declaration-site = enabled
+ktlint_standard_trailing-comma-on-call-site = enabled
+
+[*.{xml,yml,yaml}]
+indent_size = 4
+
+[*.{yml,yaml}]
+indent_size = 2
+
+# Generated sources: SQLDelight names classes after their tables (App_settings), which no
+# naming rule will accept, and reformatting build output is pointless anyway.
+[**/build/**]
+ktlint = disabled

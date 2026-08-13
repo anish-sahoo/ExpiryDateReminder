@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Portuguese (Português) translation. Drafted for the 2.0 rewrite; wants a native-speaker review pass before
+  release. Plural forms follow the CLDR rules for this language.
+-->
+<resources>
+    <string name="items_title">Os meus artigos</string>
+    <string name="items_search_hint">Procurar artigos</string>
+    <string name="items_filter_all">Todos os artigos</string>
+    <string name="items_sort_by_expiry">Ordenar por validade</string>
+    <string name="items_sort_by_name">Ordenar por nome</string>
+    <string name="items_add">Adicionar artigo</string>
+    <string name="items_empty_title">Ainda não há nada</string>
+    <string name="items_empty_body">Adicione algo com data de validade e avisamos a tempo.</string>
+    <string name="items_no_results_title">Sem resultados</string>
+    <string name="items_no_results_body">Experimente outra pesquisa ou categoria.</string>
+    <string name="items_section_expired">Fora de validade</string>
+    <string name="items_section_expiring">Validade a terminar</string>
+    <string name="items_section_ok">Mais tarde</string>
+    <string name="badge_expired">Expirado</string>
+    <string name="badge_expiring_soon">Em breve</string>
+    <string name="badge_ok">OK</string>
+    <string name="header_nothing_tracked">Nada registado</string>
+    <string name="header_all_good">Tudo bem</string>
+    <string name="header_needs_attention">%1$d precisam de atenção</string>
+    <string name="header_detail_expired">%1$d fora de validade</string>
+    <string name="header_detail_soon">%1$d a terminar</string>
+    <string name="item_deleted">%1$s eliminado</string>
+    <string name="action_undo">Anular</string>
+    <string name="toast_item_added">Artigo adicionado</string>
+    <string name="toast_item_updated">Alterações guardadas</string>
+    <string name="toast_item_deleted">Artigo eliminado</string>
+    <string name="toast_photo_saved">Foto guardada</string>
+    <string name="expiry_today">Expira hoje</string>
+    <string name="expiry_tomorrow">Expira amanhã</string>
+    <string name="edit_title_add">Adicionar artigo</string>
+    <string name="edit_title_edit">Editar artigo</string>
+    <string name="edit_name">Nome</string>
+    <string name="edit_category">Categoria</string>
+    <string name="edit_expiry">Data de validade</string>
+    <string name="edit_notes">Notas</string>
+    <string name="edit_notes_hint">Onde está, para que serve, o que valer a pena lembrar</string>
+    <string name="detail_notes">Notas</string>
+    <string name="detail_tap_to_add_photo">Toque para adicionar uma foto</string>
+    <string name="edit_day">Dia</string>
+    <string name="edit_month">Mês</string>
+    <string name="edit_year">Ano</string>
+    <string name="edit_pick_date">Escolher data</string>
+    <string name="edit_scan">Digitalizar data</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_done">Concluído</string>
+    <string name="action_retry">Tentar novamente</string>
+    <string name="error_name_blank">Introduza um nome</string>
+    <string name="error_month_required">Introduza um mês</string>
+    <string name="error_month_range">O mês tem de estar entre 1 e 12</string>
+    <string name="error_day_range">Esse dia não existe neste mês</string>
+    <string name="error_year_range">Introduza um ano com quatro dígitos</string>
+    <string name="duplicate_exact">Já tem este artigo com a mesma data e categoria.</string>
+    <string name="duplicate_same_name_different_date">Já tem %1$s com outra data.</string>
+    <string name="duplicate_same_name_different_category">Já tem %1$s noutra categoria.</string>
+    <string name="scan_title">Digitalizar data de validade</string>
+    <string name="scan_hint">Aponte a câmara para a data impressa</string>
+    <string name="scan_nothing_found">Nenhuma data detetada. Introduza-a manualmente.</string>
+    <string name="scan_pick_candidate">Qual é a data de validade?</string>
+    <string name="scan_permission_needed">É preciso acesso à câmara para digitalizar.</string>
+    <string name="scan_grant_permission">Permitir câmara</string>
+    <string name="scan_capture">Capturar</string>
+    <string name="detail_photo">Foto</string>
+    <string name="detail_add_photo">Adicionar foto</string>
+    <string name="detail_replace_photo">Substituir foto</string>
+    <string name="detail_delete_photo">Remover foto</string>
+    <string name="detail_no_photo">Ainda sem foto</string>
+    <string name="detail_category">Categoria</string>
+    <string name="detail_expires">Válido até</string>
+    <string name="settings_title">Definições</string>
+    <string name="settings_categories">Categorias</string>
+    <string name="settings_add_category">Adicionar categoria</string>
+    <string name="settings_category_name">Nome da categoria</string>
+    <string name="settings_category_exists">Essa categoria já existe</string>
+    <string name="settings_category_builtin">As categorias predefinidas não podem ser eliminadas</string>
+    <string name="settings_delete_category_title">Eliminar esta categoria?</string>
+    <string name="settings_delete_category_empty">%1$s não tem artigos. Eliminar a categoria?</string>
+    <string name="settings_category_builtin_short">Predefinida</string>
+    <string name="settings_date_format">Formato da data</string>
+    <string name="settings_date_format_month_first">Mês primeiro (MM/DD/AAAA)</string>
+    <string name="settings_date_format_day_first">Dia primeiro (DD/MM/AAAA)</string>
+    <string name="settings_notifications">Lembretes</string>
+    <string name="settings_notifications_enabled">Avisar-me antes de expirar</string>
+    <string name="settings_reminder_lead">Avisar-me com esta antecedência</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_language_system">Idioma do sistema</string>
+    <string name="settings_data">Dados</string>
+    <string name="settings_delete_all_items">Eliminar todos os artigos</string>
+    <string name="settings_delete_all_items_body">Todos os artigos de todas as categorias serão eliminados. Não é possível anular.</string>
+    <string name="settings_delete_user_categories">Eliminar todas as categorias próprias</string>
+    <string name="settings_delete_user_categories_body">Todas as categorias próprias e os seus artigos serão eliminados. Não é possível anular.</string>
+    <string name="settings_about">Acerca</string>
+    <string name="settings_version">Versão %1$s</string>
+    <string name="migration_in_progress">A transferir os seus dados…</string>
+    <string name="migration_done">Transferidos %1$d artigos e %2$d categorias.</string>
+    <string name="migration_failed_title">Não foi possível importar os dados antigos</string>
+    <string name="migration_failed_body">Os seus dados originais estão intactos e continuam neste dispositivo. Pode tentar novamente.</string>
+    <string name="migration_retry">Repetir importação</string>
+    <string name="notification_channel_name">Lembretes de validade</string>
+    <string name="notification_channel_description">Lembretes sobre artigos perto do fim da validade</string>
+    <string name="notif_expired_body_1">Vale a pena verificar antes de usar.</string>
+    <string name="notif_expired_body_2">Talvez seja altura de fazer espaço.</string>
+    <string name="notif_expired_body_3">Veja o que ainda se aproveita.</string>
+    <string name="notif_today_body_1">Bom dia para o gastar.</string>
+    <string name="notif_today_body_2">Aproveite antes que se perca.</string>
+    <string name="notif_today_body_3">Mesmo no limite.</string>
+    <string name="notif_soon_body_1">Expira dentro de %1$d dias.</string>
+    <string name="notif_soon_body_2">Planeie-os para os próximos %1$d dias.</string>
+    <string name="notif_soon_body_3">Tem cerca de %1$d dias.</string>
+    <string name="notif_soon_body_4">Chega nos próximos %1$d dias.</string>
+    <string name="notif_body_named">%1$s é o que convém vigiar.</string>
+    <string name="notification_permission_rationale">Permita as notificações para que possamos avisar antes de algo expirar.</string>
+    <string name="widget_title">Validade a terminar</string>
+    <string name="widget_empty">Nada a expirar em breve</string>
+    <string name="help_title">Ajuda</string>
+    <string name="help_add">Toque no botão de adicionar para registar algo novo.</string>
+    <string name="help_scan">Ao adicionar, use o botão de digitalização para ler uma data impressa com a câmara.</string>
+    <string name="help_swipe">Deslize um artigo para o lado para o eliminar. Pode anular de imediato.</string>
+    <string name="help_categories">Adicione ou remova as suas categorias nas definições.</string>
+    <string name="category_grocery">Mercearia</string>
+    <string name="category_frozen">Congelados</string>
+    <string name="category_snacks">Snacks</string>
+    <string name="category_medicine">Medicamentos</string>
+    <string name="category_important_dates">Datas importantes</string>
+    <string name="category_uncategorized">Sem categoria</string>
+    <plurals name="header_needs_attention_p">
+        <item quantity="one">%1$d artigo precisa de atenção</item>
+        <item quantity="many">%1$d artigos precisam de atenção</item>
+        <item quantity="other">%1$d artigos precisam de atenção</item>
+    </plurals>
+    <plurals name="expiry_in_days">
+        <item quantity="one">Expira daqui a %1$d dia</item>
+        <item quantity="many">Expira daqui a %1$d dias</item>
+        <item quantity="other">Expira daqui a %1$d dias</item>
+    </plurals>
+    <plurals name="expiry_days_ago">
+        <item quantity="one">Expirou há %1$d dia</item>
+        <item quantity="many">Expirou há %1$d dias</item>
+        <item quantity="other">Expirou há %1$d dias</item>
+    </plurals>
+    <plurals name="settings_delete_category_with_items">
+        <item quantity="one">Isto também elimina %1$d artigo em %2$s. Não é possível anular.</item>
+        <item quantity="many">Isto também elimina %1$d artigos em %2$s. Não é possível anular.</item>
+        <item quantity="other">Isto também elimina %1$d artigos em %2$s. Não é possível anular.</item>
+    </plurals>
+    <plurals name="settings_reminder_lead_days">
+        <item quantity="one">%1$d dia</item>
+        <item quantity="many">%1$d dias</item>
+        <item quantity="other">%1$d dias</item>
+    </plurals>
+    <plurals name="notif_expired_title_1">
+        <item quantity="one">%1$d artigo expirou</item>
+        <item quantity="many">%1$d artigos expiraram</item>
+        <item quantity="other">%1$d artigos expiraram</item>
+    </plurals>
+    <plurals name="notif_expired_title_2">
+        <item quantity="one">Acabou o tempo para %1$d artigo</item>
+        <item quantity="many">Acabou o tempo para %1$d artigos</item>
+        <item quantity="other">Acabou o tempo para %1$d artigos</item>
+    </plurals>
+    <plurals name="notif_expired_title_3">
+        <item quantity="one">%1$d artigo passou da data</item>
+        <item quantity="many">%1$d artigos passaram da data</item>
+        <item quantity="other">%1$d artigos passaram da data</item>
+    </plurals>
+    <plurals name="notif_today_title_1">
+        <item quantity="one">%1$d artigo expira hoje</item>
+        <item quantity="many">%1$d artigos expiram hoje</item>
+        <item quantity="other">%1$d artigos expiram hoje</item>
+    </plurals>
+    <plurals name="notif_today_title_2">
+        <item quantity="one">Hoje é o último dia de %1$d artigo</item>
+        <item quantity="many">Hoje é o último dia de %1$d artigos</item>
+        <item quantity="other">Hoje é o último dia de %1$d artigos</item>
+    </plurals>
+    <plurals name="notif_today_title_3">
+        <item quantity="one">%1$d artigo termina hoje</item>
+        <item quantity="many">%1$d artigos terminam hoje</item>
+        <item quantity="other">%1$d artigos terminam hoje</item>
+    </plurals>
+    <plurals name="notif_soon_title_1">
+        <item quantity="one">%1$d artigo expira em breve</item>
+        <item quantity="many">%1$d artigos expiram em breve</item>
+        <item quantity="other">%1$d artigos expiram em breve</item>
+    </plurals>
+    <plurals name="notif_soon_title_2">
+        <item quantity="one">Atenção: %1$d artigo</item>
+        <item quantity="many">Atenção: %1$d artigos</item>
+        <item quantity="other">Atenção: %1$d artigos</item>
+    </plurals>
+    <plurals name="notif_soon_title_3">
+        <item quantity="one">%1$d artigo para gastar</item>
+        <item quantity="many">%1$d artigos para gastar</item>
+        <item quantity="other">%1$d artigos para gastar</item>
+    </plurals>
+    <plurals name="notif_soon_title_4">
+        <item quantity="one">%1$d artigo de saída</item>
+        <item quantity="many">%1$d artigos de saída</item>
+        <item quantity="other">%1$d artigos de saída</item>
+    </plurals>
+<!-- Shown on the 1x1 widget under the count, so it must stay very short. -->
+    <string name="widget_badge_due">Vence</string>
+    <string name="widget_badge_clear">Nada</string>
+    </resources>

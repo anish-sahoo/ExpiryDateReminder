@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  British English overrides. Only spellings that genuinely differ from the US default
+  belong here; everything else falls back to values/strings.xml.
+-->
+<resources>
+    <string name="category_uncategorized">Uncategorised</string>
+<!-- Shown on the 1x1 widget under the count, so it must stay very short. -->
+    <string name="widget_badge_due">Due</string>
+    <string name="widget_badge_clear">Clear</string>
+    </resources>

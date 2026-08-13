@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Adaptive-icon background only; app colors come from Material You at runtime.
+      Carried over from the pre-2.0 icon so the app stays recognizable in the launcher
+      through the update.
+    -->
+    <color name="ic_launcher_background">#6200EE</color>
+</resources>

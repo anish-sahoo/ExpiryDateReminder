@@ -1,0 +1,45 @@
+-- Built-in categories carry a stable `builtinKey` so their display name can be
+-- localized at render time. User-created categories have builtinKey = NULL and
+-- render `name` verbatim.
+CREATE TABLE category (
+    id          INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name        TEXT NOT NULL,
+    builtinKey  TEXT UNIQUE,
+    isBuiltin   INTEGER AS kotlin.Boolean NOT NULL DEFAULT 0
+);
+
+-- Uniqueness applies only among user-created names. A user category may legitimately
+-- collide with a *translated* built-in name (a Spanish user's "Medicina" alongside
+-- the built-in `medicine` rendered as "Medicina"), and mangling their data to avoid
+-- that would be worse than the visual duplicate.
+CREATE UNIQUE INDEX category_user_name_idx ON category(name) WHERE builtinKey IS NULL;
+
+selectAll:
+SELECT * FROM category ORDER BY isBuiltin DESC, id ASC;
+
+selectById:
+SELECT * FROM category WHERE id = ?;
+
+
+selectByBuiltinKey:
+SELECT * FROM category WHERE builtinKey = ?;
+
+
+insert:
+INSERT INTO category(name, builtinKey, isBuiltin) VALUES (?, ?, ?);
+
+
+rename:
+UPDATE category SET name = ? WHERE id = ? AND isBuiltin = 0;
+
+deleteById:
+DELETE FROM category WHERE id = ? AND isBuiltin = 0;
+
+deleteAllUserCategories:
+DELETE FROM category WHERE isBuiltin = 0;
+
+countByName:
+SELECT count(*) FROM category WHERE name = ?;
+
+lastInsertRowId:
+SELECT last_insert_rowid();

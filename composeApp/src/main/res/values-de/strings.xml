@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  German (Deutsch) translation. Drafted for the 2.0 rewrite; wants a native-speaker review pass before
+  release. Plural forms follow the CLDR rules for this language.
+-->
+<resources>
+    <string name="items_title">Meine Artikel</string>
+    <string name="items_search_hint">Artikel suchen</string>
+    <string name="items_filter_all">Alle Artikel</string>
+    <string name="items_sort_by_expiry">Nach Ablauf sortieren</string>
+    <string name="items_sort_by_name">Nach Name sortieren</string>
+    <string name="items_add">Artikel hinzufügen</string>
+    <string name="items_empty_title">Noch nichts erfasst</string>
+    <string name="items_empty_body">Füge etwas mit Ablaufdatum hinzu und wir erinnern dich rechtzeitig.</string>
+    <string name="items_no_results_title">Keine Treffer</string>
+    <string name="items_no_results_body">Probiere eine andere Suche oder Kategorie.</string>
+    <string name="items_section_expired">Abgelaufen</string>
+    <string name="items_section_expiring">Läuft bald ab</string>
+    <string name="items_section_ok">Später</string>
+    <string name="badge_expired">Abgelaufen</string>
+    <string name="badge_expiring_soon">Bald</string>
+    <string name="badge_ok">OK</string>
+    <string name="header_nothing_tracked">Nichts erfasst</string>
+    <string name="header_all_good">Alles gut</string>
+    <string name="header_needs_attention">%1$d brauchen Aufmerksamkeit</string>
+    <string name="header_detail_expired">%1$d abgelaufen</string>
+    <string name="header_detail_soon">%1$d laufen bald ab</string>
+    <string name="item_deleted">%1$s gelöscht</string>
+    <string name="action_undo">Rückgängig</string>
+    <string name="toast_item_added">Artikel hinzugefügt</string>
+    <string name="toast_item_updated">Änderungen gespeichert</string>
+    <string name="toast_item_deleted">Artikel gelöscht</string>
+    <string name="toast_photo_saved">Foto gespeichert</string>
+    <string name="expiry_today">Läuft heute ab</string>
+    <string name="expiry_tomorrow">Läuft morgen ab</string>
+    <string name="edit_title_add">Artikel hinzufügen</string>
+    <string name="edit_title_edit">Artikel bearbeiten</string>
+    <string name="edit_name">Name</string>
+    <string name="edit_category">Kategorie</string>
+    <string name="edit_expiry">Ablaufdatum</string>
+    <string name="edit_notes">Notizen</string>
+    <string name="edit_notes_hint">Wo er liegt, wofür er ist, alles Wissenswerte</string>
+    <string name="detail_notes">Notizen</string>
+    <string name="detail_tap_to_add_photo">Tippen, um ein Foto hinzuzufügen</string>
+    <string name="edit_day">Tag</string>
+    <string name="edit_month">Monat</string>
+    <string name="edit_year">Jahr</string>
+    <string name="edit_pick_date">Datum wählen</string>
+    <string name="edit_scan">Datum scannen</string>
+    <string name="action_save">Speichern</string>
+    <string name="action_cancel">Abbrechen</string>
+    <string name="action_delete">Löschen</string>
+    <string name="action_done">Fertig</string>
+    <string name="action_retry">Erneut versuchen</string>
+    <string name="error_name_blank">Bitte einen Namen eingeben</string>
+    <string name="error_month_required">Bitte einen Monat eingeben</string>
+    <string name="error_month_range">Der Monat muss zwischen 1 und 12 liegen</string>
+    <string name="error_day_range">Diesen Tag gibt es in diesem Monat nicht</string>
+    <string name="error_year_range">Bitte ein vierstelliges Jahr eingeben</string>
+    <string name="duplicate_exact">Diesen Artikel gibt es bereits mit demselben Datum und derselben Kategorie.</string>
+    <string name="duplicate_same_name_different_date">%1$s gibt es bereits mit einem anderen Datum.</string>
+    <string name="duplicate_same_name_different_category">%1$s gibt es bereits in einer anderen Kategorie.</string>
+    <string name="scan_title">Ablaufdatum scannen</string>
+    <string name="scan_hint">Richte die Kamera auf das aufgedruckte Datum</string>
+    <string name="scan_nothing_found">Kein Datum erkannt. Bitte manuell eingeben.</string>
+    <string name="scan_pick_candidate">Welches Datum ist das Ablaufdatum?</string>
+    <string name="scan_permission_needed">Für das Scannen wird Kamerazugriff benötigt.</string>
+    <string name="scan_grant_permission">Kamera erlauben</string>
+    <string name="scan_capture">Aufnehmen</string>
+    <string name="detail_photo">Foto</string>
+    <string name="detail_add_photo">Foto hinzufügen</string>
+    <string name="detail_replace_photo">Foto ersetzen</string>
+    <string name="detail_delete_photo">Foto entfernen</string>
+    <string name="detail_no_photo">Noch kein Foto</string>
+    <string name="detail_category">Kategorie</string>
+    <string name="detail_expires">Läuft ab</string>
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_categories">Kategorien</string>
+    <string name="settings_add_category">Kategorie hinzufügen</string>
+    <string name="settings_category_name">Name der Kategorie</string>
+    <string name="settings_category_exists">Diese Kategorie gibt es bereits</string>
+    <string name="settings_category_builtin">Vorgegebene Kategorien können nicht gelöscht werden</string>
+    <string name="settings_delete_category_title">Diese Kategorie löschen?</string>
+    <string name="settings_delete_category_empty">%1$s enthält keine Artikel. Kategorie löschen?</string>
+    <string name="settings_category_builtin_short">Vorgegeben</string>
+    <string name="settings_date_format">Datumsformat</string>
+    <string name="settings_date_format_month_first">Monat zuerst (MM/TT/JJJJ)</string>
+    <string name="settings_date_format_day_first">Tag zuerst (TT/MM/JJJJ)</string>
+    <string name="settings_notifications">Erinnerungen</string>
+    <string name="settings_notifications_enabled">Vor dem Ablauf erinnern</string>
+    <string name="settings_reminder_lead">So lange im Voraus erinnern</string>
+    <string name="settings_language">Sprache</string>
+    <string name="settings_language_system">Systemsprache</string>
+    <string name="settings_data">Daten</string>
+    <string name="settings_delete_all_items">Alle Artikel löschen</string>
+    <string name="settings_delete_all_items_body">Alle Artikel in allen Kategorien werden gelöscht. Das lässt sich nicht rückgängig machen.</string>
+    <string name="settings_delete_user_categories">Alle eigenen Kategorien löschen</string>
+    <string name="settings_delete_user_categories_body">Alle eigenen Kategorien und ihre Artikel werden gelöscht. Das lässt sich nicht rückgängig machen.</string>
+    <string name="settings_about">Über die App</string>
+    <string name="settings_version">Version %1$s</string>
+    <string name="migration_in_progress">Deine Daten werden übernommen …</string>
+    <string name="migration_done">%1$d Artikel und %2$d Kategorien übernommen.</string>
+    <string name="migration_failed_title">Deine alten Daten konnten nicht importiert werden</string>
+    <string name="migration_failed_body">Deine ursprünglichen Daten sind unverändert und weiterhin auf diesem Gerät. Du kannst es erneut versuchen.</string>
+    <string name="migration_retry">Import wiederholen</string>
+    <string name="notification_channel_name">Ablauf-Erinnerungen</string>
+    <string name="notification_channel_description">Erinnerungen an Artikel, die bald ablaufen</string>
+    <string name="notif_expired_body_1">Vor dem Verbrauch lieber prüfen.</string>
+    <string name="notif_expired_body_2">Vielleicht Zeit, Platz zu schaffen.</string>
+    <string name="notif_expired_body_3">Schau nach, was noch gut ist.</string>
+    <string name="notif_today_body_1">Guter Tag, um es aufzubrauchen.</string>
+    <string name="notif_today_body_2">Schnapp es dir, bevor es schlecht wird.</string>
+    <string name="notif_today_body_3">Genau auf der Kippe.</string>
+    <string name="notif_soon_body_1">Läuft innerhalb von %1$d Tagen ab.</string>
+    <string name="notif_soon_body_2">Plane sie für die nächsten %1$d Tage ein.</string>
+    <string name="notif_soon_body_3">Du hast noch etwa %1$d Tage.</string>
+    <string name="notif_soon_body_4">Kommt in den nächsten %1$d Tagen.</string>
+    <string name="notif_body_named">%1$s solltest du im Auge behalten.</string>
+    <string name="notification_permission_rationale">Erlaube Benachrichtigungen, damit wir dich vor dem Ablauf erinnern können.</string>
+    <string name="widget_title">Läuft bald ab</string>
+    <string name="widget_empty">Nichts läuft bald ab</string>
+    <string name="help_title">Hilfe</string>
+    <string name="help_add">Tippe auf Hinzufügen, um etwas Neues zu erfassen.</string>
+    <string name="help_scan">Nutze beim Hinzufügen die Scan-Taste, um ein aufgedrucktes Ablaufdatum mit der Kamera zu lesen.</string>
+    <string name="help_swipe">Wische einen Artikel zur Seite, um ihn zu löschen. Du kannst es sofort rückgängig machen.</string>
+    <string name="help_categories">Eigene Kategorien fügst du in den Einstellungen hinzu oder entfernst sie dort.</string>
+    <string name="category_grocery">Lebensmittel</string>
+    <string name="category_frozen">Tiefkühl</string>
+    <string name="category_snacks">Snacks</string>
+    <string name="category_medicine">Medikamente</string>
+    <string name="category_important_dates">Wichtige Termine</string>
+    <string name="category_uncategorized">Ohne Kategorie</string>
+    <plurals name="header_needs_attention_p">
+        <item quantity="one">%1$d Artikel braucht Aufmerksamkeit</item>
+        <item quantity="other">%1$d Artikel brauchen Aufmerksamkeit</item>
+    </plurals>
+    <plurals name="expiry_in_days">
+        <item quantity="one">Läuft in %1$d Tag ab</item>
+        <item quantity="other">Läuft in %1$d Tagen ab</item>
+    </plurals>
+    <plurals name="expiry_days_ago">
+        <item quantity="one">Vor %1$d Tag abgelaufen</item>
+        <item quantity="other">Vor %1$d Tagen abgelaufen</item>
+    </plurals>
+    <plurals name="settings_delete_category_with_items">
+        <item quantity="one">Dabei wird auch %1$d Artikel in %2$s gelöscht. Das lässt sich nicht rückgängig machen.</item>
+        <item quantity="other">Dabei werden auch %1$d Artikel in %2$s gelöscht. Das lässt sich nicht rückgängig machen.</item>
+    </plurals>
+    <plurals name="settings_reminder_lead_days">
+        <item quantity="one">%1$d Tag</item>
+        <item quantity="other">%1$d Tage</item>
+    </plurals>
+    <plurals name="notif_expired_title_1">
+        <item quantity="one">%1$d Artikel ist abgelaufen</item>
+        <item quantity="other">%1$d Artikel sind abgelaufen</item>
+    </plurals>
+    <plurals name="notif_expired_title_2">
+        <item quantity="one">Zeit abgelaufen für %1$d Artikel</item>
+        <item quantity="other">Zeit abgelaufen für %1$d Artikel</item>
+    </plurals>
+    <plurals name="notif_expired_title_3">
+        <item quantity="one">%1$d Artikel ist über dem Datum</item>
+        <item quantity="other">%1$d Artikel sind über dem Datum</item>
+    </plurals>
+    <plurals name="notif_today_title_1">
+        <item quantity="one">%1$d Artikel läuft heute ab</item>
+        <item quantity="other">%1$d Artikel laufen heute ab</item>
+    </plurals>
+    <plurals name="notif_today_title_2">
+        <item quantity="one">Heute ist der letzte Tag für %1$d Artikel</item>
+        <item quantity="other">Heute ist der letzte Tag für %1$d Artikel</item>
+    </plurals>
+    <plurals name="notif_today_title_3">
+        <item quantity="one">%1$d Artikel ist heute fällig</item>
+        <item quantity="other">%1$d Artikel sind heute fällig</item>
+    </plurals>
+    <plurals name="notif_soon_title_1">
+        <item quantity="one">%1$d Artikel läuft bald ab</item>
+        <item quantity="other">%1$d Artikel laufen bald ab</item>
+    </plurals>
+    <plurals name="notif_soon_title_2">
+        <item quantity="one">Achtung: %1$d Artikel</item>
+        <item quantity="other">Achtung: %1$d Artikel</item>
+    </plurals>
+    <plurals name="notif_soon_title_3">
+        <item quantity="one">%1$d Artikel sollte verbraucht werden</item>
+        <item quantity="other">%1$d Artikel sollten verbraucht werden</item>
+    </plurals>
+    <plurals name="notif_soon_title_4">
+        <item quantity="one">%1$d Artikel geht zur Neige</item>
+        <item quantity="other">%1$d Artikel gehen zur Neige</item>
+    </plurals>
+<!-- Shown on the 1x1 widget under the count, so it must stay very short. -->
+    <string name="widget_badge_due">Fällig</string>
+    <string name="widget_badge_clear">Frei</string>
+    </resources>
