@@ -22,6 +22,14 @@ allprojects {
         config.setFrom(rootProject.files("config/detekt/detekt.yml"))
         parallel = true
     }
+
+    // detekt 1.23 embeds a Kotlin compiler whose IntelliJ `JavaVersion.parse` cannot read a
+    // JDK 25 version string, and dies with `IllegalArgumentException: 25.0.3` before it
+    // analyses anything. The task has no `javaLauncher`, so the JVM is pinned in
+    // gradle.properties instead. This only sets the bytecode target.
+    tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+        jvmTarget = "21"
+    }
 }
 
 /**

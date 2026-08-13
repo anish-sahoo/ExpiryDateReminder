@@ -51,6 +51,3 @@ fun urgencyStyle(status: ExpiryStatus): UrgencyStyle {
         )
     }
 }
-
-private const val BADGE_ALPHA = 0.10f
-private const val BORDER_ALPHA = 0.22f
