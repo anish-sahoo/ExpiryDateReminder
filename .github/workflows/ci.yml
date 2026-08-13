@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
   workflow_dispatch:
 
@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   check:
-    name: Format, analysis, tests, build
+    name: Checks
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -28,10 +28,37 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      # Everything the ciCheck task runs, in one step, so the local and CI gates cannot
-      # drift apart. Run `./gradlew ciCheck` before pushing to get the same answer.
-      - name: ciCheck
-        run: ./gradlew ciCheck --no-daemon --stacktrace
+      # One step per gate, so a red run says which gate failed without opening the log.
+      #
+      # These are the same tasks `./gradlew ciCheck` depends on. Adding a task there means
+      # adding a step here, or the local gate and the CI gate drift apart.
+      #
+      # Each step runs even if an earlier one failed, so a single push reports every
+      # problem at once instead of one per round trip. The cost is that a compile error
+      # turns several steps red at the same time.
+
+      - name: Formatting
+        run: ./gradlew ktlintCheck --no-daemon --stacktrace
+
+      - name: Static analysis
+        if: ${{ !cancelled() }}
+        run: ./gradlew detekt --no-daemon --stacktrace
+
+      - name: Android Lint
+        if: ${{ !cancelled() }}
+        run: ./gradlew :composeApp:lintDebug --no-daemon --stacktrace
+
+      - name: Unit tests (shared)
+        if: ${{ !cancelled() }}
+        run: ./gradlew :shared:testAndroid --no-daemon --stacktrace
+
+      - name: Unit tests (app)
+        if: ${{ !cancelled() }}
+        run: ./gradlew :composeApp:testDebugUnitTest --no-daemon --stacktrace
+
+      - name: Debug build
+        if: ${{ !cancelled() }}
+        run: ./gradlew :composeApp:assembleDebug --no-daemon --stacktrace
 
       # Reports are far more useful than the log when something fails, and they are the
       # only artefact of a red run worth keeping.
@@ -43,6 +70,7 @@ jobs:
           path: |
             **/build/reports/ktlint/**
             **/build/reports/detekt/**
+            **/build/reports/lint-results-*.html
             **/build/reports/tests/**
           retention-days: 7
           if-no-files-found: ignore
@@ -97,9 +125,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: [check, e2e]
-    # Only on main: this proves the release variant still assembles, which is what actually
-    # ships to Play. It is unsigned here — the upload keystore never enters CI.
-    if: github.ref == 'refs/heads/main'
+    # Only on master: this proves the release variant still assembles, which is what
+    # actually ships to Play. It is unsigned here, the upload keystore never enters CI.
+    if: github.ref == 'refs/heads/master'
 
     steps:
       - uses: actions/checkout@v4
