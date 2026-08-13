@@ -68,6 +68,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -372,6 +373,10 @@ private fun InlineSearch(value: String, onValueChange: (String) -> Unit, modifie
 @Composable
 private fun CategoryFilters(categories: List<Category>, selectedId: Long?, onSelect: (Long?) -> Unit) {
     LazyRow(
+        // Tagged so a test can scroll the row to a chip. A LazyRow does not compose what is
+        // off screen, and how many chips fit depends on the device, so matching one by text
+        // alone only works on a screen wide enough to show it.
+        modifier = Modifier.testTag(CATEGORY_FILTERS_TAG),
         contentPadding = PaddingValues(horizontal = Space.md),
         horizontalArrangement = Arrangement.spacedBy(Space.sm),
     ) {
@@ -588,3 +593,6 @@ private fun ItemRow(item: Item, state: ItemListUiState, status: ExpiryStatus, on
 }
 
 private val HERO_TEXT_HEIGHT = 104.dp
+
+/** Identifies the category filter row so a test can scroll it to a chip. */
+const val CATEGORY_FILTERS_TAG = "category_filters"

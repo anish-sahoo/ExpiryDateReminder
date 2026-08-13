@@ -7,8 +7,10 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextClearance
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTouchInput
@@ -21,6 +23,7 @@ import com.anish.expirydatereminder.domain.model.ItemDraft
 import com.anish.expirydatereminder.domain.model.plusDays
 import com.anish.expirydatereminder.domain.repository.CategoryRepository
 import com.anish.expirydatereminder.domain.repository.ItemRepository
+import com.anish.expirydatereminder.ui.items.CATEGORY_FILTERS_TAG
 import kotlin.time.Clock
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.TimeZone
@@ -136,7 +139,12 @@ class ItemJourneyTest {
 
     @Test
     fun filteringByCategoryHidesTheOtherCategories() {
-        rule.onNodeWithText("Medicine").performClick()
+        // Scroll the row rather than matching the chip directly. The filters are a LazyRow,
+        // so a chip that does not fit on screen is never composed and cannot be found: this
+        // passed on a wide emulator and failed on a narrower one.
+        val medicine = string(R.string.category_medicine)
+        rule.onNodeWithTag(CATEGORY_FILTERS_TAG).performScrollToNode(hasText(medicine))
+        rule.onNodeWithText(medicine).performClick()
 
         waitUntilRowShown(TABLETS)
         waitUntilRowGone(SOUP)
@@ -194,6 +202,8 @@ class ItemJourneyTest {
         const val SOUP = "EdrJourneySoup"
         const val TABLETS = "EdrJourneyTablets"
         const val RENAMED = "EdrJourneyRenamed"
-        const val TIMEOUT_MS = 5_000L
+        // Generous because a cold CI emulator is far slower than a warm local one, and a
+        // timeout here reports as a behaviour failure rather than as the machine being busy.
+        const val TIMEOUT_MS = 15_000L
     }
 }
