@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Spanish (Español) translation. Drafted for the 2.0 rewrite; wants a native-speaker review pass before
+  release. Plural forms follow the CLDR rules for this language.
+-->
+<resources>
+    <string name="items_title">Mis artículos</string>
+    <string name="items_search_hint">Buscar artículos</string>
+    <string name="items_filter_all">Todos los artículos</string>
+    <string name="items_sort_by_expiry">Ordenar por caducidad</string>
+    <string name="items_sort_by_name">Ordenar por nombre</string>
+    <string name="items_add">Añadir artículo</string>
+    <string name="items_empty_title">Aún no hay nada</string>
+    <string name="items_empty_body">Añade algo con fecha de caducidad y te avisaremos a tiempo.</string>
+    <string name="items_no_results_title">Sin resultados</string>
+    <string name="items_no_results_body">Prueba con otra búsqueda u otra categoría.</string>
+    <string name="items_section_expired">Caducado</string>
+    <string name="items_section_expiring">Caduca pronto</string>
+    <string name="items_section_ok">Más adelante</string>
+    <string name="badge_expired">Caducado</string>
+    <string name="badge_expiring_soon">Pronto</string>
+    <string name="badge_ok">Bien</string>
+    <string name="header_nothing_tracked">Nada registrado</string>
+    <string name="header_all_good">Todo bien</string>
+    <string name="header_needs_attention">%1$d requieren atención</string>
+    <string name="header_detail_expired">%1$d caducados</string>
+    <string name="header_detail_soon">%1$d caducan pronto</string>
+    <string name="item_deleted">%1$s eliminado</string>
+    <string name="action_undo">Deshacer</string>
+    <string name="toast_item_added">Artículo añadido</string>
+    <string name="toast_item_updated">Cambios guardados</string>
+    <string name="toast_item_deleted">Artículo eliminado</string>
+    <string name="toast_photo_saved">Foto guardada</string>
+    <string name="expiry_today">Caduca hoy</string>
+    <string name="expiry_tomorrow">Caduca mañana</string>
+    <string name="edit_title_add">Añadir artículo</string>
+    <string name="edit_title_edit">Editar artículo</string>
+    <string name="edit_name">Nombre</string>
+    <string name="edit_category">Categoría</string>
+    <string name="edit_expiry">Fecha de caducidad</string>
+    <string name="edit_notes">Notas</string>
+    <string name="edit_notes_hint">Dónde está, para qué es, lo que quieras recordar</string>
+    <string name="detail_notes">Notas</string>
+    <string name="detail_tap_to_add_photo">Toca para añadir una foto</string>
+    <string name="edit_day">Día</string>
+    <string name="edit_month">Mes</string>
+    <string name="edit_year">Año</string>
+    <string name="edit_pick_date">Elegir fecha</string>
+    <string name="edit_scan">Escanear fecha</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="action_done">Hecho</string>
+    <string name="action_retry">Reintentar</string>
+    <string name="error_name_blank">Escribe un nombre</string>
+    <string name="error_month_required">Escribe un mes</string>
+    <string name="error_month_range">El mes debe estar entre 1 y 12</string>
+    <string name="error_day_range">Ese día no existe en este mes</string>
+    <string name="error_year_range">Escribe un año de cuatro cifras</string>
+    <string name="duplicate_exact">Ya tienes este artículo con la misma fecha y categoría.</string>
+    <string name="duplicate_same_name_different_date">Ya tienes %1$s con otra fecha.</string>
+    <string name="duplicate_same_name_different_category">Ya tienes %1$s en otra categoría.</string>
+    <string name="scan_title">Escanear fecha de caducidad</string>
+    <string name="scan_hint">Apunta la cámara a la fecha impresa</string>
+    <string name="scan_nothing_found">No se detectó ninguna fecha. Escríbela a mano.</string>
+    <string name="scan_pick_candidate">¿Cuál es la fecha de caducidad?</string>
+    <string name="scan_permission_needed">Se necesita acceso a la cámara para escanear.</string>
+    <string name="scan_grant_permission">Permitir cámara</string>
+    <string name="scan_capture">Capturar</string>
+    <string name="detail_photo">Foto</string>
+    <string name="detail_add_photo">Añadir foto</string>
+    <string name="detail_replace_photo">Cambiar foto</string>
+    <string name="detail_delete_photo">Quitar foto</string>
+    <string name="detail_no_photo">Todavía sin foto</string>
+    <string name="detail_category">Categoría</string>
+    <string name="detail_expires">Caduca</string>
+    <string name="settings_title">Ajustes</string>
+    <string name="settings_categories">Categorías</string>
+    <string name="settings_add_category">Añadir categoría</string>
+    <string name="settings_category_name">Nombre de la categoría</string>
+    <string name="settings_category_exists">Esa categoría ya existe</string>
+    <string name="settings_category_builtin">Las categorías predefinidas no se pueden eliminar</string>
+    <string name="settings_delete_category_title">¿Eliminar esta categoría?</string>
+    <string name="settings_delete_category_empty">%1$s no tiene artículos. ¿Eliminar la categoría?</string>
+    <string name="settings_category_builtin_short">Predefinida</string>
+    <string name="settings_date_format">Formato de fecha</string>
+    <string name="settings_date_format_month_first">Mes primero (MM/DD/AAAA)</string>
+    <string name="settings_date_format_day_first">Día primero (DD/MM/AAAA)</string>
+    <string name="settings_notifications">Recordatorios</string>
+    <string name="settings_notifications_enabled">Avisarme antes de que caduque</string>
+    <string name="settings_reminder_lead">Avisarme con esta antelación</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_language_system">Idioma del sistema</string>
+    <string name="settings_data">Datos</string>
+    <string name="settings_delete_all_items">Eliminar todos los artículos</string>
+    <string name="settings_delete_all_items_body">Se eliminarán todos los artículos de todas las categorías. No se puede deshacer.</string>
+    <string name="settings_delete_user_categories">Eliminar todas las categorías propias</string>
+    <string name="settings_delete_user_categories_body">Se eliminarán todas las categorías propias y sus artículos. No se puede deshacer.</string>
+    <string name="settings_about">Acerca de</string>
+    <string name="settings_version">Versión %1$s</string>
+    <string name="migration_in_progress">Trasladando tus datos…</string>
+    <string name="migration_done">Se trasladaron %1$d artículos y %2$d categorías.</string>
+    <string name="migration_failed_title">No se pudieron importar tus datos anteriores</string>
+    <string name="migration_failed_body">Tus datos originales están intactos y siguen en este dispositivo. Puedes volver a intentarlo.</string>
+    <string name="migration_retry">Reintentar importación</string>
+    <string name="notification_channel_name">Avisos de caducidad</string>
+    <string name="notification_channel_description">Avisos sobre artículos que caducan pronto</string>
+    <string name="notif_expired_body_1">Conviene comprobarlo antes de usarlo.</string>
+    <string name="notif_expired_body_2">Quizá toque hacer sitio.</string>
+    <string name="notif_expired_body_3">Echa un vistazo a ver qué se salva.</string>
+    <string name="notif_today_body_1">Buen día para gastarlo.</string>
+    <string name="notif_today_body_2">Aprovéchalo antes de que se pase.</string>
+    <string name="notif_today_body_3">Justo en el límite.</string>
+    <string name="notif_soon_body_1">Caduca en %1$d días.</string>
+    <string name="notif_soon_body_2">Planifícalos para los próximos %1$d días.</string>
+    <string name="notif_soon_body_3">Te quedan unos %1$d días.</string>
+    <string name="notif_soon_body_4">Llega en los próximos %1$d días.</string>
+    <string name="notif_body_named">%1$s es lo que conviene vigilar.</string>
+    <string name="notification_permission_rationale">Permite las notificaciones para que podamos avisarte antes de que algo caduque.</string>
+    <string name="widget_title">Caduca pronto</string>
+    <string name="widget_empty">Nada caduca pronto</string>
+    <string name="help_title">Ayuda</string>
+    <string name="help_add">Toca el botón de añadir para registrar algo nuevo.</string>
+    <string name="help_scan">Al añadir, usa el botón de escanear para leer una fecha impresa con la cámara.</string>
+    <string name="help_swipe">Desliza un artículo hacia el lado para eliminarlo. Puedes deshacerlo al momento.</string>
+    <string name="help_categories">Añade o quita tus propias categorías en los ajustes.</string>
+    <string name="category_grocery">Alimentación</string>
+    <string name="category_frozen">Congelados</string>
+    <string name="category_snacks">Aperitivos</string>
+    <string name="category_medicine">Medicamentos</string>
+    <string name="category_important_dates">Fechas importantes</string>
+    <string name="category_uncategorized">Sin categoría</string>
+    <plurals name="header_needs_attention_p">
+        <item quantity="one">%1$d artículo requiere atención</item>
+        <item quantity="many">%1$d artículos requieren atención</item>
+        <item quantity="other">%1$d artículos requieren atención</item>
+    </plurals>
+    <plurals name="expiry_in_days">
+        <item quantity="one">Caduca en %1$d día</item>
+        <item quantity="many">Caduca en %1$d días</item>
+        <item quantity="other">Caduca en %1$d días</item>
+    </plurals>
+    <plurals name="expiry_days_ago">
+        <item quantity="one">Caducó hace %1$d día</item>
+        <item quantity="many">Caducó hace %1$d días</item>
+        <item quantity="other">Caducó hace %1$d días</item>
+    </plurals>
+    <plurals name="settings_delete_category_with_items">
+        <item quantity="one">También se eliminará %1$d artículo de %2$s. No se puede deshacer.</item>
+        <item quantity="many">También se eliminarán %1$d artículos de %2$s. No se puede deshacer.</item>
+        <item quantity="other">También se eliminarán %1$d artículos de %2$s. No se puede deshacer.</item>
+    </plurals>
+    <plurals name="settings_reminder_lead_days">
+        <item quantity="one">%1$d día</item>
+        <item quantity="many">%1$d días</item>
+        <item quantity="other">%1$d días</item>
+    </plurals>
+    <plurals name="notif_expired_title_1">
+        <item quantity="one">%1$d artículo ha caducado</item>
+        <item quantity="many">%1$d artículos han caducado</item>
+        <item quantity="other">%1$d artículos han caducado</item>
+    </plurals>
+    <plurals name="notif_expired_title_2">
+        <item quantity="one">Se acabó el tiempo para %1$d artículo</item>
+        <item quantity="many">Se acabó el tiempo para %1$d artículos</item>
+        <item quantity="other">Se acabó el tiempo para %1$d artículos</item>
+    </plurals>
+    <plurals name="notif_expired_title_3">
+        <item quantity="one">%1$d artículo ha pasado su fecha</item>
+        <item quantity="many">%1$d artículos han pasado su fecha</item>
+        <item quantity="other">%1$d artículos han pasado su fecha</item>
+    </plurals>
+    <plurals name="notif_today_title_1">
+        <item quantity="one">%1$d artículo caduca hoy</item>
+        <item quantity="many">%1$d artículos caducan hoy</item>
+        <item quantity="other">%1$d artículos caducan hoy</item>
+    </plurals>
+    <plurals name="notif_today_title_2">
+        <item quantity="one">Hoy es el último día de %1$d artículo</item>
+        <item quantity="many">Hoy es el último día de %1$d artículos</item>
+        <item quantity="other">Hoy es el último día de %1$d artículos</item>
+    </plurals>
+    <plurals name="notif_today_title_3">
+        <item quantity="one">%1$d artículo vence hoy</item>
+        <item quantity="many">%1$d artículos vencen hoy</item>
+        <item quantity="other">%1$d artículos vencen hoy</item>
+    </plurals>
+    <plurals name="notif_soon_title_1">
+        <item quantity="one">%1$d artículo caduca pronto</item>
+        <item quantity="many">%1$d artículos caducan pronto</item>
+        <item quantity="other">%1$d artículos caducan pronto</item>
+    </plurals>
+    <plurals name="notif_soon_title_2">
+        <item quantity="one">Atención: %1$d artículo</item>
+        <item quantity="many">Atención: %1$d artículos</item>
+        <item quantity="other">Atención: %1$d artículos</item>
+    </plurals>
+    <plurals name="notif_soon_title_3">
+        <item quantity="one">%1$d artículo hay que gastarlo</item>
+        <item quantity="many">%1$d artículos hay que gastarlos</item>
+        <item quantity="other">%1$d artículos hay que gastarlos</item>
+    </plurals>
+    <plurals name="notif_soon_title_4">
+        <item quantity="one">%1$d artículo a punto de irse</item>
+        <item quantity="many">%1$d artículos a punto de irse</item>
+        <item quantity="other">%1$d artículos a punto de irse</item>
+    </plurals>
+<!-- Shown on the 1x1 widget under the count, so it must stay very short. -->
+    <string name="widget_badge_due">Vence</string>
+    <string name="widget_badge_clear">Todo bien</string>
+    </resources>

@@ -1,0 +1,105 @@
+-- Expiry is stored as three integers rather than an epoch timestamp. It is
+-- semantically a calendar date with no time component, and collapsing it to an
+-- instant invites timezone bugs (an item expiring "31 March" must not shift to
+-- 30 March for a user who travels).
+--
+-- ON DELETE CASCADE reproduces existing behavior: the legacy
+-- SettingsDatabase.deleteCategory deleted the category *and* every item under it.
+-- Note that SQLite enforces this only when `PRAGMA foreign_keys = ON` is set on
+-- the connection; see DriverFactory.
+CREATE TABLE item (
+    id           INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    name         TEXT NOT NULL,
+    categoryId   INTEGER NOT NULL REFERENCES category(id) ON DELETE CASCADE,
+    expiryDay    INTEGER NOT NULL,
+    expiryMonth  INTEGER NOT NULL,
+    expiryYear   INTEGER NOT NULL,
+    imagePath    TEXT,
+    notes        TEXT,
+    createdAt    INTEGER NOT NULL,
+    updatedAt    INTEGER NOT NULL
+);
+
+CREATE INDEX item_category_idx ON item(categoryId);
+CREATE INDEX item_expiry_idx ON item(expiryYear, expiryMonth, expiryDay);
+
+selectAll:
+SELECT item.*, category.name AS categoryName, category.builtinKey AS categoryBuiltinKey
+FROM item
+JOIN category ON category.id = item.categoryId
+ORDER BY item.expiryYear ASC, item.expiryMonth ASC, item.expiryDay ASC, item.name ASC;
+
+selectByCategory:
+SELECT item.*, category.name AS categoryName, category.builtinKey AS categoryBuiltinKey
+FROM item
+JOIN category ON category.id = item.categoryId
+WHERE item.categoryId = ?
+ORDER BY item.expiryYear ASC, item.expiryMonth ASC, item.expiryDay ASC, item.name ASC;
+
+selectById:
+SELECT item.*, category.name AS categoryName, category.builtinKey AS categoryBuiltinKey
+FROM item
+JOIN category ON category.id = item.categoryId
+WHERE item.id = ?;
+
+-- Used by the reminder worker. The lower bound is deliberate: the legacy
+-- WakeUpReceiver counted every item where `today >= expiry - 14 days` with no
+-- floor, so items that expired years ago inflated the count forever.
+selectExpiringBetween:
+SELECT item.*, category.name AS categoryName, category.builtinKey AS categoryBuiltinKey
+FROM item
+JOIN category ON category.id = item.categoryId
+WHERE (item.expiryYear * 10000 + item.expiryMonth * 100 + item.expiryDay) BETWEEN :fromKey AND :toKey
+ORDER BY item.expiryYear ASC, item.expiryMonth ASC, item.expiryDay ASC;
+
+countExpiringBetween:
+SELECT count(*) FROM item
+WHERE (expiryYear * 10000 + expiryMonth * 100 + expiryDay) BETWEEN :fromKey AND :toKey;
+
+-- Substring search across name and notes. At home-inventory scale this stays instant
+-- without needing FTS.
+search:
+SELECT item.*, category.name AS categoryName, category.builtinKey AS categoryBuiltinKey
+FROM item
+JOIN category ON category.id = item.categoryId
+WHERE item.name LIKE :pattern ESCAPE '\\'
+   OR ifnull(item.notes, '') LIKE :pattern ESCAPE '\\'
+ORDER BY item.expiryYear ASC, item.expiryMonth ASC, item.expiryDay ASC;
+
+findDuplicates:
+SELECT item.*, category.name AS categoryName, category.builtinKey AS categoryBuiltinKey
+FROM item
+JOIN category ON category.id = item.categoryId
+WHERE item.name = :name COLLATE NOCASE;
+
+insert:
+INSERT INTO item(name, categoryId, expiryDay, expiryMonth, expiryYear, imagePath, notes, createdAt, updatedAt)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+
+update:
+UPDATE item
+SET name = ?, categoryId = ?, expiryDay = ?, expiryMonth = ?, expiryYear = ?, imagePath = ?, notes = ?, updatedAt = ?
+WHERE id = ?;
+
+updateImagePath:
+UPDATE item SET imagePath = ?, updatedAt = ? WHERE id = ?;
+
+-- Deletes exactly one row. The legacy ItemsDatabase.deleteRow matched on
+-- `itemName=?` alone, which silently wiped every same-named item across all
+-- categories and dates.
+deleteById:
+DELETE FROM item WHERE id = ?;
+
+deleteAll:
+DELETE FROM item;
+
+
+countByCategory:
+SELECT count(*) FROM item WHERE categoryId = ?;
+
+selectImagePaths:
+SELECT imagePath FROM item WHERE imagePath IS NOT NULL;
+
+lastInsertRowId:
+SELECT last_insert_rowid();

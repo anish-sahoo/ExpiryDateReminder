@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Expiry Date Reminder</string>
+
+    <!-- Item list -->
+    <string name="items_title">My items</string>
+    <string name="items_search_hint">Search items</string>
+    <string name="items_filter_all">All items</string>
+    <string name="items_sort_by_expiry">Sort by expiry</string>
+    <string name="items_sort_by_name">Sort by name</string>
+    <string name="items_add">Add item</string>
+    <string name="items_empty_title">Nothing tracked yet</string>
+    <string name="items_empty_body">Add something with an expiry date and we\'ll remind you before it runs out.</string>
+    <string name="items_no_results_title">No matches</string>
+    <string name="items_no_results_body">Try a different search or category.</string>
+    <string name="items_section_expired">Expired</string>
+    <string name="items_section_expiring">Expiring soon</string>
+    <string name="items_section_ok">Later</string>
+    <string name="badge_expired">Expired</string>
+    <string name="badge_expiring_soon">Soon</string>
+    <string name="badge_ok">Fine</string>
+    <string name="header_nothing_tracked">Nothing tracked</string>
+    <string name="header_all_good">All good</string>
+    <string name="header_hint_start">Start by adding an item</string>
+    <string name="header_hint_all_good">Nothing needs attention right now</string>
+    <plurals name="header_needs_attention_p">
+        <item quantity="one">%1$d item needs attention</item>
+        <item quantity="other">%1$d items need attention</item>
+    </plurals>
+    <string name="header_needs_attention">%1$d need attention</string>
+    <string name="header_detail_expired">%1$d expired</string>
+    <string name="header_detail_soon">%1$d expiring soon</string>
+    <string name="item_deleted">Deleted %1$s</string>
+    <string name="action_undo">Undo</string>
+    <string name="toast_item_added">Item added</string>
+    <string name="toast_item_updated">Changes saved</string>
+    <string name="toast_item_deleted">Item deleted</string>
+    <string name="toast_photo_saved">Photo saved</string>
+
+    <!-- Relative expiry -->
+    <string name="expiry_today">Expires today</string>
+    <string name="expiry_tomorrow">Expires tomorrow</string>
+    <plurals name="expiry_in_days">
+        <item quantity="one">Expires in %1$d day</item>
+        <item quantity="other">Expires in %1$d days</item>
+    </plurals>
+    <plurals name="expiry_days_ago">
+        <item quantity="one">Expired %1$d day ago</item>
+        <item quantity="other">Expired %1$d days ago</item>
+    </plurals>
+
+    <!-- Add / edit -->
+    <string name="edit_title_add">Add item</string>
+    <string name="edit_title_edit">Edit item</string>
+    <string name="edit_name">Name</string>
+    <string name="edit_category">Category</string>
+    <string name="edit_expiry">Expiry date</string>
+    <string name="edit_notes">Notes</string>
+    <string name="edit_notes_hint">Where it is, what it is for, anything worth remembering</string>
+    <string name="detail_notes">Notes</string>
+    <string name="detail_tap_to_add_photo">Tap to add a photo</string>
+    <string name="edit_day">Day</string>
+    <string name="edit_month">Month</string>
+    <string name="edit_year">Year</string>
+    <string name="edit_pick_date">Pick a date</string>
+    <string name="edit_scan">Scan date</string>
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_done">Done</string>
+    <string name="action_retry">Retry</string>
+
+    <!-- Validation -->
+    <string name="error_name_blank">Enter a name</string>
+    <string name="error_month_required">Enter a month</string>
+    <string name="error_month_range">Month must be between 1 and 12</string>
+    <string name="error_day_range">That day doesn\'t exist in this month</string>
+    <string name="error_year_range">Enter a four-digit year</string>
+
+    <!-- Duplicates -->
+    <string name="duplicate_exact">You already have this item with the same date and category.</string>
+    <string name="duplicate_same_name_different_date">You already have %1$s with a different date.</string>
+    <string name="duplicate_same_name_different_category">You already have %1$s in another category.</string>
+
+    <!-- Scanning -->
+    <string name="scan_title">Scan expiry date</string>
+    <string name="scan_hint">Point the camera at the printed date</string>
+    <string name="scan_nothing_found">Couldn\'t read a date. Enter it manually.</string>
+    <string name="scan_pick_candidate">Which date is the expiry?</string>
+    <string name="scan_permission_needed">Camera access is needed to scan dates.</string>
+    <string name="scan_grant_permission">Allow camera</string>
+    <string name="scan_capture">Capture</string>
+
+    <!-- Item detail -->
+    <string name="detail_photo">Photo</string>
+    <string name="detail_add_photo">Add photo</string>
+    <string name="detail_replace_photo">Replace photo</string>
+    <string name="detail_delete_photo">Remove photo</string>
+    <string name="detail_no_photo">No photo yet</string>
+    <string name="detail_category">Category</string>
+    <string name="detail_expires">Expires</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_categories">Categories</string>
+    <string name="settings_add_category">Add category</string>
+    <string name="settings_category_name">Category name</string>
+    <string name="settings_category_exists">That category already exists</string>
+    <string name="settings_category_builtin">Built-in categories can\'t be deleted</string>
+    <string name="settings_delete_category_title">Delete this category?</string>
+    <string name="settings_delete_category_empty">%1$s has no items in it. Delete the category?</string>
+    <plurals name="settings_delete_category_with_items">
+        <item quantity="one">This will also delete %1$d item in %2$s. This can\'t be undone.</item>
+        <item quantity="other">This will also delete %1$d items in %2$s. This can\'t be undone.</item>
+    </plurals>
+    <string name="settings_category_builtin_short">Built in</string>
+    <string name="settings_date_format">Date format</string>
+    <string name="settings_date_format_month_first">Month first (MM/DD/YYYY)</string>
+    <string name="settings_date_format_day_first">Day first (DD/MM/YYYY)</string>
+    <string name="settings_notifications">Reminders</string>
+    <string name="settings_notifications_enabled">Remind me before things expire</string>
+    <string name="settings_reminder_lead">Remind me this far ahead</string>
+    <plurals name="settings_reminder_lead_days">
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_system">System default</string>
+    <string name="settings_data">Data</string>
+    <string name="settings_delete_all_items">Delete all items</string>
+    <string name="settings_delete_all_items_body">Every item in every category will be deleted. This can\'t be undone.</string>
+    <string name="settings_delete_user_categories">Delete all custom categories</string>
+    <string name="settings_delete_user_categories_body">Every custom category and all of its items will be deleted. This can\'t be undone.</string>
+    <string name="settings_about">About</string>
+    <string name="settings_version">Version %1$s</string>
+
+    <!-- Migration -->
+    <string name="migration_in_progress">Bringing your data across…</string>
+    <string name="migration_done">Brought across %1$d items and %2$d categories.</string>
+    <string name="migration_failed_title">Couldn\'t import your old data</string>
+    <string name="migration_failed_body">Your original data is untouched and still on this device. You can try again.</string>
+    <string name="migration_retry">Retry import</string>
+
+    <!-- Notifications -->
+    <string name="notification_channel_name">Expiry reminders</string>
+    <string name="notification_channel_description">Reminders about items that are close to expiring</string>
+    <!-- Reminder wording. The tone follows the situation (already expired / due today /
+         due soon) and one phrasing is picked at random within it, seeded by the day. -->
+    <plurals name="notif_expired_title_1">
+        <item quantity="one">%1$d item has expired</item>
+        <item quantity="other">%1$d items have expired</item>
+    </plurals>
+    <plurals name="notif_expired_title_2">
+        <item quantity="one">Time\'s up on %1$d item</item>
+        <item quantity="other">Time\'s up on %1$d items</item>
+    </plurals>
+    <plurals name="notif_expired_title_3">
+        <item quantity="one">%1$d item is past its date</item>
+        <item quantity="other">%1$d items are past their date</item>
+    </plurals>
+    <string name="notif_expired_body_1">Worth checking before you use it.</string>
+    <string name="notif_expired_body_2">Might be time to clear some space.</string>
+    <string name="notif_expired_body_3">Have a look and see what still holds up.</string>
+
+    <plurals name="notif_today_title_1">
+        <item quantity="one">%1$d item expires today</item>
+        <item quantity="other">%1$d items expire today</item>
+    </plurals>
+    <plurals name="notif_today_title_2">
+        <item quantity="one">Today\'s the last day for %1$d item</item>
+        <item quantity="other">Today\'s the last day for %1$d items</item>
+    </plurals>
+    <plurals name="notif_today_title_3">
+        <item quantity="one">%1$d item is due today</item>
+        <item quantity="other">%1$d items are due today</item>
+    </plurals>
+    <string name="notif_today_body_1">Good day to use it up.</string>
+    <string name="notif_today_body_2">Catch it before it goes.</string>
+    <string name="notif_today_body_3">Right on the edge.</string>
+
+    <plurals name="notif_soon_title_1">
+        <item quantity="one">%1$d item is expiring soon</item>
+        <item quantity="other">%1$d items are expiring soon</item>
+    </plurals>
+    <plurals name="notif_soon_title_2">
+        <item quantity="one">Heads up: %1$d item</item>
+        <item quantity="other">Heads up: %1$d items</item>
+    </plurals>
+    <plurals name="notif_soon_title_3">
+        <item quantity="one">%1$d item needs using</item>
+        <item quantity="other">%1$d items need using</item>
+    </plurals>
+    <plurals name="notif_soon_title_4">
+        <item quantity="one">%1$d item on the way out</item>
+        <item quantity="other">%1$d items on the way out</item>
+    </plurals>
+    <string name="notif_soon_body_1">Expiring within %1$d days.</string>
+    <string name="notif_soon_body_2">Plan them in over the next %1$d days.</string>
+    <string name="notif_soon_body_3">You\'ve got about %1$d days.</string>
+    <string name="notif_soon_body_4">Coming up in the next %1$d days.</string>
+
+    <string name="notif_body_named">%1$s is the one to watch.</string>
+    <string name="notification_permission_rationale">Allow notifications so we can remind you before things expire.</string>
+
+    <!-- Widget -->
+    <string name="widget_title">Expiring soon</string>
+    <string name="widget_empty">Nothing expiring soon</string>
+    <string name="widget_empty_short">All good</string>
+    <!-- Shown on the 1x1 widget under the count, so it must stay very short. -->
+    <string name="widget_badge_due">Due</string>
+    <string name="widget_badge_clear">Clear</string>
+    <string name="widget_more">+%1$d more</string>
+
+    <!-- Help -->
+    <string name="help_title">Help</string>
+    <string name="help_add">Tap the add button to track something new.</string>
+    <string name="help_scan">Use the scan button while adding to read a printed expiry date with the camera.</string>
+    <string name="help_swipe">Swipe an item sideways to delete it. You can undo straight away.</string>
+    <string name="help_categories">Add or remove your own categories in Settings.</string>
+
+    <!-- Built-in categories -->
+    <string name="category_grocery">Grocery</string>
+    <string name="category_frozen">Frozen</string>
+    <string name="category_snacks">Snacks</string>
+    <string name="category_medicine">Medicine</string>
+    <string name="category_important_dates">Important dates</string>
+    <string name="category_uncategorized">Uncategorized</string>
+</resources>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Polish (Polski) translation. Drafted for the 2.0 rewrite; wants a native-speaker review pass before
+  release. Plural forms follow the CLDR rules for this language.
+-->
+<resources>
+    <string name="items_title">Moje produkty</string>
+    <string name="items_search_hint">Szukaj produktów</string>
+    <string name="items_filter_all">Wszystkie produkty</string>
+    <string name="items_sort_by_expiry">Sortuj wg terminu</string>
+    <string name="items_sort_by_name">Sortuj wg nazwy</string>
+    <string name="items_add">Dodaj produkt</string>
+    <string name="items_empty_title">Nic tu jeszcze nie ma</string>
+    <string name="items_empty_body">Dodaj coś z terminem ważności, a przypomnimy Ci w porę.</string>
+    <string name="items_no_results_title">Brak wyników</string>
+    <string name="items_no_results_body">Spróbuj innej frazy lub kategorii.</string>
+    <string name="items_section_expired">Po terminie</string>
+    <string name="items_section_expiring">Wkrótce się kończy</string>
+    <string name="items_section_ok">Później</string>
+    <string name="badge_expired">Po terminie</string>
+    <string name="badge_expiring_soon">Wkrótce</string>
+    <string name="badge_ok">OK</string>
+    <string name="header_nothing_tracked">Nic nie śledzisz</string>
+    <string name="header_all_good">Wszystko gra</string>
+    <string name="header_needs_attention">%1$d wymaga uwagi</string>
+    <string name="header_detail_expired">%1$d po terminie</string>
+    <string name="header_detail_soon">%1$d wkrótce się kończy</string>
+    <string name="item_deleted">Usunięto %1$s</string>
+    <string name="action_undo">Cofnij</string>
+    <string name="toast_item_added">Dodano produkt</string>
+    <string name="toast_item_updated">Zapisano zmiany</string>
+    <string name="toast_item_deleted">Usunięto produkt</string>
+    <string name="toast_photo_saved">Zapisano zdjęcie</string>
+    <string name="expiry_today">Termin mija dziś</string>
+    <string name="expiry_tomorrow">Termin mija jutro</string>
+    <string name="edit_title_add">Dodaj produkt</string>
+    <string name="edit_title_edit">Edytuj produkt</string>
+    <string name="edit_name">Nazwa</string>
+    <string name="edit_category">Kategoria</string>
+    <string name="edit_expiry">Termin ważności</string>
+    <string name="edit_notes">Notatki</string>
+    <string name="edit_notes_hint">Gdzie leży, do czego służy, co warto zapamiętać</string>
+    <string name="detail_notes">Notatki</string>
+    <string name="detail_tap_to_add_photo">Dotknij, aby dodać zdjęcie</string>
+    <string name="edit_day">Dzień</string>
+    <string name="edit_month">Miesiąc</string>
+    <string name="edit_year">Rok</string>
+    <string name="edit_pick_date">Wybierz datę</string>
+    <string name="edit_scan">Zeskanuj datę</string>
+    <string name="action_save">Zapisz</string>
+    <string name="action_cancel">Anuluj</string>
+    <string name="action_delete">Usuń</string>
+    <string name="action_done">Gotowe</string>
+    <string name="action_retry">Spróbuj ponownie</string>
+    <string name="error_name_blank">Wpisz nazwę</string>
+    <string name="error_month_required">Wpisz miesiąc</string>
+    <string name="error_month_range">Miesiąc musi być od 1 do 12</string>
+    <string name="error_day_range">Taki dzień nie istnieje w tym miesiącu</string>
+    <string name="error_year_range">Wpisz czterocyfrowy rok</string>
+    <string name="duplicate_exact">Masz już ten produkt z tą samą datą i kategorią.</string>
+    <string name="duplicate_same_name_different_date">Masz już %1$s z inną datą.</string>
+    <string name="duplicate_same_name_different_category">Masz już %1$s w innej kategorii.</string>
+    <string name="scan_title">Zeskanuj termin ważności</string>
+    <string name="scan_hint">Skieruj aparat na nadrukowaną datę</string>
+    <string name="scan_nothing_found">Nie wykryto daty. Wpisz ją ręcznie.</string>
+    <string name="scan_pick_candidate">Która data to termin ważności?</string>
+    <string name="scan_permission_needed">Do skanowania potrzebny jest dostęp do aparatu.</string>
+    <string name="scan_grant_permission">Zezwól na aparat</string>
+    <string name="scan_capture">Zrób zdjęcie</string>
+    <string name="detail_photo">Zdjęcie</string>
+    <string name="detail_add_photo">Dodaj zdjęcie</string>
+    <string name="detail_replace_photo">Zmień zdjęcie</string>
+    <string name="detail_delete_photo">Usuń zdjęcie</string>
+    <string name="detail_no_photo">Jeszcze bez zdjęcia</string>
+    <string name="detail_category">Kategoria</string>
+    <string name="detail_expires">Ważne do</string>
+    <string name="settings_title">Ustawienia</string>
+    <string name="settings_categories">Kategorie</string>
+    <string name="settings_add_category">Dodaj kategorię</string>
+    <string name="settings_category_name">Nazwa kategorii</string>
+    <string name="settings_category_exists">Taka kategoria już istnieje</string>
+    <string name="settings_category_builtin">Kategorii wbudowanych nie można usunąć</string>
+    <string name="settings_delete_category_title">Usunąć tę kategorię?</string>
+    <string name="settings_delete_category_empty">%1$s nie zawiera produktów. Usunąć kategorię?</string>
+    <string name="settings_category_builtin_short">Wbudowana</string>
+    <string name="settings_date_format">Format daty</string>
+    <string name="settings_date_format_month_first">Najpierw miesiąc (MM/DD/RRRR)</string>
+    <string name="settings_date_format_day_first">Najpierw dzień (DD/MM/RRRR)</string>
+    <string name="settings_notifications">Przypomnienia</string>
+    <string name="settings_notifications_enabled">Przypominaj przed upływem terminu</string>
+    <string name="settings_reminder_lead">Przypominaj z takim wyprzedzeniem</string>
+    <string name="settings_language">Język</string>
+    <string name="settings_language_system">Język systemu</string>
+    <string name="settings_data">Dane</string>
+    <string name="settings_delete_all_items">Usuń wszystkie produkty</string>
+    <string name="settings_delete_all_items_body">Wszystkie produkty ze wszystkich kategorii zostaną usunięte. Tego nie da się cofnąć.</string>
+    <string name="settings_delete_user_categories">Usuń wszystkie własne kategorie</string>
+    <string name="settings_delete_user_categories_body">Wszystkie własne kategorie i ich produkty zostaną usunięte. Tego nie da się cofnąć.</string>
+    <string name="settings_about">O aplikacji</string>
+    <string name="settings_version">Wersja %1$s</string>
+    <string name="migration_in_progress">Przenoszenie Twoich danych…</string>
+    <string name="migration_done">Przeniesiono %1$d produktów i %2$d kategorii.</string>
+    <string name="migration_failed_title">Nie udało się zaimportować starych danych</string>
+    <string name="migration_failed_body">Twoje pierwotne dane są nienaruszone i nadal na tym urządzeniu. Możesz spróbować ponownie.</string>
+    <string name="migration_retry">Ponów import</string>
+    <string name="notification_channel_name">Przypomnienia o terminach</string>
+    <string name="notification_channel_description">Przypomnienia o produktach, którym kończy się termin</string>
+    <string name="notif_expired_body_1">Lepiej sprawdź przed użyciem.</string>
+    <string name="notif_expired_body_2">Może czas zrobić miejsce.</string>
+    <string name="notif_expired_body_3">Zobacz, co jeszcze się nadaje.</string>
+    <string name="notif_today_body_1">Dobry dzień, żeby to zużyć.</string>
+    <string name="notif_today_body_2">Złap to, zanim przepadnie.</string>
+    <string name="notif_today_body_3">Dokładnie na styk.</string>
+    <string name="notif_soon_body_1">Termin mija w ciągu %1$d dni.</string>
+    <string name="notif_soon_body_2">Zaplanuj je na najbliższe %1$d dni.</string>
+    <string name="notif_soon_body_3">Masz jeszcze około %1$d dni.</string>
+    <string name="notif_soon_body_4">Nadchodzi w ciągu %1$d dni.</string>
+    <string name="notif_body_named">Na %1$s warto zwrócić uwagę.</string>
+    <string name="notification_permission_rationale">Zezwól na powiadomienia, żebyśmy mogli przypomnieć przed upływem terminu.</string>
+    <string name="widget_title">Wkrótce się kończy</string>
+    <string name="widget_empty">Nic się nie kończy w najbliższym czasie</string>
+    <string name="help_title">Pomoc</string>
+    <string name="help_add">Dotknij przycisku dodawania, aby zacząć śledzić coś nowego.</string>
+    <string name="help_scan">Podczas dodawania użyj przycisku skanowania, aby odczytać nadrukowaną datę aparatem.</string>
+    <string name="help_swipe">Przesuń produkt w bok, aby go usunąć. Możesz od razu cofnąć.</string>
+    <string name="help_categories">Własne kategorie dodasz i usuniesz w ustawieniach.</string>
+    <string name="category_grocery">Spożywcze</string>
+    <string name="category_frozen">Mrożonki</string>
+    <string name="category_snacks">Przekąski</string>
+    <string name="category_medicine">Leki</string>
+    <string name="category_important_dates">Ważne daty</string>
+    <string name="category_uncategorized">Bez kategorii</string>
+    <plurals name="header_needs_attention_p">
+        <item quantity="one">%1$d produkt wymaga uwagi</item>
+        <item quantity="few">%1$d produkty wymagają uwagi</item>
+        <item quantity="many">%1$d produktów wymaga uwagi</item>
+        <item quantity="other">%1$d produktu wymaga uwagi</item>
+    </plurals>
+    <plurals name="expiry_in_days">
+        <item quantity="one">Termin mija za %1$d dzień</item>
+        <item quantity="few">Termin mija za %1$d dni</item>
+        <item quantity="many">Termin mija za %1$d dni</item>
+        <item quantity="other">Termin mija za %1$d dnia</item>
+    </plurals>
+    <plurals name="expiry_days_ago">
+        <item quantity="one">Termin minął %1$d dzień temu</item>
+        <item quantity="few">Termin minął %1$d dni temu</item>
+        <item quantity="many">Termin minął %1$d dni temu</item>
+        <item quantity="other">Termin minął %1$d dnia temu</item>
+    </plurals>
+    <plurals name="settings_delete_category_with_items">
+        <item quantity="one">Usunie to również %1$d produkt w %2$s. Tego nie da się cofnąć.</item>
+        <item quantity="few">Usunie to również %1$d produkty w %2$s. Tego nie da się cofnąć.</item>
+        <item quantity="many">Usunie to również %1$d produktów w %2$s. Tego nie da się cofnąć.</item>
+        <item quantity="other">Usunie to również %1$d produktu w %2$s. Tego nie da się cofnąć.</item>
+    </plurals>
+    <plurals name="settings_reminder_lead_days">
+        <item quantity="one">%1$d dzień</item>
+        <item quantity="few">%1$d dni</item>
+        <item quantity="many">%1$d dni</item>
+        <item quantity="other">%1$d dnia</item>
+    </plurals>
+    <plurals name="notif_expired_title_1">
+        <item quantity="one">%1$d produkt jest po terminie</item>
+        <item quantity="few">%1$d produkty są po terminie</item>
+        <item quantity="many">%1$d produktów jest po terminie</item>
+        <item quantity="other">%1$d produktu jest po terminie</item>
+    </plurals>
+    <plurals name="notif_expired_title_2">
+        <item quantity="one">Czas minął dla %1$d produktu</item>
+        <item quantity="few">Czas minął dla %1$d produktów</item>
+        <item quantity="many">Czas minął dla %1$d produktów</item>
+        <item quantity="other">Czas minął dla %1$d produktu</item>
+    </plurals>
+    <plurals name="notif_expired_title_3">
+        <item quantity="one">%1$d produkt przekroczył datę</item>
+        <item quantity="few">%1$d produkty przekroczyły datę</item>
+        <item quantity="many">%1$d produktów przekroczyło datę</item>
+        <item quantity="other">%1$d produktu przekroczyło datę</item>
+    </plurals>
+    <plurals name="notif_today_title_1">
+        <item quantity="one">%1$d produkt kończy się dziś</item>
+        <item quantity="few">%1$d produkty kończą się dziś</item>
+        <item quantity="many">%1$d produktów kończy się dziś</item>
+        <item quantity="other">%1$d produktu kończy się dziś</item>
+    </plurals>
+    <plurals name="notif_today_title_2">
+        <item quantity="one">Dziś ostatni dzień dla %1$d produktu</item>
+        <item quantity="few">Dziś ostatni dzień dla %1$d produktów</item>
+        <item quantity="many">Dziś ostatni dzień dla %1$d produktów</item>
+        <item quantity="other">Dziś ostatni dzień dla %1$d produktu</item>
+    </plurals>
+    <plurals name="notif_today_title_3">
+        <item quantity="one">%1$d produkt ma dziś termin</item>
+        <item quantity="few">%1$d produkty mają dziś termin</item>
+        <item quantity="many">%1$d produktów ma dziś termin</item>
+        <item quantity="other">%1$d produktu ma dziś termin</item>
+    </plurals>
+    <plurals name="notif_soon_title_1">
+        <item quantity="one">%1$d produkt wkrótce się kończy</item>
+        <item quantity="few">%1$d produkty wkrótce się kończą</item>
+        <item quantity="many">%1$d produktów wkrótce się kończy</item>
+        <item quantity="other">%1$d produktu wkrótce się kończy</item>
+    </plurals>
+    <plurals name="notif_soon_title_2">
+        <item quantity="one">Uwaga: %1$d produkt</item>
+        <item quantity="few">Uwaga: %1$d produkty</item>
+        <item quantity="many">Uwaga: %1$d produktów</item>
+        <item quantity="other">Uwaga: %1$d produktu</item>
+    </plurals>
+    <plurals name="notif_soon_title_3">
+        <item quantity="one">%1$d produkt trzeba zużyć</item>
+        <item quantity="few">%1$d produkty trzeba zużyć</item>
+        <item quantity="many">%1$d produktów trzeba zużyć</item>
+        <item quantity="other">%1$d produktu trzeba zużyć</item>
+    </plurals>
+    <plurals name="notif_soon_title_4">
+        <item quantity="one">%1$d produkt na wylocie</item>
+        <item quantity="few">%1$d produkty na wylocie</item>
+        <item quantity="many">%1$d produktów na wylocie</item>
+        <item quantity="other">%1$d produktu na wylocie</item>
+    </plurals>
+<!-- Shown on the 1x1 widget under the count, so it must stay very short. -->
+    <string name="widget_badge_due">Wkrótce</string>
+    <string name="widget_badge_clear">Brak</string>
+    </resources>

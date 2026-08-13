@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Dutch (Nederlands) translation. Drafted for the 2.0 rewrite; wants a native-speaker review pass before
+  release. Plural forms follow the CLDR rules for this language.
+-->
+<resources>
+    <string name="items_title">Mijn items</string>
+    <string name="items_search_hint">Items zoeken</string>
+    <string name="items_filter_all">Alle items</string>
+    <string name="items_sort_by_expiry">Sorteren op houdbaarheid</string>
+    <string name="items_sort_by_name">Sorteren op naam</string>
+    <string name="items_add">Item toevoegen</string>
+    <string name="items_empty_title">Nog niets bijgehouden</string>
+    <string name="items_empty_body">Voeg iets toe met een houdbaarheidsdatum en we waarschuwen je op tijd.</string>
+    <string name="items_no_results_title">Geen resultaten</string>
+    <string name="items_no_results_body">Probeer een andere zoekterm of categorie.</string>
+    <string name="items_section_expired">Verlopen</string>
+    <string name="items_section_expiring">Bijna over datum</string>
+    <string name="items_section_ok">Later</string>
+    <string name="badge_expired">Verlopen</string>
+    <string name="badge_expiring_soon">Bijna</string>
+    <string name="badge_ok">Prima</string>
+    <string name="header_nothing_tracked">Niets bijgehouden</string>
+    <string name="header_all_good">Alles goed</string>
+    <string name="header_needs_attention">%1$d vragen aandacht</string>
+    <string name="header_detail_expired">%1$d verlopen</string>
+    <string name="header_detail_soon">%1$d bijna over datum</string>
+    <string name="item_deleted">%1$s verwijderd</string>
+    <string name="action_undo">Ongedaan maken</string>
+    <string name="toast_item_added">Item toegevoegd</string>
+    <string name="toast_item_updated">Wijzigingen opgeslagen</string>
+    <string name="toast_item_deleted">Item verwijderd</string>
+    <string name="toast_photo_saved">Foto opgeslagen</string>
+    <string name="expiry_today">Vandaag over datum</string>
+    <string name="expiry_tomorrow">Morgen over datum</string>
+    <string name="edit_title_add">Item toevoegen</string>
+    <string name="edit_title_edit">Item bewerken</string>
+    <string name="edit_name">Naam</string>
+    <string name="edit_category">Categorie</string>
+    <string name="edit_expiry">Houdbaarheidsdatum</string>
+    <string name="edit_notes">Notities</string>
+    <string name="edit_notes_hint">Waar het ligt, waar het voor is, alles wat handig is</string>
+    <string name="detail_notes">Notities</string>
+    <string name="detail_tap_to_add_photo">Tik om een foto toe te voegen</string>
+    <string name="edit_day">Dag</string>
+    <string name="edit_month">Maand</string>
+    <string name="edit_year">Jaar</string>
+    <string name="edit_pick_date">Datum kiezen</string>
+    <string name="edit_scan">Datum scannen</string>
+    <string name="action_save">Opslaan</string>
+    <string name="action_cancel">Annuleren</string>
+    <string name="action_delete">Verwijderen</string>
+    <string name="action_done">Klaar</string>
+    <string name="action_retry">Opnieuw proberen</string>
+    <string name="error_name_blank">Vul een naam in</string>
+    <string name="error_month_required">Vul een maand in</string>
+    <string name="error_month_range">De maand moet tussen 1 en 12 liggen</string>
+    <string name="error_day_range">Die dag bestaat niet in deze maand</string>
+    <string name="error_year_range">Vul een jaartal van vier cijfers in</string>
+    <string name="duplicate_exact">Je hebt dit item al met dezelfde datum en categorie.</string>
+    <string name="duplicate_same_name_different_date">Je hebt %1$s al met een andere datum.</string>
+    <string name="duplicate_same_name_different_category">Je hebt %1$s al in een andere categorie.</string>
+    <string name="scan_title">Houdbaarheidsdatum scannen</string>
+    <string name="scan_hint">Richt de camera op de gedrukte datum</string>
+    <string name="scan_nothing_found">Geen datum herkend. Vul hem handmatig in.</string>
+    <string name="scan_pick_candidate">Welke datum is de houdbaarheidsdatum?</string>
+    <string name="scan_permission_needed">Toegang tot de camera is nodig om te scannen.</string>
+    <string name="scan_grant_permission">Camera toestaan</string>
+    <string name="scan_capture">Vastleggen</string>
+    <string name="detail_photo">Foto</string>
+    <string name="detail_add_photo">Foto toevoegen</string>
+    <string name="detail_replace_photo">Foto vervangen</string>
+    <string name="detail_delete_photo">Foto verwijderen</string>
+    <string name="detail_no_photo">Nog geen foto</string>
+    <string name="detail_category">Categorie</string>
+    <string name="detail_expires">Houdbaar tot</string>
+    <string name="settings_title">Instellingen</string>
+    <string name="settings_categories">Categorieën</string>
+    <string name="settings_add_category">Categorie toevoegen</string>
+    <string name="settings_category_name">Naam van de categorie</string>
+    <string name="settings_category_exists">Die categorie bestaat al</string>
+    <string name="settings_category_builtin">Standaardcategorieën kunnen niet worden verwijderd</string>
+    <string name="settings_delete_category_title">Deze categorie verwijderen?</string>
+    <string name="settings_delete_category_empty">%1$s bevat geen items. Categorie verwijderen?</string>
+    <string name="settings_category_builtin_short">Standaard</string>
+    <string name="settings_date_format">Datumnotatie</string>
+    <string name="settings_date_format_month_first">Maand eerst (MM/DD/JJJJ)</string>
+    <string name="settings_date_format_day_first">Dag eerst (DD/MM/JJJJ)</string>
+    <string name="settings_notifications">Herinneringen</string>
+    <string name="settings_notifications_enabled">Waarschuw me voordat iets over datum gaat</string>
+    <string name="settings_reminder_lead">Zo lang van tevoren waarschuwen</string>
+    <string name="settings_language">Taal</string>
+    <string name="settings_language_system">Systeemtaal</string>
+    <string name="settings_data">Gegevens</string>
+    <string name="settings_delete_all_items">Alle items verwijderen</string>
+    <string name="settings_delete_all_items_body">Alle items in alle categorieën worden verwijderd. Dit kan niet ongedaan worden gemaakt.</string>
+    <string name="settings_delete_user_categories">Alle eigen categorieën verwijderen</string>
+    <string name="settings_delete_user_categories_body">Alle eigen categorieën en hun items worden verwijderd. Dit kan niet ongedaan worden gemaakt.</string>
+    <string name="settings_about">Over deze app</string>
+    <string name="settings_version">Versie %1$s</string>
+    <string name="migration_in_progress">Je gegevens worden overgezet…</string>
+    <string name="migration_done">%1$d items en %2$d categorieën overgezet.</string>
+    <string name="migration_failed_title">Je oude gegevens konden niet worden geïmporteerd</string>
+    <string name="migration_failed_body">Je oorspronkelijke gegevens zijn ongewijzigd en staan nog op dit apparaat. Je kunt het opnieuw proberen.</string>
+    <string name="migration_retry">Import opnieuw proberen</string>
+    <string name="notification_channel_name">Houdbaarheidsherinneringen</string>
+    <string name="notification_channel_description">Herinneringen over items die bijna over datum zijn</string>
+    <string name="notif_expired_body_1">Even controleren voor je het gebruikt.</string>
+    <string name="notif_expired_body_2">Misschien tijd om ruimte te maken.</string>
+    <string name="notif_expired_body_3">Kijk even wat nog goed is.</string>
+    <string name="notif_today_body_1">Goede dag om het op te maken.</string>
+    <string name="notif_today_body_2">Pak het voordat het weg is.</string>
+    <string name="notif_today_body_3">Precies op de grens.</string>
+    <string name="notif_soon_body_1">Over datum binnen %1$d dagen.</string>
+    <string name="notif_soon_body_2">Plan ze in voor de komende %1$d dagen.</string>
+    <string name="notif_soon_body_3">Je hebt nog ongeveer %1$d dagen.</string>
+    <string name="notif_soon_body_4">Komt eraan in de komende %1$d dagen.</string>
+    <string name="notif_body_named">%1$s is degene om in de gaten te houden.</string>
+    <string name="notification_permission_rationale">Sta meldingen toe zodat we je kunnen waarschuwen voordat iets over datum gaat.</string>
+    <string name="widget_title">Bijna over datum</string>
+    <string name="widget_empty">Niets gaat binnenkort over datum</string>
+    <string name="help_title">Help</string>
+    <string name="help_add">Tik op de toevoegknop om iets nieuws bij te houden.</string>
+    <string name="help_scan">Gebruik tijdens het toevoegen de scanknop om een gedrukte datum met de camera te lezen.</string>
+    <string name="help_swipe">Veeg een item opzij om het te verwijderen. Je kunt het meteen ongedaan maken.</string>
+    <string name="help_categories">Eigen categorieën voeg je toe of verwijder je in de instellingen.</string>
+    <string name="category_grocery">Boodschappen</string>
+    <string name="category_frozen">Diepvries</string>
+    <string name="category_snacks">Snacks</string>
+    <string name="category_medicine">Medicijnen</string>
+    <string name="category_important_dates">Belangrijke data</string>
+    <string name="category_uncategorized">Zonder categorie</string>
+    <plurals name="header_needs_attention_p">
+        <item quantity="one">%1$d item vraagt aandacht</item>
+        <item quantity="other">%1$d items vragen aandacht</item>
+    </plurals>
+    <plurals name="expiry_in_days">
+        <item quantity="one">Over datum over %1$d dag</item>
+        <item quantity="other">Over datum over %1$d dagen</item>
+    </plurals>
+    <plurals name="expiry_days_ago">
+        <item quantity="one">%1$d dag over datum</item>
+        <item quantity="other">%1$d dagen over datum</item>
+    </plurals>
+    <plurals name="settings_delete_category_with_items">
+        <item quantity="one">Hiermee wordt ook %1$d item in %2$s verwijderd. Dit kan niet ongedaan worden gemaakt.</item>
+        <item quantity="other">Hiermee worden ook %1$d items in %2$s verwijderd. Dit kan niet ongedaan worden gemaakt.</item>
+    </plurals>
+    <plurals name="settings_reminder_lead_days">
+        <item quantity="one">%1$d dag</item>
+        <item quantity="other">%1$d dagen</item>
+    </plurals>
+    <plurals name="notif_expired_title_1">
+        <item quantity="one">%1$d item is over datum</item>
+        <item quantity="other">%1$d items zijn over datum</item>
+    </plurals>
+    <plurals name="notif_expired_title_2">
+        <item quantity="one">Tijd is om voor %1$d item</item>
+        <item quantity="other">Tijd is om voor %1$d items</item>
+    </plurals>
+    <plurals name="notif_expired_title_3">
+        <item quantity="one">%1$d item is over de datum heen</item>
+        <item quantity="other">%1$d items zijn over de datum heen</item>
+    </plurals>
+    <plurals name="notif_today_title_1">
+        <item quantity="one">%1$d item gaat vandaag over datum</item>
+        <item quantity="other">%1$d items gaan vandaag over datum</item>
+    </plurals>
+    <plurals name="notif_today_title_2">
+        <item quantity="one">Vandaag is de laatste dag voor %1$d item</item>
+        <item quantity="other">Vandaag is de laatste dag voor %1$d items</item>
+    </plurals>
+    <plurals name="notif_today_title_3">
+        <item quantity="one">%1$d item is vandaag aan de beurt</item>
+        <item quantity="other">%1$d items zijn vandaag aan de beurt</item>
+    </plurals>
+    <plurals name="notif_soon_title_1">
+        <item quantity="one">%1$d item is bijna over datum</item>
+        <item quantity="other">%1$d items zijn bijna over datum</item>
+    </plurals>
+    <plurals name="notif_soon_title_2">
+        <item quantity="one">Let op: %1$d item</item>
+        <item quantity="other">Let op: %1$d items</item>
+    </plurals>
+    <plurals name="notif_soon_title_3">
+        <item quantity="one">%1$d item moet op</item>
+        <item quantity="other">%1$d items moeten op</item>
+    </plurals>
+    <plurals name="notif_soon_title_4">
+        <item quantity="one">%1$d item gaat er bijna uit</item>
+        <item quantity="other">%1$d items gaan er bijna uit</item>
+    </plurals>
+<!-- Shown on the 1x1 widget under the count, so it must stay very short. -->
+    <string name="widget_badge_due">Verloopt</string>
+    <string name="widget_badge_clear">Niets</string>
+    </resources>

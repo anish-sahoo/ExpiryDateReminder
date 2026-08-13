@@ -1,0 +1,49 @@
+# Detekt, tuned for a Compose codebase.
+#
+# The defaults assume ordinary Kotlin: camelCase functions, short methods, few literals.
+# Composables break all three by design — they are PascalCase, they describe a whole screen
+# in one declarative block, and their bodies are full of dp/sp values. Rather than sprinkling
+# @Suppress through the UI layer, the affected rules are scoped to skip @Composable and stay
+# fully enforced everywhere else (data, domain, parser, migration).
+build:
+  maxIssues: 0
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated: ['Composable']
+  MatchingDeclarationName:
+    # Several files deliberately group a component with the small types that only it uses
+    # (SystemCamera.kt/CameraCapture, UrgencyBadge.kt/UrgencyStyle). One file per declaration
+    # would scatter them.
+    active: false
+
+complexity:
+  LongMethod:
+    ignoreAnnotated: ['Composable']
+  LongParameterList:
+    ignoreAnnotated: ['Composable']
+  CyclomaticComplexMethod:
+    ignoreAnnotated: ['Composable']
+  TooManyFunctions:
+    # ViewModels expose one function per user action; that count is a description of the
+    # screen, not a smell.
+    thresholdInClasses: 20
+    ignoreAnnotated: ['Composable']
+
+style:
+  MagicNumber:
+    # Layout literals (dp, sp, alpha, color channels) read better inline than behind a name,
+    # so the rule is scoped out of the presentation layer entirely. It stays fully enforced in
+    # :shared — the database, migration and parser code, where a bare literal is a real risk.
+    ignoreAnnotated: ['Composable']
+    ignorePropertyDeclaration: true
+    excludes:
+      - '**/ui/**'
+      - '**/widget/**'
+  MaxLineLength:
+    # Matches .editorconfig, so ktlint and detekt agree.
+    maxLineLength: 120
+  ReturnCount:
+    # Guard clauses and early returns are the house style; a parser that validates five
+    # fields in sequence reads better as five early returns than as nested ifs.
+    max: 6

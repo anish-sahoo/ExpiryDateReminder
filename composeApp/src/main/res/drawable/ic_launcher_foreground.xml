@@ -1,0 +1,68 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!--
+      Calendar with a clock, over the brand purple.
+
+      One amber body, the color carried over from the pre-2.0 icon. Everything that would
+      otherwise be a second color is a hole instead, so the shapes read the same way in the
+      full-color and themed variants.
+
+      Sizing: the group scale lands the artwork on roughly the 60dp keyline circle. Adaptive
+      icon artwork should not fill the whole 72dp safe zone (no breathing room under a
+      circular mask), nor rely on that zone's square corners (they get clipped).
+
+      For the themed (monochrome) variant everything flattens to a single tint, so the
+      calendar keeps an evenOdd clearance hole around the clock; without it the two shapes
+      merge into one blob.
+    -->
+    <group
+        android:pivotX="54"
+        android:pivotY="54"
+        android:scaleX="0.68"
+        android:scaleY="0.68">
+
+        <!--
+          Calendar and clock as a single evenOdd path.
+
+          Every shape here is one subpath of one path, and evenOdd turns any region covered an
+          even number of times into a hole. That is what draws the line under the calendar
+          header, the clearance gap between the calendar and the clock, and the clock's hands.
+
+          One path rather than two because holes only work between subpaths of the same path.
+
+          Subpaths, in order:
+            1-2  the two tabs on top of the calendar
+            3    the calendar body
+            4    the header line — a hole
+            5    the clock face, center (71,71) radius 13.5
+            6    the hands, reading 3 o'clock — a hole
+
+          There is no separate clearance shape between the calendar and the clock. Where the
+          two overlap they cover the same region twice, and evenOdd turns that into a hole:
+          the crescent gap falls out of the geometry rather than being a third circle sized
+          by hand. The clock sits far enough down and right that the crescent follows the
+          calendar's corner instead of biting into its side.
+
+          One path, not two, because a hole only works between subpaths of the same path —
+          and a hole punched into a subpath that is itself a full circle does not survive the
+          resource build at all, whatever the fill rule says.
+
+          The hands are a gap rather than a painted shape so they survive the monochrome
+          variant, where the launcher flattens this whole layer to a single tint and a painted
+          hand would vanish into the face. An L of two bars stays legible once the glyph is
+          shrunk to 48dp; two thin strokes at an arbitrary angle would not.
+        -->
+        <path
+            android:fillColor="#FFFFA51E"
+            android:fillType="evenOdd"
+            android:pathData="M37,28 a2.5,2.5 0 0,1 2.5,2.5 v5 h-5 v-5 a2.5,2.5 0 0,1 2.5,-2.5 z
+                              M55,28 a2.5,2.5 0 0,1 2.5,2.5 v5 h-5 v-5 a2.5,2.5 0 0,1 2.5,-2.5 z
+                              M35,32 h24 a6,6 0 0,1 6,6 v27 a6,6 0 0,1 -6,6 h-24 a6,6 0 0,1 -6,-6 v-27 a6,6 0 0,1 6,-6 z
+                              M29,43 h36 v4 h-36 z
+                              M57.5,71 a13.5,13.5 0 1,0 27,0 a13.5,13.5 0 1,0 -27,0 z
+                              M69.2,60.5 h3.6 v8.7 h8.5 v3.6 h-12.1 z" />
+    </group>
+</vector>
